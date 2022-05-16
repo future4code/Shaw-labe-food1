@@ -1,17 +1,17 @@
-export const goTosignUpPage = (navigate) =>{
-    navigate("/cadastro")
+export const goToFeedPage = (navigate) =>{
+    navigate("/")
 }
 
 export const goToLoginPage = (navigate) =>{
     navigate("/login")
 }
 
-export const goToAdressPage = (navigate) =>{
-    navigate("/endereço")
+export const goTosignUpPage = (navigate) =>{
+    navigate("/cadastro")
 }
 
-export const goToFeedPage = (navigate) =>{
-    navigate("/")
+export const goToAdressPage = (navigate) =>{
+    navigate("/endereço")
 }
 
 export const goToDetailsPage = (navigate, id) => {
