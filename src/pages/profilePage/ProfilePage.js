@@ -6,11 +6,12 @@ import OrderCard from "../../components/orders/OrderCard"
 import { goToUpDateProfile } from "../../routes/coordinator"
 import useProtectdPage from "../../hooks/useProtectedPage"
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
-import  {MainContainer} from "./styled"
+import { MainContainer } from "./styled"
+import Header from "../../components/header/Header";
 
 function ProfilePage() {
   const navigate = useNavigate()
-  const { states, requests } = useContext(GlobalContext)
+  const { states, requests, setters } = useContext(GlobalContext)
   useProtectdPage()
 
 
@@ -23,10 +24,13 @@ function ProfilePage() {
   useEffect(() => {
     requests.getProfile()
     requests.getOrdersHistory()
+    setters.setHeaderText("Meu perfil")
+    setters.setHeaderButton("")
   }, [])
 
   return (
     <div>
+      <Header />
       <MainContainer>
         <p>
           {states.profile?.user.name}
@@ -35,14 +39,14 @@ function ProfilePage() {
           <br />
           {states.profile?.user.cpf}
         </p>
-        <button onClick={() => goToUpDateProfile(navigate)}>
+        <button onClick={() => goToUpDateProfile(navigate, setters.setHeaderButton("x"), setters.setHeaderText("Editar"))}>
           <CreateOutlinedIcon />
         </button>
       </MainContainer>
       <MainContainer>
         <p>Endereço cadastrado</p>
         <p>{states.profile?.user.address}</p>
-        <button onClick={() => goToAdressPage(navigate)}>
+        <button onClick={() => goToAdressPage(navigate, setters.setHeaderButton("x"), setters.setHeaderText("Endereço"))}>
           <CreateOutlinedIcon />
         </button>
       </MainContainer>
