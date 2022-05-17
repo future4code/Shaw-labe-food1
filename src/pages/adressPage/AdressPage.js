@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import useProtectdPage from "../../hooks/useProtectedPage"
 import { useNavigate } from "react-router-dom"
 import useForm from "../../hooks/useForm"
@@ -8,11 +8,13 @@ import { DivAdress, FormAdress } from "./styled"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { goToFeedPage } from "../../routes/coordinator"
+import { GlobalContext } from "../../global/GlobalContext"
 
 function AdressPage() {
 
   useProtectdPage()
   const navigate = useNavigate()
+  const { states } = useContext(GlobalContext)
   const { form, onChange } = useForm({
     street: "",
     number: "",
@@ -42,7 +44,7 @@ function AdressPage() {
 
   return (
     <DivAdress>
-      <p> Meu endereço </p>
+      { states.profile?.user.hasAddress ? "" : <p> Meu endereço </p> }
 
       <FormAdress onSubmit={onSubmitAddAdress}>
         <TextField variant="outlined"
