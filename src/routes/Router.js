@@ -16,7 +16,7 @@ const Router = () => {
                 <Route index element={<FeedPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
-                <Route path="/endereço" element={<AdressPage />} />
+                <Route path="/endereco" element={<AdressPage />} />
                 <Route path="/detalhesRestaurante/:restaurantId" element={<RestaurantDetailsPage />} />
                 <Route path="/carrinho" element={<CartPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />

@@ -1,5 +1,5 @@
 import React from "react"
-import { SingUpForm } from "../../components/singUpForm/SingUpForm";
+import { SingUpForm } from "./singUpForm/SingUpForm";
 
 
 

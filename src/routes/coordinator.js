@@ -11,7 +11,7 @@ export const goTosignUpPage = (navigate) =>{
 }
 
 export const goToAdressPage = (navigate) =>{
-    navigate("/endereço")
+    navigate("/endereco")
 }
 
 export const goToDetailsPage = (navigate, id) => {
