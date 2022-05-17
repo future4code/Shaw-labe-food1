@@ -3,8 +3,11 @@ import useProtectdPage from "../../hooks/useProtectedPage"
 import { useNavigate } from "react-router-dom"
 import useForm from "../../hooks/useForm"
 import axios from "axios"
-import { BASE_URL, headers } from "../../constants/urls"
+import { BASE_URL, headers, tokenadress } from "../../constants/urls"
 import { DivAdress, FormAdress } from "./styled"
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { goToFeedPage } from "../../routes/coordinator"
 
 function AdressPage () {
 
@@ -27,8 +30,8 @@ function AdressPage () {
       console.log(res.data)
       console.log(form)
       alert("Cadastro de endereço feito com sucesso!")
-      localStorage.setItem("token", res.data.token)
-      navigate("/")
+      localStorage.setItem("tokenadress", res.data.token)
+      goToFeedPage(navigate)
     })
     .catch((err) => {
       console.log(err.response)
@@ -42,14 +45,24 @@ function AdressPage () {
       <p> Meu endereço </p>
       
       <FormAdress onSubmit={onSubmitAddAdress}>
-        <input placeholder="Rua / Av."
+        <TextField variant="outlined" 
+          label="Logadouro"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Rua / Av."
           name="street"
           value={form.street}
           onChange={onChange}
           required
         />
 
-        <input placeholder="Número"
+        <TextField variant="outlined" 
+          label="Número"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Número"
           type="number"
           name="number"
           value={form.number}
@@ -57,36 +70,56 @@ function AdressPage () {
           required
         />
 
-        <input placeholder="Apto. / Bloco"
+        <TextField variant="outlined"
+          label="Complemento"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Apto. / Bloco"
           name="complement"
           value={form.complement}
           onChange={onChange}
         />
         
-        <input placeholder="Bairro"
+        <TextField variant="outlined"
+          label="Bairro"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Bairro"
           name="neighbourhood"
           value={form.neighbourhood}
           onChange={onChange}
           required
         />
 
-        <input placeholder="Cidade"
+        <TextField variant="outlined" 
+          label="Cidade"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Cidade"
           name="city"
           value={form.city}
           onChange={onChange}
           required
         />
 
-        <input placeholder="Estado"
+        <TextField variant="outlined" 
+          label="Estado"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          placeholder="Estado"
           name="state"
           value={form.state}
           onChange={onChange}
           required
         />
 
-        <button type="submit">
+        <Button type="submit" variant="contained" color="primary">
           Salvar
-        </button>
+        </Button>
       </FormAdress>
     </DivAdress>
   )

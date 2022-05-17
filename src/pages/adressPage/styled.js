@@ -18,6 +18,6 @@ export const FormAdress = styled.form`
     margin: 25px;
 
     input{
-        padding: 5px;
+        /* padding: 5px; */
     }
 `
