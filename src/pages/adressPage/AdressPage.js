@@ -9,43 +9,43 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { goToFeedPage } from "../../routes/coordinator"
 
-function AdressPage () {
+function AdressPage() {
 
-  useProtectdPage() 
+  useProtectdPage()
   const navigate = useNavigate()
   const { form, onChange } = useForm({
-    street: "", 
-    number: "", 
-    neighbourhood: "", 
-    city: "", 
-    state: "", 
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
     complement: ""
   })
 
   const onSubmitAddAdress = (event) => {
     event.preventDefault()
 
-    axios.put(`${BASE_URL}address`, form, headers)
-    .then((res) => {
-      console.log(res.data)
-      console.log(form)
-      alert("Cadastro de endereço feito com sucesso!")
-      localStorage.setItem("tokenadress", res.data.token)
-      goToFeedPage(navigate)
-    })
-    .catch((err) => {
-      console.log(err.response)
-      console.log(form)
-      alert("Deu ruin Bergue, confere o console ae!!")
-    })
+    axios.put(`${BASE_URL}address`, form, {headers: { auth: localStorage.getItem("token") } })
+      .then((res) => {
+        console.log(res.data)
+        console.log(form)
+        alert("Cadastro de endereço feito com sucesso!")
+        localStorage.setItem("tokenadress", res.data.token)
+        goToFeedPage(navigate)
+      })
+      .catch((err) => {
+        console.log(err.response)
+        console.log(form)
+        alert("Deu ruin Bergue, confere o console ae!!")
+      })
   }
 
   return (
     <DivAdress>
       <p> Meu endereço </p>
-      
+
       <FormAdress onSubmit={onSubmitAddAdress}>
-        <TextField variant="outlined" 
+        <TextField variant="outlined"
           label="Logadouro"
           InputLabelProps={{
             shrink: true,
@@ -57,7 +57,7 @@ function AdressPage () {
           required
         />
 
-        <TextField variant="outlined" 
+        <TextField variant="outlined"
           label="Número"
           InputLabelProps={{
             shrink: true,
@@ -80,7 +80,7 @@ function AdressPage () {
           value={form.complement}
           onChange={onChange}
         />
-        
+
         <TextField variant="outlined"
           label="Bairro"
           InputLabelProps={{
@@ -93,7 +93,7 @@ function AdressPage () {
           required
         />
 
-        <TextField variant="outlined" 
+        <TextField variant="outlined"
           label="Cidade"
           InputLabelProps={{
             shrink: true,
@@ -105,7 +105,7 @@ function AdressPage () {
           required
         />
 
-        <TextField variant="outlined" 
+        <TextField variant="outlined"
           label="Estado"
           InputLabelProps={{
             shrink: true,

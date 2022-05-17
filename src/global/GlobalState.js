@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GlobalContext } from './GlobalContext'
 import useRequestData from '../hooks/useRequestData'
-import { BASE_URL, headers } from "../constants/urls"
+import { BASE_URL, headers, headersAddress } from "../constants/urls"
 import axios from 'axios'
 
 export default function GlobalState(props) {
@@ -9,23 +9,25 @@ export default function GlobalState(props) {
     //-- Estados & Setters --//
     const [profile, setProfile] = useState()
     const [orders, setOrders] = useState()
-    // const [update, setUpdate] = useState(0)
-    // const [address, setAddress] = useState()
+    const [update, setUpdate] = useState(0)
+    const [address, setAddress] = useState()
+    const [restaurants, setRestaurants] = useState()
 
     //-- requests --//
-    // const getFullAddress = () => {
-    //     axios
-    //         .get(`${BASE_URL}profile/address`, headers)
-    //         .then((res) => {
-    //             setAddress(res.data)
-    //         })
-    //         .catch((err) => {
-    //             console.log('Deu ruim: ', err.response.data)
-    //         })
-    // }
-    const getProfile = () => {
+    const getFullAddress = () => {
         axios
-            .get(`${BASE_URL}profile`, headers)
+            .get(`${BASE_URL}profile/address`, headersAddress)
+            .then((res) => {
+                setAddress(res.data)
+            })
+            .catch((err) => {
+                console.log('Deu ruim: ', err.response.data)
+            })
+    }
+
+    const getProfile = async () => {
+        await axios
+            .get(`${BASE_URL}profile`, headersAddress)
             .then((res) => {
                 setProfile(res.data)
             })
@@ -33,6 +35,18 @@ export default function GlobalState(props) {
                 console.log('Deu ruim: ', err.response.data)
             })
     }
+
+    const getRestaurants = () => {
+        axios
+            .get(`${BASE_URL}restaurants`, { headers: { auth: localStorage.getItem("tokenadress") } })
+            .then((res) => {
+                setRestaurants(res.data)
+            })
+            .catch((err) => {
+                console.log('Deu ruim: ', err.response.data)
+            })
+    }
+
     const getOrdersHistory = () => {
         axios
             .get(`${BASE_URL}orders/history`, headers)
@@ -44,9 +58,9 @@ export default function GlobalState(props) {
             })
     }
 
-    const states = { profile, orders }
-    const setters = { setProfile, setOrders }
-    const requests = { getProfile, getOrdersHistory }
+    const states = { profile, orders, update, address, restaurants }
+    const setters = { setProfile, setOrders, setUpdate }
+    const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurants }
 
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>

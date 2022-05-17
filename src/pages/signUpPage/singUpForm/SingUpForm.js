@@ -31,8 +31,8 @@ export const SingUpForm = () => {
         clearPasswordConfirm()
         goToAdressPage(navigate)
       }catch(err){
-        alert("Erro:", err.response)
-        console.log(err.response.message);
+        alert("Erro:", err.response.data.message)
+        console.log(err.response.data.message);
         clear()
       }
     } 
