@@ -1,9 +1,12 @@
 import React from "react"
+import { SingUpForm } from "../../components/singUpForm/SingUpForm";
+
+
 
 function SignUpPage () {
   return (
     <div>
-      Cadastro
+     <SingUpForm/>
     </div>
   )
 }
