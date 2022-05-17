@@ -23,6 +23,7 @@ const LoginForm = () => {
         axios.post(url, form)
             .then((res) => {
                 localStorage.setItem("token", res.data.token)
+                localStorage.setItem("tokenadress", res.data.token)
                 clear()
                 goToFeedPage(navigate)
             })
@@ -30,7 +31,6 @@ const LoginForm = () => {
                 console.log(err)
             })
     }
-    //
 
     return (
         <InputsContainer>
