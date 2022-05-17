@@ -1,14 +1,14 @@
+import moment from "moment";
 import React from "react"
 
 function OrderCard(props) {
+    const newDate = moment(new Date(props.order.createdAt)).format("DD MMMM YYYY")
 
     return (
         <div>
             <h3>{props.order.restaurantName}</h3>
-            {/* <p>props.order.</p> */}
-            data 
-            {/* tem que verificar formato da data para formatar */}
-            <p>Subtotal {props.order.totalPrice}</p>
+            {newDate}
+            <p>Subtotal R${props.order.totalPrice}0</p>
         </div>
     )
 }
