@@ -26,6 +26,11 @@ export const goToProfilePage = (navigate) =>{
     navigate("/perfil")
 }
 
+
+export const goToUpDateProfile = (navigate) =>{
+    navigate("/atualizaPerfil")
+}
+
 export const goBack = (navigate) =>{
     navigate(-1)
 }

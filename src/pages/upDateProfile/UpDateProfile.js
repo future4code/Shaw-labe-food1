@@ -3,7 +3,7 @@ import useForm from "../../hooks/useForm"
 import axios from "axios";
 import { BASE_URL, headers } from "../../constants/urls"
 
-export default function UpDateProfileForm() {
+export default function UpDateProfile() {
     const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
 
     const updateProfile = () => {
