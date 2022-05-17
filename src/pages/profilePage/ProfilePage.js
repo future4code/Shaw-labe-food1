@@ -4,20 +4,22 @@ import { goToAdressPage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext";
 import OrderCard from "../../components/orders/OrderCard"
 import { goToUpDateProfile } from "../../routes/coordinator"
+import useProtectdPage from "../../hooks/useProtectedPage"
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import  {MainContainer} from "./styled"
 
-// colocar use protected page 
 function ProfilePage() {
   const navigate = useNavigate()
   const { states, requests } = useContext(GlobalContext)
+  useProtectdPage()
 
-  // -- Map dos pedidos --//
+
   const mapOrders = states.orders?.orders.map((order) => {
     return (
       <OrderCard key={order.restaurantName} order={order} />
     )
   })
 
-  //-- useEffect ainda sem atualizar automatico --//
   useEffect(() => {
     requests.getProfile()
     requests.getOrdersHistory()
@@ -25,7 +27,7 @@ function ProfilePage() {
 
   return (
     <div>
-      <div>
+      <MainContainer>
         <p>
           {states.profile?.user.name}
           <br />
@@ -34,20 +36,20 @@ function ProfilePage() {
           {states.profile?.user.cpf}
         </p>
         <button onClick={() => goToUpDateProfile(navigate)}>
-          editar perfil
+          <CreateOutlinedIcon />
         </button>
-      </div>
-      <div>
+      </MainContainer>
+      <MainContainer>
         <p>Endereço cadastrado</p>
         <p>{states.profile?.user.address}</p>
         <button onClick={() => goToAdressPage(navigate)}>
-          editar endereço
+          <CreateOutlinedIcon />
         </button>
-      </div>
-      <div>
+      </MainContainer>
+      <MainContainer>
         <h3>Histórico de pedidos</h3>
         {mapOrders}
-      </div>
+      </MainContainer>
     </div>
   )
 }

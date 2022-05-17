@@ -2,9 +2,14 @@ import React from "react";
 import useForm from "../../hooks/useForm"
 import axios from "axios";
 import { BASE_URL, headers } from "../../constants/urls"
+import { TextField } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { FormAdress } from "./styled";
+import useProtectdPage from "../../hooks/useProtectedPage"
 
 export default function UpDateProfile() {
     const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
+    useProtectdPage()
 
     const updateProfile = () => {
         axios
@@ -26,15 +31,23 @@ export default function UpDateProfile() {
 
     return (
         <div>
-            <form onSubmit={onSubmitForm}>
-                <input
+            <FormAdress onSubmit={onSubmitForm}>
+                <TextField
+                    inputProps={{
+                        pattern: "^.{3,30}$",
+                        title: "Nome deve possuir no mínimo 3 e no máximo 30 caracteres"
+                    }}
+                    label="Nome"
+                    variant="outlined"
                     placeholder="Nome"
                     name={"name"}
                     value={form.name}
                     onChange={onChange}
                     required
                 />
-                <input
+                <TextField
+                    label="E-mail"
+                    variant="outlined"
                     type="email"
                     placeholder="E-mail"
                     name={"email"}
@@ -42,16 +55,21 @@ export default function UpDateProfile() {
                     onChange={onChange}
                     required
                 />
-                <input
-                    pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                <TextField
+                    label="CPF"
+                    variant="outlined"
+                    inputProps={{
+                        pattern: "^.{11,11}$",
+                        title: "CPF deve conter 11 números"
+                    }}
                     placeholder="CPF"
                     name={"cpf"}
                     value={form.cpf}
                     onChange={onChange}
                     required
                 />
-                <button type="submit">Salvar</button>
-            </form>
+                <Button color="primary" variant="contained" type="submit">Salvar</Button>
+            </FormAdress>
         </div>
     )
 } 
