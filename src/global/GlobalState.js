@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { GlobalContext } from './GlobalContext'
-import useRequestData from '../hooks/useRequestData'
 import { BASE_URL, headers, headersAddress } from "../constants/urls"
 import axios from 'axios'
 
 export default function GlobalState(props) {
-
     //-- Estados & Setters --//
     const [profile, setProfile] = useState()
     const [orders, setOrders] = useState()
-    const [update, setUpdate] = useState(0)
     const [address, setAddress] = useState()
     const [restaurants, setRestaurants] = useState()
-
+    const [headerText, setHeaderText] = useState("")
+    const [headerButton, setHeaderButton] = useState("<")
     //-- requests --//
     const getFullAddress = () => {
         axios
@@ -58,8 +56,8 @@ export default function GlobalState(props) {
             })
     }
 
-    const states = { profile, orders, update, address, restaurants }
-    const setters = { setProfile, setOrders, setUpdate }
+    const states = { profile, orders, address, restaurants, headerText, headerButton }
+    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton }
     const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurants }
 
     return (

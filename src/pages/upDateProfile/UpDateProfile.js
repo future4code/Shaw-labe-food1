@@ -6,6 +6,9 @@ import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { FormAdress } from "./styled";
 import useProtectdPage from "../../hooks/useProtectedPage"
+import Header from "../../components/header/Header";
+
+
 
 export default function UpDateProfile() {
     const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
@@ -27,10 +30,12 @@ export default function UpDateProfile() {
     const onSubmitForm = (ev) => {
         ev.preventDefault()
         updateProfile()
+
     }
 
     return (
         <div>
+            <Header />
             <FormAdress onSubmit={onSubmitForm}>
                 <TextField
                     inputProps={{
