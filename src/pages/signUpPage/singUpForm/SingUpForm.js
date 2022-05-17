@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import useForm from "../../hooks/useForm"
+import useForm from "../../../hooks/useForm"
 import {ContainerForm} from "./styled"
-import {BASE_URL} from "../../constants/urls"
+import {BASE_URL} from "../../../constants/urls"
 import { useNavigate } from "react-router-dom";
-import {goToAdressPage} from "../../routes/coordinator"
+import {goToAdressPage} from "../../../routes/coordinator"
 import axios from "axios"
 
 export const SingUpForm = () => {
