@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { goToAdressPage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext";
 import OrderCard from "../../components/orders/OrderCard"
+import { goToUpDateProfile } from "../../routes/coordinator"
 
 // colocar use protected page 
 function ProfilePage() {
@@ -32,15 +33,15 @@ function ProfilePage() {
           <br />
           {states.profile?.user.cpf}
         </p>
-        <button >
-          editar
+        <button onClick={() => goToUpDateProfile(navigate)}>
+          editar perfil
         </button>
       </div>
       <div>
         <p>Endereço cadastrado</p>
         <p>{states.profile?.user.address}</p>
         <button onClick={() => goToAdressPage(navigate)}>
-          editar
+          editar endereço
         </button>
       </div>
       <div>

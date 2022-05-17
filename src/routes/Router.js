@@ -7,6 +7,7 @@ import LoginPage from "../pages/loginPage/LoginPage"
 import ProfilePage from "../pages/profilePage/ProfilePage"
 import SignUpPage from "../pages/signUpPage/SignUpPage"
 import ErrorPage from "../pages/errorPage/ErrorPage"
+import UpDateProfile from "../pages/upDateProfile/UpDateProfile"
 import RestaurantDetailsPage from "../pages/restaurantDetailsPage/RestaurantDetailsPage"
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
                 <Route path="/detalhesRestaurante/:restaurantId" element={<RestaurantDetailsPage />} />
                 <Route path="/carrinho" element={<CartPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />
+                <Route path="/atualizaPerfil" element={<UpDateProfile />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
