@@ -1,13 +1,17 @@
 import React from "react"
 import { SingUpForm } from "./singUpForm/SingUpForm";
+import { ContainerSingup, Title } from "./styled";
+import logo from "../../assets/logo.png"
 
 
 
 function SignUpPage () {
   return (
-    <div>
+    <ContainerSingup>
+      <img src={logo}/>
+      <Title>Cadastrar</Title>
      <SingUpForm/>
-    </div>
+    </ContainerSingup>
   )
 }
 
