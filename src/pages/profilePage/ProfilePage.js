@@ -39,14 +39,14 @@ function ProfilePage() {
           <br />
           {states.profile?.user.cpf}
         </p>
-        <button onClick={() => goToUpDateProfile(navigate, setters.setHeaderButton("x"), setters.setHeaderText("Editar"))}>
+        <button onClick={() => goToUpDateProfile(navigate)}>
           <CreateOutlinedIcon />
         </button>
       </MainContainer>
       <MainContainer>
         <p>Endereço cadastrado</p>
         <p>{states.profile?.user.address}</p>
-        <button onClick={() => goToAdressPage(navigate, setters.setHeaderButton("x"), setters.setHeaderText("Endereço"))}>
+        <button onClick={() => goToAdressPage(navigate)}>
           <CreateOutlinedIcon />
         </button>
       </MainContainer>

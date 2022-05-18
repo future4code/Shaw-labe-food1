@@ -3,6 +3,7 @@ import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { goBack } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext";
+import { DivButton, DivText, DivTextButton } from "./styled"
 
 function Header() {
     const { states } = useContext(GlobalContext)
@@ -10,16 +11,24 @@ function Header() {
 
     return (
         <div>
-            {states.headerButton === ""
-                ?
-                <div> {states.headerText} </div>
+            {states.headerButton === "" ?
+                <DivText> {states.headerText} </DivText>
                 :
                 <>
-                    <Button onClick={() => goBack(navigate)}> {states.headerButton} </Button>
-                    {states.headerText !== "" ? <div>{states.headerText}</div> : ""}
+                    {states.headerText !== ""
+                        ?
+                        <DivTextButton>
+                            <Button onClick={() => goBack(navigate)}> {states.headerButton} </Button>
+                            <p> {states.headerText} </p>
+                        </DivTextButton>
+                        :
+                        <DivButton>
+                            <Button onClick={() => goBack(navigate)}> {states.headerButton} </Button>
+                        </DivButton>
+                    }
                 </>
             }
-
+            <hr/>
         </div>
     )
 }

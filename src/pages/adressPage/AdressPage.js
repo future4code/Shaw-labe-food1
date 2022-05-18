@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import useProtectdPage from "../../hooks/useProtectedPage"
 import { useNavigate } from "react-router-dom"
 import useForm from "../../hooks/useForm"
@@ -9,12 +9,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { goToFeedPage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext"
+import Header from "../../components/header/Header"
 
 function AdressPage() {
 
   useProtectdPage()
   const navigate = useNavigate()
-  const { states } = useContext(GlobalContext)
+  const { states, setters, requests } = useContext(GlobalContext)
   const { form, onChange } = useForm({
     street: "",
     number: "",
@@ -42,88 +43,98 @@ function AdressPage() {
       })
   }
 
+  useEffect(() => {
+    setters.setHeaderButton("<") 
+    setters.setHeaderText("Endereço")
+    requests.getProfile()
+  }, [])
+  
   return (
-    <DivAdress>
-      { states.profile?.user.hasAddress ? "" : <p> Meu endereço </p> }
+    <>
+      <Header />
+      
+      <DivAdress>
+        { states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p> }
 
-      <FormAdress onSubmit={onSubmitAddAdress}>
-        <TextField variant="outlined"
-          label="Logadouro"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Rua / Av."
-          name="street"
-          value={form.street}
-          onChange={onChange}
-          required
-        />
+        <FormAdress onSubmit={onSubmitAddAdress}>
+          <TextField variant="outlined"
+            label="Logadouro"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Rua / Av."
+            name="street"
+            value={form.street}
+            onChange={onChange}
+            required
+          />
 
-        <TextField variant="outlined"
-          label="Número"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Número"
-          type="number"
-          name="number"
-          value={form.number}
-          onChange={onChange}
-          required
-        />
+          <TextField variant="outlined"
+            label="Número"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Número"
+            type="number"
+            name="number"
+            value={form.number}
+            onChange={onChange}
+            required
+          />
 
-        <TextField variant="outlined"
-          label="Complemento"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Apto. / Bloco"
-          name="complement"
-          value={form.complement}
-          onChange={onChange}
-        />
+          <TextField variant="outlined"
+            label="Complemento"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Apto. / Bloco"
+            name="complement"
+            value={form.complement}
+            onChange={onChange}
+          />
 
-        <TextField variant="outlined"
-          label="Bairro"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Bairro"
-          name="neighbourhood"
-          value={form.neighbourhood}
-          onChange={onChange}
-          required
-        />
+          <TextField variant="outlined"
+            label="Bairro"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Bairro"
+            name="neighbourhood"
+            value={form.neighbourhood}
+            onChange={onChange}
+            required
+          />
 
-        <TextField variant="outlined"
-          label="Cidade"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Cidade"
-          name="city"
-          value={form.city}
-          onChange={onChange}
-          required
-        />
+          <TextField variant="outlined"
+            label="Cidade"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Cidade"
+            name="city"
+            value={form.city}
+            onChange={onChange}
+            required
+          />
 
-        <TextField variant="outlined"
-          label="Estado"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Estado"
-          name="state"
-          value={form.state}
-          onChange={onChange}
-          required
-        />
+          <TextField variant="outlined"
+            label="Estado"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder="Estado"
+            name="state"
+            value={form.state}
+            onChange={onChange}
+            required
+          />
 
-        <Button type="submit" variant="contained" color="primary">
-          Salvar
-        </Button>
-      </FormAdress>
-    </DivAdress>
+          <Button type="submit" variant="contained" color="primary">
+            Salvar
+          </Button>
+        </FormAdress>
+      </DivAdress>
+    </>
   )
 }
 
