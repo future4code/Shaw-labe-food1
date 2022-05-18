@@ -10,7 +10,9 @@ export default function GlobalState(props) {
     const [address, setAddress] = useState()
     const [restaurantDetail, setRestaurantDetail] = useState()
     const [restaurants, setRestaurants] = useState()
-    
+
+    const [cart, setCart] = useState([])
+
     const [headerText, setHeaderText] = useState("")
     const [headerButton, setHeaderButton] = useState("<")
     //-- requests --//
@@ -65,8 +67,10 @@ export default function GlobalState(props) {
             })
     }
 
-    const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail }
-    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton }
+    console.log(cart)
+
+    const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail, cart }
+    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton, setCart }
     const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
 
     return (
