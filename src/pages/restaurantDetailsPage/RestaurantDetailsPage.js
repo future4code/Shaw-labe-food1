@@ -8,7 +8,6 @@ function RestaurantDetailsPage() {
   // const navigate = useNavigate()
   const { states, requests, setters } = useContext(GlobalContext);
   const params = useParams();
-  console.log(states.restaurantDetail?.restaurant.products)
 
   const restaurantProducts = states.restaurantDetail?.restaurant.products.map((product) => {
     return <ProductCard key={product.id} product={product} />
