@@ -1,3 +1,5 @@
+
+import { Footer } from "../../components/footer/Footer";
 import React, { useContext, useEffect } from "react"
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
@@ -16,6 +18,7 @@ function CartPage () {
     <div>
       <Header />
       Cart
+      <Footer page='cart' />
     </div>
   )
 }

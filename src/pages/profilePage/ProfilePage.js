@@ -8,6 +8,7 @@ import useProtectdPage from "../../hooks/useProtectedPage"
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import { MainContainer } from "./styled"
 import Header from "../../components/header/Header";
+import { Footer } from "../../components/footer/Footer";
 
 function ProfilePage() {
   const navigate = useNavigate()
@@ -54,6 +55,7 @@ function ProfilePage() {
         <h3>Histórico de pedidos</h3>
         {mapOrders}
       </MainContainer>
+      <Footer page='profile' />
     </div>
   )
 }

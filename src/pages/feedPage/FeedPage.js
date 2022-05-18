@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../global/GlobalContext";
 import CardRestaurant from "./cardRestaurant/CardRestaurant";
 import useForm from "../../hooks/useForm"
+import { Footer } from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
+
 
 function FeedPage() {
 
@@ -34,6 +36,7 @@ function FeedPage() {
       />
 
       {getFilteredList}
+      <Footer page='home' />
     </div>
   );
 }
