@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import useForm from "../../hooks/useForm"
 import axios from "axios";
 import { BASE_URL, headers } from "../../constants/urls"
@@ -7,16 +7,18 @@ import { Button } from "@material-ui/core";
 import { FormAdress } from "./styled";
 import useProtectdPage from "../../hooks/useProtectedPage"
 import Header from "../../components/header/Header";
-
-
+import { token } from "../../constants/urls";
+import { GlobalContext } from "../../global/GlobalContext";
 
 export default function UpDateProfile() {
-    const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
+
     useProtectdPage()
+    const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
+    const { states, requests, setters } = useContext(GlobalContext)
 
     const updateProfile = () => {
         axios
-            .put(`${BASE_URL}profile`, form, headers)
+            .put(`${BASE_URL}profile`, form, { headers: { auth: token } })
             .then((res) => {
                 console.log(res.data);
                 //-- talvez direcionar para o perfil atualizado 
@@ -30,8 +32,13 @@ export default function UpDateProfile() {
     const onSubmitForm = (ev) => {
         ev.preventDefault()
         updateProfile()
-
     }
+
+    useEffect(() => {
+        setters.setHeaderText("Editar")
+        setters.setHeaderButton("<")
+        requests.getProfile()
+    }, [])
 
     return (
         <div>

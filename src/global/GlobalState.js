@@ -14,7 +14,7 @@ export default function GlobalState(props) {
     //-- requests --//
     const getFullAddress = () => {
         axios
-            .get(`${BASE_URL}profile/address`, headersAddress)
+            .get(`${BASE_URL}profile/address`, { headers: { auth: localStorage.getItem("tokenadress") } })
             .then((res) => {
                 setAddress(res.data)
             })
@@ -25,7 +25,7 @@ export default function GlobalState(props) {
 
     const getProfile = async () => {
         await axios
-            .get(`${BASE_URL}profile`, headersAddress)
+            .get(`${BASE_URL}profile`, { headers: { auth: localStorage.getItem("tokenadress") } })
             .then((res) => {
                 setProfile(res.data)
             })
@@ -33,7 +33,8 @@ export default function GlobalState(props) {
                 console.log('Deu ruim: ', err.response.data)
             })
     }
-
+    console.log(profile)
+    
     const getRestaurants = () => {
         axios
             .get(`${BASE_URL}restaurants`, { headers: { auth: localStorage.getItem("tokenadress") } })
@@ -47,7 +48,7 @@ export default function GlobalState(props) {
 
     const getOrdersHistory = () => {
         axios
-            .get(`${BASE_URL}orders/history`, headers)
+            .get(`${BASE_URL}orders/history`, { headers: { auth: localStorage.getItem("tokenadress") } })
             .then((res) => {
                 setOrders(res.data)
             })
