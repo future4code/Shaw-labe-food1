@@ -1,47 +1,62 @@
-import React, { useContext, useEffect } from "react"
+import { CardActionArea, Typography } from "@material-ui/core";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
+import {
+  CardMediaImg,
+  ContainerCardDetail,
+  TypographyNameDetail,
+} from "./productCard/styled";
 
 function RestaurantDetailsPage() {
   // const navigate = useNavigate()
   const { states, requests, setters } = useContext(GlobalContext);
   const params = useParams();
 
-  const restaurantProducts = states.restaurantDetail?.restaurant.products.map((product) => {
-    return <ProductCard key={product.id} product={product} />
-  })
-
-
+  const restaurantProducts = states.restaurantDetail?.restaurant.products.map(
+    (product) => {
+      return <ProductCard key={product.id} product={product} />;
+    }
+  );
 
   useEffect(() => {
-    requests.getRestaurantDetail(params.restaurantId)
-    setters.setHeaderText("Restaurante")
-    setters.setHeaderButton("<")
+    requests.getRestaurantDetail(params.restaurantId);
+    setters.setHeaderText("Restaurante");
+    setters.setHeaderButton("<");
   }, []);
 
   return (
     <div>
       <Header />
-      <div>
-        <img src={states.restaurantDetail?.restaurant.logoUrl} />
-        <br />
-        {states.restaurantDetail?.restaurant.name}
-        <br />
-        {states.restaurantDetail?.restaurant.category}
-        <br />
-        {states.restaurantDetail?.restaurant.deliveryTime} min
-        <br />
-        Frete R${states.restaurantDetail?.restaurant.shipping.toFixed(2)}
-        <br />
-        {states.restaurantDetail?.restaurant.address}
-      </div>
-      <div>
+
+      <ContainerCardDetail>
+        <CardActionArea>
+          <CardMediaImg
+            component="img"
+            alt="logo da loja"
+            height="150"
+            image={states.restaurantDetail?.restaurant.logoUrl}
+            title="Nome da loja"
+          />
+          <br />
+          <TypographyNameDetail gutterBottom variant="h6" color="primary">
+            {states.restaurantDetail?.restaurant.name}
+          </TypographyNameDetail>
+          <Typography size="small" color="secondary">
+            <p>{states.restaurantDetail?.restaurant.category}</p>
+            <p>{states.restaurantDetail?.restaurant.deliveryTime} min</p>
+            <p>Frete R${states.restaurantDetail?.restaurant.shipping.toFixed(2)}</p>
+            <p>{states.restaurantDetail?.restaurant.address}</p>
+          </Typography>
+        </CardActionArea>
+        <h3>Principais</h3>
+        <hr />
         {restaurantProducts}
-      </div>
+      </ContainerCardDetail>
     </div>
-  )
+  );
 }
 
 export default RestaurantDetailsPage;
