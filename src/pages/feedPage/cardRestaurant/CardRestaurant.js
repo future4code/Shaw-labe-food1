@@ -16,27 +16,27 @@ const CardRestaurant = (props) => {
   };
 
   return (
-    <Card key={props.restaurant.id}>
-      <CardActionArea onClick={() => onClickCard(props.restaurant.id)}>
+    <Card key={props.filtered.id}>
+      <CardActionArea onClick={() => onClickCard(props.filtered.id)}>
         <CardMedia
           component="img"
           alt="logo da loja"
           height="140"
-          image={props.restaurant.logoUrl}
+          image={props.filtered.logoUrl}
           title="Nome da loja"
         />
         <CardContent>
           <Typography gutterBottom variant="h6" color="primary">
-            {props.restaurant.name}
+            {props.filtered.name}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Typography size="small" color="secondary">
-          {props.restaurant.deliveryTime} min.
+          {props.filtered.deliveryTime} min.
         </Typography>
         <Typography size="small" color="secondary">
-          Frete R$ {props.restaurant.shipping},00
+          Frete R$ {props.filtered.shipping},00
         </Typography>
       </CardActions>
     </Card>
