@@ -8,34 +8,21 @@ function FeedPage() {
   const { states, requests } = useContext(GlobalContext);
   const {form, onChange} = useForm({ search: ""})
 
-  // const filterRestaurants = states.restaurants?.filter((restaurant) =>{
-  //   return restaurant.name.includes(form.change)
-  // })
-  
-  // const [query, setQuery] = useState("") 
 
-  // onChangeQuery = (e) => {
-  //       setQuery(e.target.value )
-  //   }
+  const getFilteredList = states.restaurants?.restaurants.filter((restaurant) =>{
+    return (
+      restaurant.name.toLowerCase().includes(form.search.toLowerCase())
+    )
+  }).map((filtered) =>{
+    return <CardRestaurant filtered={filtered} key={filtered.id}/>
+  })
 
-  // getFilteredList = () => {
-  //       return (states.restaurants
-  //           .filter(restaurant => (restaurant.name.toLowerCase().includes(query.toLowerCase())))
-  // )}
+console.log(getFilteredList)
 
   useEffect(() => {
     requests.getRestaurants();
   }, []);
 
-  console.log(states.restaurants)
-
-  const mapRestaurants = states.restaurants?.restaurants.map((restaurant) => {
-    return (
-     <CardRestaurant
-     restaurant={restaurant}
-     />
-    );
-  });
 
   return (
     <div>
@@ -45,7 +32,8 @@ function FeedPage() {
       value={form.search}
       name={"search"}
       />
-      {mapRestaurants}
+
+      {getFilteredList}
     </div>
   );
 }
