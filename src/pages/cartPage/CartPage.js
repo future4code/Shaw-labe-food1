@@ -22,19 +22,19 @@ function CartPage() {
   })
 
   //-- Request place order --//
-  // const onClickPlaceOrder = () => {
+  const onClickPlaceOrder = () => {
 
-  //   const body = {...cartBody, paymentMethod}
-  //   console.log(body);
-  //   axios
-  //     .post(`${BASE_URL}restaurants/${states.restaurantDetail?.restaurant.shipping}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
-  //     .then((res) => {
-  //       console.log("Seu pedido foi enviado ao restaurante")
-  //     })
-  //     .catch((err) => {
-  //       console.log('Deu ruim: ', err.response.data)
-  //     })
-  // }
+    const body = {...cartBody, paymentMethod}
+    console.log(body);
+    axios
+      .post(`${BASE_URL}restaurants/${states.restaurantDetail?.restaurant.shipping}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
+      .then((res) => {
+        console.log("Seu pedido foi enviado ao restaurante")
+      })
+      .catch((err) => {
+        console.log('Deu ruim: ', err.response.data)
+      })
+  }
 
 
   //-- Funções para setar paymentMethod --//
