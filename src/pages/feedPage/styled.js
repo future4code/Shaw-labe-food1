@@ -11,7 +11,5 @@ export const DivFeed = styled.div`
 `
 
 export const FilterName = styled(Tabs)`
-    span{
-        padding: 5px;
-    }    
+    padding: 0 2px;  
 `
