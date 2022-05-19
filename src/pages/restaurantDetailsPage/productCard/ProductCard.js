@@ -1,51 +1,88 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 
 export const ProductCard = (props) => {
-    const { states, requests, setters } = useContext(GlobalContext)
+    const { states, setters } = useContext(GlobalContext)
     const [productQuantity, setProductQuantity] = useState(0)
 
-
-    const addProduct = () => {
-        const newProductOnCart = [...states.cart, { ...props.product, quantity: 1 }]
-        setters.setCart(newProductOnCart)
+    const addProduct = (product) => {
+        const newCart = [...states.cart, { ...product, quantity: 1 }]
+        setters.setCart(newCart)
         setProductQuantity(1)
     }
-
-    // const removeProduct = (productId) => {
-    // }
+    const onChangeQuantity = (e) => {
+        const newQuantity = states.cart.map((item) => {
+            if (item.id === props.product.id) {
+                setProductQuantity(e.target.value)
+                return { ...item, quantity: Number(e.target.value) }
+            }
+            return item
+        })
+        setters.setCart(newQuantity)
+    }
+    const removeProduct = (product) => {
+        const newCart = states.cart.map((item) => {
+            if (item.id === product.id) {
+                return {
+                    ...item, quantity: item.quantity - 1
+                }
+            }
+            return item
+        }).filter((item) => {
+            if (item.quantity === 0) {
+                setProductQuantity(0)
+            }
+            return item.quantity > 0
+        })
+        setters.setCart(newCart)
+    }
 
     return (
         <div>
-            <img src={props.product.photoUrl} />
-            {props.product.name}
-            <br />
-            {props.product.description}
-            <br />
-            R${props.product.price.toFixed(2)}
             <div>
-                <button onClick={() => addProduct(props.product.id)}>adicionar</button>
+                <img src={props.product.photoUrl} />
             </div>
-            {productQuantity > 0
-                ?
-                <div>
-                    <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                        <option value={6}>6</option>
-                        <option value={7}>7</option>
-                        <option value={8}>8</option>
-                        <option value={9}>9</option>
-                        <option value={10}>10</option>
-                    </select>
-                </div>
-                :
-                ""
-            }
-
+            <div>
+                {props.product.name}
+                <br />
+                {props.product.description}
+                <br />
+                R${props.product.price.toFixed(2)}
+            </div>
+            <div>
+                <button
+                    onClick={
+                        productQuantity === 0
+                            ?
+                            () => addProduct(props.product)
+                            :
+                            () => removeProduct(props.product)
+                    }>
+                    {productQuantity === 0 ? "adicionar" : "remover"}
+                </button>
+            </div>
+            {productQuantity ? <div>productQuantity</div> : ""}
+            <div>
+                {productQuantity > 0
+                    ?
+                    <div>
+                        <select onChange={onChangeQuantity}>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                            <option value={7}>7</option>
+                            <option value={8}>8</option>
+                            <option value={9}>9</option>
+                            <option value={10}>10</option>
+                        </select>
+                    </div>
+                    :
+                    ""
+                }
+            </div>
         </div>
     )
 }
