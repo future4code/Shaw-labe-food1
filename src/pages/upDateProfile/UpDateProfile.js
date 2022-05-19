@@ -44,7 +44,7 @@ export default function UpDateProfile() {
         setters.setHeaderButton("<")
         setForm({name: `${states.profile?.user.name}`, email:`${states.profile?.user.email}`, cpf: `${states.profile?.user.cpf}`})
         requests.getProfile()
-    }, [])
+    }, [states.profile?.user.name])
 
     return (
         <div>

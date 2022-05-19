@@ -55,7 +55,7 @@ function AdressPage() {
     requests.getFullAddress()
     setForm({street: `${states.address?.address.street}`, number:`${states.address?.address.number}`, neighbourhood: `${states.address?.address.neighbourhood}`, city: `${states.address?.address.city}`, state: `${states.address?.address.state}`, complement: `${states.address?.address.complement}`})
     requests.getProfile()
-  }, [])
+  }, [states.address?.address.street])
 
   return (
     <>
