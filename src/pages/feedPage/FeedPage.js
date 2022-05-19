@@ -21,37 +21,38 @@ function FeedPage() {
     setValue(newValue);
   };
 
-  const layane = () => {
-    const getFilteredList = states.restaurants?.restaurants
-      .filter((restaurant) => {
-        return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
-      })
-      .map((filtered) => {
-        return <CardRestaurant filtered={filtered} key={filtered.id} />;
-      });
+  const getFilterName = () => {
+    const filteredName = states.restaurants?.restaurants
+    .filter((restaurant) => {
+      return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
+    })
+    .map((filtered) => {
+      return <CardRestaurant filtered={filtered} key={filtered.id} />;
+    });
 
-    setFilterRestaurant(getFilteredList)
+    setFilterRestaurant(filteredName)
   }
 
-  const filterCategory = (category) => {
-    const filteredRestaurant = states.restaurants?.restaurants.filter((restaurant) => {
+  const getFilterCategory = (category) => {
+    const filteredCategory = states.restaurants?.restaurants
+    .filter((restaurant) => {
       return restaurant.category === category
     }).map((filtered) => {
       return <CardRestaurant filtered={filtered} key={filtered.id} />
     })
-    setFilterRestaurant(filteredRestaurant)
+
+    setFilterRestaurant(filteredCategory)
   }
 
-  const getFilterCategory = states.restaurants?.restaurants.map((restaurant) => {
+  const showCategories = states.restaurants?.restaurants.map((restaurant) => {
     return (
-      <Tab  label={restaurant.category} key={restaurant.id} onClick={() => filterCategory(restaurant.category)}>
+      <Tab  label={restaurant.category} key={restaurant.id} onClick={() => getFilterCategory(restaurant.category)}>
         {restaurant.category}
       </Tab>
     )
   })
 
   const reset = () => {
-    console.log(filterRestaurant)
     setFilterRestaurant(requests.getRestaurants())
   }
 
@@ -62,7 +63,7 @@ function FeedPage() {
   }, []);
 
   useEffect(() => {
-    layane()
+    getFilterName()
   }, [form, states.restaurants])
 
   return (
@@ -95,7 +96,7 @@ function FeedPage() {
             aria-label="disabled tabs example"
           >
             <Tab label="Todos" onClick={reset}/>
-            {getFilterCategory}
+            {showCategories}
           </FilterName>
         </Paper>
 
