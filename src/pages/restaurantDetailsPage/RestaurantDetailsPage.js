@@ -17,9 +17,8 @@ function RestaurantDetailsPage() {
   const restaurantProducts = states.restaurantDetail?.restaurant.products.map(
     (product) => {
       return <ProductCard params={params.restaurantId} key={product.id} product={product} />;
+    })
 
-    }
-  })
     const restaurantProducts2 = states.restaurantDetail?.restaurant.products.map((product)=>{
     if(product.category === "Bebida"){
       return <ProductCard key={product.id} product={product}/>
