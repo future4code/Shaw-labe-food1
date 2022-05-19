@@ -11,7 +11,7 @@ p{
 `
 
 export const CardMediaImg = styled(CardMedia)`
-border-radius: 0.7rem;
+border-radius: 0.7rem 0.7rem 0 0;
 `
 
 export const P = styled.p`
