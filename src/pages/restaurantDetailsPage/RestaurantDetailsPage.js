@@ -1,6 +1,6 @@
 import { CardActionArea, Typography } from "@material-ui/core";
 import React, { useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
@@ -11,13 +11,12 @@ import {
 } from "./productCard/styled";
 
 function RestaurantDetailsPage() {
-  // const navigate = useNavigate()
   const { states, requests, setters } = useContext(GlobalContext);
   const params = useParams();
 
   const restaurantProducts = states.restaurantDetail?.restaurant.products.map(
     (product) => {
-      return <ProductCard key={product.id} product={product} />;
+      return <ProductCard params={params.restaurantId} key={product.id} product={product} />;
     }
   );
 
@@ -25,8 +24,9 @@ function RestaurantDetailsPage() {
     requests.getRestaurantDetail(params.restaurantId);
     setters.setHeaderText("Restaurante");
     setters.setHeaderButton("<");
-  }, []);
+  }, [states.update]);
 
+  console.log(states.cart)
   return (
     <div>
       <Header />

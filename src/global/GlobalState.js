@@ -4,16 +4,22 @@ import { BASE_URL, headers, headersAddress } from "../constants/urls"
 import axios from 'axios'
 
 export default function GlobalState(props) {
+
     //-- Estados & Setters --//
     const [profile, setProfile] = useState()
     const [orders, setOrders] = useState()
     const [address, setAddress] = useState()
     const [restaurantDetail, setRestaurantDetail] = useState()
     const [restaurants, setRestaurants] = useState()
+    const [update, setUpdate] = useState(0)
 
+    //-- CARRINHO --//
     const [cart, setCart] = useState([])
+    const [restaurantId, setRestaurantId] = useState({})
+    const [productQuantity, setProductQuantity] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
 
+    //-- HEADER --//
     const [headerText, setHeaderText] = useState("")
     const [headerButton, setHeaderButton] = useState("<")
 
@@ -68,18 +74,40 @@ export default function GlobalState(props) {
                 console.log('Deu ruim: ', err.response.data)
             })
     }
-
-    //-- Functions --//
-    const getTotalPrice = () => {
-        for (let product of cart) {
-            setTotalPrice(totalPrice + (product.price * product.quantity))
-        }
+    const postPlaceOrder = async (restaurantId, body) => {
+        await axios
+            .get(`${BASE_URL}restaurants/${restaurantId}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
+            .then((res) => {
+                console.log("Seu pedido foi enviado ao restaurante")
+            })
+            .catch((err) => {
+                console.log('Deu ruim: ', err.response.data)
+            })
     }
 
-    const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail, cart, totalPrice }
-    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton, setCart, setTotalPrice }
-    const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
-    const functions = { getTotalPrice }
+    //-- Functions --//
+    const removeProduct = (product) => {
+        const newCart = states.cart.map((item) => {
+            if (item.id === product.id) {
+                return {
+                    ...item, quantity: item.quantity - 1
+                }
+            }
+            return item
+        }).filter((item) => {
+            if (item.quantity === 0) {
+                setProductQuantity(0)
+            }
+            return item.quantity > 0
+        })
+        setters.setCart(newCart)
+    }
+
+    //-- Constantes para organização --//
+    const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity }
+    const setters = { setProfile, setRestaurantId, setOrders, setHeaderText, setHeaderButton, setUpdate, setCart, setTotalPrice, setProductQuantity }
+    const requests = { postPlaceOrder, getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
+    const functions = { removeProduct }
 
     return (
         <GlobalContext.Provider value={{ states, setters, requests, functions }}>
