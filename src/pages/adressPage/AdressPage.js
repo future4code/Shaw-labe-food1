@@ -7,7 +7,7 @@ import { BASE_URL, headers, tokenadress } from "../../constants/urls"
 import { DivAdress, FormAdress } from "./styled"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { goToFeedPage } from "../../routes/coordinator"
+import { goToFeedPage, goToProfilePage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext"
 import Header from "../../components/header/Header"
 import { CircularProgress } from "@material-ui/core"
@@ -138,7 +138,7 @@ function AdressPage() {
           />
 
           <Button type="submit" variant="contained" color="primary">
-            {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+            {isLoading ? <CircularProgress color={"inherit"} size={28} /> : <>Salvar</>}
           </Button>
         </FormAdress>
       </DivAdress>
