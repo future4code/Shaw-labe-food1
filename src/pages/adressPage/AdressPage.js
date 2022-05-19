@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import useProtectdPage from "../../hooks/useProtectedPage"
 import { useNavigate } from "react-router-dom"
 import useForm from "../../hooks/useForm"
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { goToFeedPage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext"
 import Header from "../../components/header/Header"
+import { CircularProgress } from "@material-ui/core"
 
 function AdressPage() {
 
@@ -24,41 +25,44 @@ function AdressPage() {
     state: "",
     complement: ""
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitAddAdress = (event) => {
     event.preventDefault()
-
-    axios.put(`${BASE_URL}address`, form, {headers: { auth: localStorage.getItem("token") } })
+    setIsLoading(true)
+    axios.put(`${BASE_URL}address`, form, { headers: { auth: localStorage.getItem("token") } })
       .then((res) => {
         console.log(res.data)
         console.log(form)
         alert("Cadastro de endereço feito com sucesso!")
         localStorage.setItem("tokenadress", res.data.token)
         goToFeedPage(navigate)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err.response)
         console.log(form)
         alert("Deu ruin Bergue, confere o console ae!!")
+        setIsLoading(false)
       })
   }
 
   console.log(states.address?.address.city)
 
   useEffect(() => {
-    setters.setHeaderButton("<") 
+    setters.setHeaderButton("<")
     setters.setHeaderText("Endereço")
     requests.getFullAddress()
     setForm({street: `${states.address?.address.street}`, number:`${states.address?.address.number}`, neighbourhood: `${states.address?.address.neighbourhood}`, city: `${states.address?.address.city}`, state: `${states.address?.address.state}`, complement: `${states.address?.address.complement}`})
     requests.getProfile()
   }, [])
-  
+
   return (
     <>
       <Header />
-      
+
       <DivAdress>
-        { states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p> }
+        {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
 
         <FormAdress onSubmit={onSubmitAddAdress}>
           <TextField variant="outlined"
@@ -134,7 +138,7 @@ function AdressPage() {
           />
 
           <Button type="submit" variant="contained" color="primary">
-            Salvar
+            {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
           </Button>
         </FormAdress>
       </DivAdress>

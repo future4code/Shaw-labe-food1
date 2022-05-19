@@ -10,6 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
+import Loading from '../../components/Loading/Loading'
 
 function FeedPage() {
   const { states, requests, setters } = useContext(GlobalContext);
@@ -23,30 +24,30 @@ function FeedPage() {
 
   const getFilterName = () => {
     const filteredName = states.restaurants?.restaurants
-    .filter((restaurant) => {
-      return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
-    })
-    .map((filtered) => {
-      return <CardRestaurant filtered={filtered} key={filtered.id} />;
-    });
+      .filter((restaurant) => {
+        return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
+      })
+      .map((filtered) => {
+        return <CardRestaurant filtered={filtered} key={filtered.id} />;
+      });
 
     setFilterRestaurant(filteredName)
   }
 
   const getFilterCategory = (category) => {
     const filteredCategory = states.restaurants?.restaurants
-    .filter((restaurant) => {
-      return restaurant.category === category
-    }).map((filtered) => {
-      return <CardRestaurant filtered={filtered} key={filtered.id} />
-    })
+      .filter((restaurant) => {
+        return restaurant.category === category
+      }).map((filtered) => {
+        return <CardRestaurant filtered={filtered} key={filtered.id} />
+      })
 
     setFilterRestaurant(filteredCategory)
   }
 
   const showCategories = states.restaurants?.restaurants.map((restaurant) => {
     return (
-      <Tab  label={restaurant.category} key={restaurant.id} onClick={() => getFilterCategory(restaurant.category)}>
+      <Tab label={restaurant.category} key={restaurant.id} onClick={() => getFilterCategory(restaurant.category)}>
         {restaurant.category}
       </Tab>
     )
@@ -83,7 +84,7 @@ function FeedPage() {
           onChange={onChange}
           value={form.search}
           name={"search"}
-          fullWidth 
+          fullWidth
         />
         <Paper square>
           <FilterName
@@ -95,12 +96,12 @@ function FeedPage() {
             scrollButtons="auto"
             aria-label="disabled tabs example"
           >
-            <Tab label="Todos" onClick={reset}/>
+            <Tab label="Todos" onClick={reset} />
             {showCategories}
           </FilterName>
         </Paper>
 
-        {filterRestaurant}
+        {filterRestaurant ? filterRestaurant : <Loading />}
       </DivFeed>
 
       <Footer page='home' />
