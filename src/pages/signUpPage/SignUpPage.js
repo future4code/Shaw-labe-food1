@@ -4,6 +4,7 @@ import { ContainerSingup, Title } from "./styled";
 import logo from "../../assets/logo.png"
 import Header from "../../components/header/Header"
 import { GlobalContext } from "../../global/GlobalContext";
+import { ArrowBackIos } from "@material-ui/icons";
 
 function SignUpPage() {
 
@@ -11,7 +12,7 @@ function SignUpPage() {
 
   useEffect(() => {
     setters.setHeaderText("")
-    setters.setHeaderButton("<")
+    setters.setHeaderButton(<ArrowBackIos/>)
   }, [])
 
   return (

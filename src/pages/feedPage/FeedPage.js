@@ -61,7 +61,7 @@ function FeedPage() {
     requests.getRestaurants();
     setters.setHeaderText("Rappi4")
     setters.setHeaderButton("")
-  }, []);
+  }, [])
 
   useEffect(() => {
     getFilterName()

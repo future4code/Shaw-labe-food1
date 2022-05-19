@@ -12,17 +12,16 @@ export const DivText = styled.div`
 `
 
 export const DivTextButton = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
     height: 8vh;
+    align-items: center;
+    justify-items:  center;
 
     p{
-        width: 58%;
-    }
-
-    hr{
-        width: 100vw
+        text-align: center;
+        grid-column: 2/3;
     }
 `
 
