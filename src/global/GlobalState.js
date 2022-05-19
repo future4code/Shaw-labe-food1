@@ -12,9 +12,11 @@ export default function GlobalState(props) {
     const [restaurants, setRestaurants] = useState()
 
     const [cart, setCart] = useState([])
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const [headerText, setHeaderText] = useState("")
     const [headerButton, setHeaderButton] = useState("<")
+
     //-- requests --//
     const getFullAddress = () => {
         axios
@@ -67,12 +69,20 @@ export default function GlobalState(props) {
             })
     }
 
-    const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail, cart }
-    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton, setCart }
+    //-- Functions --//
+    const getTotalPrice = () => {
+        for (let product of cart) {
+            setTotalPrice(totalPrice + (product.price * product.quantity))
+        }
+    }
+
+    const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail, cart, totalPrice }
+    const setters = { setProfile, setOrders, setHeaderText, setHeaderButton, setCart, setTotalPrice }
     const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
+    const functions = { getTotalPrice }
 
     return (
-        <GlobalContext.Provider value={{ states, setters, requests }}>
+        <GlobalContext.Provider value={{ states, setters, requests, functions }}>
             {props.children}
         </GlobalContext.Provider>
     )
