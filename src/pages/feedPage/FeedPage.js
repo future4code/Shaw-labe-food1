@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../global/GlobalContext";
 import CardRestaurant from "./cardRestaurant/CardRestaurant";
 import useForm from "../../hooks/useForm";
-// import {restaurantCategory} from "../../constants/categorys"
+import {restaurantCategory} from "../../constants/categorys"
 
 function FeedPage() {
   const { states, requests } = useContext(GlobalContext);
   const { form, onChange } = useForm({ search: "" });
+  const [filterRestaurant, setFilterRestaurant] = useState([])
 
 
   const getFilteredList = states.restaurants?.restaurants
@@ -16,21 +17,33 @@ function FeedPage() {
     .map((filtered) => {
       return <CardRestaurant filtered={filtered} key={filtered.id} />;
     });
+    // const teste = () => {
+    //   const getFilteredList = states.restaurants?.restaurants
+    //   .filter((restaurant) => {
+    //     return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
+    //   })
+    //   .map((filtered) => {
+    //     return <CardRestaurant filtered={filtered} key={filtered.id} />;
+    //   });
+    //   setFilterRestaurant(getFilteredList)
+    // }
 
-  // const filterCategory = (category) => {
-  //   const filter = restaurantCategory.map((categoria) =>{
-  //     return categoria
-  //   })
-  //   if(filter === category){
-  //     return <CardRestaurant/>
-  //   }
-  // }
+    
+  const filterCategory = (category) => {
+     const filteredRestaurant = states.restaurants?.restaurants.filter((restaurant) =>{
+      return restaurant.category === category
+    }).map((filtered) =>{
+      return <CardRestaurant filtered={filtered} key={filtered.id} />
+    })
 
-  // const getFilterCategory = states.restaurants?.restaurants.map((restaurant) =>{
-  //   return (
-  //     <h4 onClick={() => filterCategory(restaurant.category)} key={restaurant.id}>{restaurant.category}</h4>
-  //   )
-  // })
+    setFilterRestaurant(filteredRestaurant)
+  }
+
+  const getFilterCategory = states.restaurants?.restaurants.map((restaurant) =>{
+    return (
+      <h4 onClick={() => filterCategory(restaurant.category)} key={restaurant.id}>{restaurant.category}</h4>
+    )
+  })
 
 
   
@@ -46,8 +59,10 @@ function FeedPage() {
         value={form.search}
         name={"search"}
       />
-      {/* {getFilterCategory} */}
+      {filterRestaurant}
+      {getFilterCategory}
       {getFilteredList}
+      
     </div>
   );
 }
