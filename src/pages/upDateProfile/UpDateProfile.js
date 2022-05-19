@@ -7,27 +7,32 @@ import { Button } from "@material-ui/core";
 import { FormAdress } from "./styled";
 import useProtectdPage from "../../hooks/useProtectedPage"
 import Header from "../../components/header/Header";
-import { token } from "../../constants/urls";
+import { tokenadress } from "../../constants/urls";
 import { GlobalContext } from "../../global/GlobalContext";
+import { goToProfilePage } from "../../routes/coordinator";
+import { useNavigate } from "react-router-dom";
 
 export default function UpDateProfile() {
 
     useProtectdPage()
-    const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "" })
+    const { form, onChange, clear, setForm } = useForm({ name: "", email: "", cpf: "" })
     const { states, requests, setters } = useContext(GlobalContext)
+    const navigate = useNavigate()
 
     const updateProfile = () => {
         axios
-            .put(`${BASE_URL}profile`, form, { headers: { auth: token } })
+            .put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
             .then((res) => {
                 console.log(res.data);
-                //-- talvez direcionar para o perfil atualizado 
+                goToProfilePage(navigate)
+                alert(res.data)
             })
             .catch((err) => {
                 console.log(err.response);
                 clear()
             })
     }
+
 
     const onSubmitForm = (ev) => {
         ev.preventDefault()
@@ -37,6 +42,7 @@ export default function UpDateProfile() {
     useEffect(() => {
         setters.setHeaderText("Editar")
         setters.setHeaderButton("<")
+        setForm({name: `${states.profile?.user.name}`, email:`${states.profile?.user.email}`, cpf: `${states.profile?.user.cpf}`})
         requests.getProfile()
     }, [])
 

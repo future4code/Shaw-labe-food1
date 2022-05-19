@@ -16,7 +16,7 @@ function AdressPage() {
   useProtectdPage()
   const navigate = useNavigate()
   const { states, setters, requests } = useContext(GlobalContext)
-  const { form, onChange } = useForm({
+  const { form, onChange, setForm } = useForm({
     street: "",
     number: "",
     neighbourhood: "",
@@ -43,9 +43,13 @@ function AdressPage() {
       })
   }
 
+  console.log(states.address?.address.city)
+
   useEffect(() => {
     setters.setHeaderButton("<") 
     setters.setHeaderText("Endereço")
+    requests.getFullAddress()
+    setForm({street: `${states.address?.address.street}`, number:`${states.address?.address.number}`, neighbourhood: `${states.address?.address.neighbourhood}`, city: `${states.address?.address.city}`, state: `${states.address?.address.state}`, complement: `${states.address?.address.complement}`})
     requests.getProfile()
   }, [])
   

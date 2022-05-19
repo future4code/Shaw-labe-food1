@@ -27,7 +27,6 @@ export const SingUpForm = () => {
       try{
         const res = await axios.post(`${BASE_URL}signup`, body)
         localStorage.setItem("token", res.data.token);
-        clear()
         clearPasswordConfirm()
         goToAdressPage(navigate)
       }catch(err){
