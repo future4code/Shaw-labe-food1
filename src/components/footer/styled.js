@@ -5,6 +5,7 @@ display: flex;
 flex-direction:row;
 justify-content: space-evenly;
 position: fixed;
+height: 8vh;
 width: 100%;
 bottom: 0;
 left: 0;
