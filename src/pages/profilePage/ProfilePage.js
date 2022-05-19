@@ -20,11 +20,11 @@ function ProfilePage() {
   });
 
   useEffect(() => {
-    requests.getProfile();
-    requests.getOrdersHistory();
-    setters.setHeaderText("Meu perfil");
-    setters.setHeaderButton("");
-  }, []);
+    requests.getProfile()
+    requests.getOrdersHistory()
+    setters.setHeaderText("Meu perfil")
+    setters.setHeaderButton("")
+  }, [states.profile?.user, states.address?.address])
 
   return (
     <div>

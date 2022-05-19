@@ -26,12 +26,11 @@ const LoginForm = () => {
             .then((res) => {
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("tokenadress", res.data.token)
-                clear()
                 setLoading(false)
                 goToFeedPage(navigate)
             })
             .catch((err) => {
-                console.log(err)
+                alert(err.response.data.message)
                 setLoading(false)
             })
     }
