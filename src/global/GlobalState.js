@@ -67,8 +67,6 @@ export default function GlobalState(props) {
             })
     }
 
-    console.log(cart)
-
     const states = { profile, orders, address, restaurants, headerText, headerButton, restaurantDetail, cart }
     const setters = { setProfile, setOrders, setHeaderText, setHeaderButton, setCart }
     const requests = { getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
