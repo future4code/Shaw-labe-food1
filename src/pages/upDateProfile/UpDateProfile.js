@@ -11,6 +11,7 @@ import { tokenadress } from "../../constants/urls";
 import { GlobalContext } from "../../global/GlobalContext";
 import { goToProfilePage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
+import { ArrowBackIos } from "@material-ui/icons";
 
 export default function UpDateProfile() {
 
@@ -23,13 +24,11 @@ export default function UpDateProfile() {
         axios
             .put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
             .then((res) => {
-                console.log(res.data);
                 goToProfilePage(navigate)
-                alert(res.data)
+                alert("Perfil atualizado")
             })
             .catch((err) => {
                 console.log(err.response);
-                clear()
             })
     }
 
@@ -41,10 +40,10 @@ export default function UpDateProfile() {
 
     useEffect(() => {
         setters.setHeaderText("Editar")
-        setters.setHeaderButton("<")
+        setters.setHeaderButton(<ArrowBackIos/>)
         setForm({name: `${states.profile?.user.name}`, email:`${states.profile?.user.email}`, cpf: `${states.profile?.user.cpf}`})
         requests.getProfile()
-    }, [states.profile?.user.name])
+    }, [states.profile?.user.name, states.profile?.user.email, states.profile?.user.cpf])
 
     return (
         <div>
