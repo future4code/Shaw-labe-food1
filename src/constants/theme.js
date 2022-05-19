@@ -11,10 +11,10 @@ const theme = createTheme({
       main: SecundaryColor,
       contrastText: NeutralSecundaryColor ,
     },
+    text: {
+      primary: NeutralColor
+    }
   },
-  text: {
-    primary: NeutralColor
-  }
 });
 
 export default theme; 

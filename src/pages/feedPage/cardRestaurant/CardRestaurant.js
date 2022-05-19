@@ -27,14 +27,17 @@ const CardRestaurant = (props) => {
           image={props.filtered.logoUrl}
           title="Nome da loja"
         />
+
         <TypographyName gutterBottom variant="h6" color="primary">
           {props.filtered.name}
         </TypographyName>
       </CardActionArea>
+      
       <CardActionsInfo>
         <Typography size="small" color="secondary">
           {props.filtered.deliveryTime} min.
         </Typography>
+
         <Typography size="small" color="secondary">
           Frete R$ {props.filtered.shipping},00
         </Typography>

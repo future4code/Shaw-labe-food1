@@ -4,18 +4,19 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { CardActions, Typography } from "@material-ui/core";
 
 export const ContainerCard = styled(Card)`
-margin: 1rem;
-border-radius: 10rem;
+    border-radius: 10rem; // o que ele faz?
+    border: solid 1px #b8b8b8;
 `
 
 export const CardMediaImg = styled(CardMedia)`
-border-radius: 0.7rem;
+    border-radius: 0.3rem 0.3rem 0 0; // estava 0.7rem 0.7rem 0 0
 `
-export const CardActionsInfo = styled(CardActions)`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-`
+
 export const TypographyName = styled(Typography)`
-padding-left: 0.4em;
+    padding: 0.4em;
+`
+
+export const CardActionsInfo = styled(CardActions)`
+    display: flex;
+    justify-content: space-between;
 `
