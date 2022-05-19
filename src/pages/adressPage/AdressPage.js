@@ -79,7 +79,6 @@ function AdressPage() {
   return (
     <>
       <Header />
-
       {states.address?.address ?  
         <DivAdress>
           {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
