@@ -4,19 +4,20 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import * as S from './styles';
-import { GlobalContext } from '../../contexts/GlobalContext';
-import { Toast } from '../../components/Toast'
+import * as S from './styled';
+// import { GlobalContext } from '../../contexts/GlobalContext';
+// import { Toast } from '../../components/Toast'
 
 const ShowModal = ({
     open,
+    // handleOpen,
     handleClose,
     quantity,
     setQuantity,
-    addItemToCart,
-    product,
-    restaurantId,
-    data,
+    // addItemToCart,
+    // product,
+    // restaurantId,
+    // data,
     }) => {
 
     const handleChange = (event) => {
@@ -41,7 +42,7 @@ const ShowModal = ({
                     <MenuItem value={5}>5</MenuItem>
                 </Select>
             </FormControl>
-            <Button color={'primary'} onClick={placeOrder}>
+            <Button color={'primary'}>
                 Adicionar ao carrinho
             </Button>
         </S.BodyModal>
@@ -49,9 +50,11 @@ const ShowModal = ({
 
     return (
         <div>
-            <S.SModal open={open} onClose={handleClose}>
+            <S.DivModal open={open} onClose={handleClose}>
                 {body}
-            </S.SModal>
+            </S.DivModal>
         </div>
     );
 }
+
+export default ShowModal

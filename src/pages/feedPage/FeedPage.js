@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 import Loading from '../../components/Loading/Loading'
 import useProtectdPage from "../../hooks/useProtectedPage"
+import ActiveOrderCard from "../../components/activeOrderCard/ActiveOrderCard";
 
 function FeedPage() {
   useProtectdPage()
@@ -20,7 +21,7 @@ function FeedPage() {
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [value, setValue] = useState(0);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     form.search = ""
     setters.setHeaderText("Rappi4")
     setValue(newValue);
@@ -72,15 +73,17 @@ function FeedPage() {
     requests.getRestaurants();
     setters.setHeaderText("Rappi4")
     setters.setHeaderButton("")
+    requests.getActiveOrder()
   }, [])
 
   useEffect(() => {
     getFilterName()
   }, [form, states.restaurants])
+
   return (
     <div>
       <Header />
-
+  
       <DivFeed>
         <TextField placeholder="Buscar Restaurantes"
           variant="outlined"
@@ -112,9 +115,7 @@ function FeedPage() {
                 aria-label="disabled tabs example"
               >
                 <Tab label="Todos" onClick={reset} />
-                <div onClick={handleChange}>
                   {showCategories}
-                </div>
               </FilterName>
             </Paper>
             <>
@@ -124,6 +125,8 @@ function FeedPage() {
           :
           <Loading />
         }
+
+      {!states.activeOrder? "" : <ActiveOrderCard/>}
 
       </DivFeed>
 
