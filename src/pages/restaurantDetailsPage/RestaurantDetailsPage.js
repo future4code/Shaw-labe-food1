@@ -18,28 +18,21 @@ function RestaurantDetailsPage() {
   const { states, requests, setters } = useContext(GlobalContext);
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(0)
-
+  const [product, setProduct] = useState()
+  console.log(product)
   const handleClose = () => { setOpen(false) }
-
-  const addProduct = (product) => {
-    const newCart = [...states.cart, { ...product, quantity: quantity }]
-    setters.setRestaurantId(params.id)
-    setters.setCart(newCart)
-    setters.setUpdate(states.update + 1)
-    // desenvolver a lógica para a tela de restaurente.
-  }
 
   const restaurantProducts = states.restaurantDetail?.restaurant.products
     .map((product) => {
       if (product.category !== "Bebida") {
-        return <ProductCard params={params.restaurantId} key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
+        return <ProductCard setProduct={setProduct} key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
       }
     })
 
   const restaurantDrinks = states.restaurantDetail?.restaurant.products
     .map((product) => {
       if (product.category === "Bebida") {
-        return <ProductCard key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
+        return <ProductCard setProduct={setProduct} key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
       }
     })
 
@@ -48,6 +41,37 @@ function RestaurantDetailsPage() {
     setters.setHeaderText("Restaurante");
     setters.setHeaderButton(<ArrowBackIos />);
   }, []);
+
+
+
+
+
+  const addProduct = (product, params) => {
+    if (states.restaurantId === params || states.restaurantId === undefined || states.cart.length === 0) {
+      const newCart = [...states.cart, { ...product, quantity: 1 }]
+      setters.setRestaurantId(params)
+      setters.setCart(newCart)
+      setters.setUpdate(states.update + 1)
+      // setters.setProductQuantity(props.quantity)
+    } else {
+      alert("só pode adicionar 1 restaurante no carrinho")
+    }
+  }
+
+
+  // const onChangeQuantity = (e) => {
+  //   const newQuantity = states.cart.map((item) => {
+  //     if (item.id === props.product.id) {
+  //       setters.setUpdate(states.update + 1)
+  //       setProductQuantity(e.target.value)
+  //       return { ...item, quantity: Number(e.target.value) }
+  //     }
+  //     return item
+  //   })
+  //   setters.setCart(newQuantity)
+  // }
+
+
 
   return (
     <div>
@@ -78,6 +102,10 @@ function RestaurantDetailsPage() {
             </Typography>
           </CardActionArea>
 
+
+          {/* //------------------------------------// */} {/* //------------------------------------// */}
+
+
           <h3>Pratos principais</h3>
           <hr />
           {restaurantProducts}
@@ -85,12 +113,19 @@ function RestaurantDetailsPage() {
           <h3>Bebidas</h3>
           <hr />
           {restaurantDrinks}
+
+
+          {/* //------------------------------------// */} {/* //------------------------------------// */}
+
         </ContainerCardDetail>
         :
         <Loading />
       }
 
       <ShowModal
+        product={product}
+        params={params.restaurantId}
+        addProduct={addProduct}
         open={open}
         handleClose={handleClose}
         quantity={quantity}
