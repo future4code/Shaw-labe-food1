@@ -20,7 +20,7 @@ function FeedPage() {
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [value, setValue] = useState(0);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     form.search = ""
     setters.setHeaderText("Rappi4")
     setValue(newValue);
@@ -77,6 +77,7 @@ function FeedPage() {
   useEffect(() => {
     getFilterName()
   }, [form, states.restaurants])
+
   return (
     <div>
       <Header />
@@ -112,9 +113,7 @@ function FeedPage() {
                 aria-label="disabled tabs example"
               >
                 <Tab label="Todos" onClick={reset} />
-                <div onClick={handleChange}>
                   {showCategories}
-                </div>
               </FilterName>
             </Paper>
             <>
@@ -124,7 +123,6 @@ function FeedPage() {
           :
           <Loading />
         }
-
       </DivFeed>
 
       <Footer page='home' />
