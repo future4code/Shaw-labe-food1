@@ -16,7 +16,7 @@ export const BodyModal = styled.div`
 `
 
 export const DivModal = styled(Modal)`
-  display: flex;
-  align-items: center;
-  outline: none;
+    display: flex;
+    align-items: center;
+    outline: none;
 `

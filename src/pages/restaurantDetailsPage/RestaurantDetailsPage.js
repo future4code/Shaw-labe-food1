@@ -1,47 +1,34 @@
 import { CardActionArea, Typography } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
 import { P, CardMediaImg, ContainerCardDetail } from "./styled";
 import Loading from '../../components/Loading/Loading'
-import ShowModal from "./modal/Modal";
 import useProtectdPage from "../../hooks/useProtectedPage"
-
 
 function RestaurantDetailsPage() {
   useProtectdPage()
 
   const params = useParams();
   const { states, requests, setters } = useContext(GlobalContext);
-  const [open, setOpen] = useState(false)
-  const [quantity, setQuantity] = useState(0)
-
-  const handleClose = () => {setOpen(false)}
-
-  const addProduct = (product) => {
-    const newCart = [...states.cart, {...product, quantity: quantity }]
-    setters.setRestaurantId(params.id)
-    setters.setCart(newCart)
-    setters.setUpdate(states.update + 1)
-    // desenvolver a lógica para a tela de restaurente.
-}
 
   const restaurantProducts = states.restaurantDetail?.restaurant.products
-  .map((product) => {
-    if (product.category !== "Bebida") {
-      return <ProductCard params={params.restaurantId} key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
-    }
-  })
+    .map((product) => {
+      if (product.category !== "Bebida") {
+        return <ProductCard params={params.restaurantId} key={product.id} product={product} />
+      }
+    })
+
 
   const restaurantDrinks = states.restaurantDetail?.restaurant.products
-  .map((product) => {
-    if (product.category === "Bebida") {
-      return <ProductCard key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
-    }
-  })
+    .map((product) => {
+      if (product.category === "Bebida") {
+        return <ProductCard key={product.id} product={product} />
+      }
+    })
 
   useEffect(() => {
     requests.getRestaurantDetail(params.restaurantId);
@@ -63,9 +50,7 @@ function RestaurantDetailsPage() {
               image={states.restaurantDetail?.restaurant.logoUrl}
               title="Nome da loja"
             />
-
             <br />
-
             <Typography gutterBottom variant="h6" color="primary">
               {states.restaurantDetail?.restaurant.name}
             </Typography>
@@ -77,7 +62,6 @@ function RestaurantDetailsPage() {
               <p>{states.restaurantDetail?.restaurant.address}</p>
             </Typography>
           </CardActionArea>
-
           <h3>Pratos principais</h3>
           <hr />
           {restaurantProducts}
@@ -89,13 +73,6 @@ function RestaurantDetailsPage() {
         :
         <Loading />
       }
-
-      <ShowModal
-        open={open}
-        handleClose={handleClose}
-        quantity={quantity} 
-        setQuantity={setQuantity}
-      />
     </div>
   );
 }
