@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowBackIos } from "@material-ui/icons";
 
 export default function UpDateProfile() {
-
     useProtectdPage()
+
     const navigate = useNavigate()
     const { form, onChange, setForm } = useForm({ name: "", email: "", cpf: "" })
     const { states, requests, setters } = useContext(GlobalContext)
@@ -97,4 +97,4 @@ export default function UpDateProfile() {
             </FormAdress>
         </div>
     )
-} 
+}

@@ -9,8 +9,10 @@ import { BASE_URL } from "../../constants/urls";
 import Loading from '../../components/Loading/Loading'
 import { goToFeedPage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
+import useProtectdPage from "../../hooks/useProtectedPage"
 
 function CartPage() {
+  useProtectdPage()
   const navigate = useNavigate()
   const [method, setMethod] = useState("")
   const { states, requests, setters } = useContext(GlobalContext);

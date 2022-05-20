@@ -8,9 +8,11 @@ import { BASE_URL } from '../../constants/urls'
 import { useNavigate } from "react-router";
 import { goToFeedPage } from '../../routes/coordinator'
 import { CircularProgress } from "@material-ui/core";
+import useUnProtectedPage from "../../hooks/useUnprotectedPage"
 
 const LoginForm = () => {
-
+    useUnProtectedPage()
+    
     const navigate = useNavigate()
     const { form, onChange } = useForm({ email: "", password: "" })
     const [isLoading, setLoading] = useState(false)
@@ -50,6 +52,9 @@ const LoginForm = () => {
                     required
                     type={"email"}
                     placeholder={"email@email.com"}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
                 <TextField
                     name={"password"}
@@ -62,8 +67,13 @@ const LoginForm = () => {
                     required
                     type={"password"}
                     placeholder={"Mínimo 6 caracteres"}
-                    pattern={"^.{6,}"}
-                    title={"A senha deve ter no mínimo 6 caracteres"}
+                    inputProps={{
+                        pattern: "^.{6,}$",
+                        title: "Senha deve possuir no mínimo 6 caracteres"
+                    }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
 
                 <Button

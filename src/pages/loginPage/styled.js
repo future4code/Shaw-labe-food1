@@ -4,8 +4,9 @@ export const Screencontainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100vw;
-    margin-top: 10vh;
+    margin-top: 12vh;
 `
 
 export const InputsContainer = styled.div`
@@ -20,4 +21,14 @@ export const InputsContainer = styled.div`
 export const LogoImage = styled.img`
     width: 104px;
     height: 58px
+`
+export const SingUpButton = styled.span`
+  text-transform: none;
+  font-weight: lighter;
+  font-size: 2vh;
+`
+export const Subtitle = styled.p`
+font-weight: lighter;
+font-size: 2vh;
+margin-top: 3vh;
 `
