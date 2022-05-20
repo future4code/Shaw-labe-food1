@@ -8,9 +8,11 @@ import { BASE_URL } from '../../constants/urls'
 import { useNavigate } from "react-router";
 import { goToFeedPage } from '../../routes/coordinator'
 import { CircularProgress } from "@material-ui/core";
+import useUnProtectedPage from "../../hooks/useUnprotectedPage"
 
 const LoginForm = () => {
-
+    useUnProtectedPage()
+    
     const navigate = useNavigate()
     const { form, onChange } = useForm({ email: "", password: "" })
     const [isLoading, setLoading] = useState(false)

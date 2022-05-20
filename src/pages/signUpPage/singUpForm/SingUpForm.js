@@ -8,8 +8,10 @@ import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import axios from "axios"
 import { CircularProgress } from "@material-ui/core";
+import useUnprotectdPage from '../../../hooks/useUnprotectedPage'
 
 export const SingUpForm = () => {
+  useUnprotectdPage()
 
   const navigate = useNavigate()
   const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "", password: "" })

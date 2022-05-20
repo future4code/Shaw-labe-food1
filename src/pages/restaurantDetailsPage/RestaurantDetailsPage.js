@@ -7,8 +7,10 @@ import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
 import { P, CardMediaImg, ContainerCardDetail } from "./styled";
 import Loading from '../../components/Loading/Loading'
+import useProtectdPage from "../../hooks/useProtectedPage"
 
 function RestaurantDetailsPage() {
+  useProtectdPage()
 
   const params = useParams();
   const { states, requests, setters } = useContext(GlobalContext);
