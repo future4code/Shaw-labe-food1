@@ -1,7 +1,13 @@
-import { Grid } from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
-import {ButtonAdd, CardInfoMeal, CardMediaItemImg, Container, Quantity, Select} from "./styled"
+import {
+  ButtonAdd,
+  CardInfoMeal,
+  CardMediaItemImg,
+  Container,
+  Quantity,
+  Select,
+} from "./styled";
 
 export const ProductCard = (props) => {
   const { states, setters } = useContext(GlobalContext);
@@ -46,46 +52,48 @@ export const ProductCard = (props) => {
     <div>
       <Container>
         <CardMediaItemImg src={props.product.photoUrl} />
-      <CardInfoMeal >
-        {props.product.name}
-        <br />
-        {props.product.description}
-        <br />
-        R${props.product.price.toFixed(2)}
-      </CardInfoMeal>
-      <ButtonAdd>
-        <button
-          onClick={
-            productQuantity === 0
-              ? () => addProduct(props.product)
-              : () => removeProduct(props.product)
-          }
-        >
-          {productQuantity === 0 ? "adicionar" : "remover"}
-        </button>
-      </ButtonAdd>
-     
-      <div>
-        {productQuantity > 0 ? (
-          <Select>
-            <select onChange={onChangeQuantity}>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-              <option value={7}>7</option>
-              <option value={8}>8</option>
-              <option value={9}>9</option>
-              <option value={10}>10</option>
-            </select>
-          </Select>
-        ) : (
-          ""
-        )}
+        <CardInfoMeal>
+          {props.product.name}
+          <br />
+          {props.product.description}
+          <br />
+          R${props.product.price.toFixed(2)}
+        </CardInfoMeal>
+        <ButtonAdd>
+          <button
+            onClick={
+              productQuantity === 0
+                ? () => addProduct(props.product)
+                : () => removeProduct(props.product)
+            }
+          >
+            {productQuantity === 0 ? "adicionar" : "remover"}
+          </button>
+        </ButtonAdd>
+
+        <div>
+          {productQuantity > 0 ? (
+            <Select>
+              <select onChange={onChangeQuantity}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
+                <option value={8}>8</option>
+                <option value={9}>9</option>
+                <option value={10}>10</option>
+              </select>
+            </Select>
+          ) : (
+            ""
+          )}
         </div>
-        <Quantity>{productQuantity !== 0 ? <div>{productQuantity}</div> : ""}</Quantity>
+        <Quantity>
+          {productQuantity !== 0 ? <div>{productQuantity}</div> : ""}
+        </Quantity>
       </Container>
     </div>
   );

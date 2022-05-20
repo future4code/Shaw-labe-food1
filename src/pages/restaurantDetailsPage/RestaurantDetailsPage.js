@@ -5,26 +5,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
-import {P,
-  CardMediaImg,
-  ContainerCardDetail,
-} from "./styled";
+import { P, CardMediaImg, ContainerCardDetail } from "./styled";
 
 function RestaurantDetailsPage() {
   // const navigate = useNavigate()
   const { states, requests, setters } = useContext(GlobalContext);
   const params = useParams();
 
-  const restaurantProducts = states.restaurantDetail?.restaurant.products.map((product)=>{
-    if(product.category !== "Bebida"){
-      return <ProductCard key={product.id} product={product}/>
+  const restaurantProducts = states.restaurantDetail?.restaurant.products.map(
+    (product) => {
+      if (product.category !== "Bebida") {
+        return <ProductCard key={product.id} product={product} />;
+      }
     }
-  })
-    const restaurantProducts2 = states.restaurantDetail?.restaurant.products.map((product)=>{
-    if(product.category === "Bebida"){
-      return <ProductCard key={product.id} product={product}/>
+  );
+  const restaurantProducts2 = states.restaurantDetail?.restaurant.products.map(
+    (product) => {
+      if (product.category === "Bebida") {
+        return <ProductCard key={product.id} product={product} />;
+      }
     }
-  })
+  );
 
   // const restaurantProducts = states.restaurantDetail?.restaurant.products.map(
   //   (product) => {
@@ -35,13 +36,12 @@ function RestaurantDetailsPage() {
   useEffect(() => {
     requests.getRestaurantDetail(params.restaurantId);
     setters.setHeaderText("Restaurante");
-    setters.setHeaderButton(<ArrowBackIos/>);
+    setters.setHeaderButton(<ArrowBackIos />);
   }, []);
 
   return (
     <div>
       <Header />
-
       <ContainerCardDetail>
         <CardActionArea>
           <CardMediaImg
@@ -57,16 +57,22 @@ function RestaurantDetailsPage() {
           </Typography>
           <Typography size="small" color="secondary">
             <p>{states.restaurantDetail?.restaurant.category}</p>
-            <P>{states.restaurantDetail?.restaurant.deliveryTime} min <p>Frete R${states.restaurantDetail?.restaurant.shipping.toFixed(2)}</p></P>
+            <P>
+              {states.restaurantDetail?.restaurant.deliveryTime} min{" "}
+              <p>
+                Frete R$
+                {states.restaurantDetail?.restaurant.shipping.toFixed(2)}
+              </p>
+            </P>
             <p></p>
             <p>{states.restaurantDetail?.restaurant.address}</p>
           </Typography>
         </CardActionArea>
         <h3>Pratos principais</h3>
-        <hr/>
+        <hr />
         {restaurantProducts}
         <h3>Bebidas</h3>
-        <hr/>
+        <hr />
         {restaurantProducts2}
       </ContainerCardDetail>
     </div>
