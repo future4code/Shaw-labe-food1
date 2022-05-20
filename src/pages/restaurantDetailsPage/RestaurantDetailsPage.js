@@ -19,35 +19,29 @@ function RestaurantDetailsPage() {
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(0)
 
-  const handleClose = () => {setOpen(false)}
+  const handleClose = () => { setOpen(false) }
 
   const addProduct = (product) => {
-    const newCart = [...states.cart, {...product, quantity: quantity }]
+    const newCart = [...states.cart, { ...product, quantity: quantity }]
     setters.setRestaurantId(params.id)
     setters.setCart(newCart)
     setters.setUpdate(states.update + 1)
     // desenvolver a lógica para a tela de restaurente.
-}
+  }
 
   const restaurantProducts = states.restaurantDetail?.restaurant.products
-  .map((product) => {
-    if (product.category !== "Bebida") {
-      return <ProductCard params={params.restaurantId} key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
-    }
-  })
-
-  const restaurantDrinks = states.restaurantDetail?.restaurant.products
-
     .map((product) => {
-      if (product.category === "Bebida") {
-        return <ProductCard params={params.restaurantId} key={product.id} product={product} />
+      if (product.category !== "Bebida") {
+        return <ProductCard params={params.restaurantId} key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
       }
     })
-  .map((product) => {
-    if (product.category === "Bebida") {
-      return <ProductCard key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
-    }
-  })
+
+  const restaurantDrinks = states.restaurantDetail?.restaurant.products
+    .map((product) => {
+      if (product.category === "Bebida") {
+        return <ProductCard key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
+      }
+    })
 
   useEffect(() => {
     requests.getRestaurantDetail(params.restaurantId);
@@ -99,7 +93,7 @@ function RestaurantDetailsPage() {
       <ShowModal
         open={open}
         handleClose={handleClose}
-        quantity={quantity} 
+        quantity={quantity}
         setQuantity={setQuantity}
       />
     </div>

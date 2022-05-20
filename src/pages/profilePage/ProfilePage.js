@@ -32,8 +32,6 @@ function ProfilePage() {
     requests.getProfile()
   }, [])
 
-  console.log(states.orders)
-
   return (
     <div>
       <Header />
