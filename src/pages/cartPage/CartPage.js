@@ -7,9 +7,11 @@ import { Button, Checkbox } from "@material-ui/core";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import Loading from '../../components/Loading/Loading'
+import { goToFeedPage } from "../../routes/coordinator";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
-
+  const navigate = useNavigate()
   const [method, setMethod] = useState("")
   const { states, requests, setters } = useContext(GlobalContext);
 
@@ -27,10 +29,11 @@ function CartPage() {
     axios.post(`${BASE_URL}restaurants/${states.restaurantId}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
       .then((res) => {
         alert("Seu pedido foi enviado ao restaurante")
+        goToFeedPage(navigate)
         setters.setCart([])
       })
       .catch((err) => {
-        console.log('Deu ruim: ', err.response.data)
+        alert(err.response.data.message)
       })
   }
 
