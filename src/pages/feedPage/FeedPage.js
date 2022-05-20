@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 import Loading from '../../components/Loading/Loading'
 import useProtectdPage from "../../hooks/useProtectedPage"
+import ActiveOrderCard from "../../components/activeOrderCard/ActiveOrderCard";
 
 function FeedPage() {
   useProtectdPage()
@@ -72,6 +73,7 @@ function FeedPage() {
     requests.getRestaurants();
     setters.setHeaderText("Rappi4")
     setters.setHeaderButton("")
+    requests.getActiveOrder()
   }, [])
 
   useEffect(() => {
@@ -80,7 +82,7 @@ function FeedPage() {
   return (
     <div>
       <Header />
-
+  
       <DivFeed>
         <TextField placeholder="Buscar Restaurantes"
           variant="outlined"
@@ -124,6 +126,8 @@ function FeedPage() {
           :
           <Loading />
         }
+
+      {!states.activeOrder? "" : <ActiveOrderCard/>}
 
       </DivFeed>
 

@@ -12,6 +12,7 @@ export default function GlobalState(props) {
     const [restaurantDetail, setRestaurantDetail] = useState()
     const [restaurants, setRestaurants] = useState()
     const [update, setUpdate] = useState(0)
+    const [activeOrder, setActiveOrder] = useState()
 
     //-- CARRINHO --//
     const [cart, setCart] = useState([])
@@ -84,6 +85,16 @@ export default function GlobalState(props) {
             })
     }
 
+    const getActiveOrder = () =>{
+        axios.get(`${BASE_URL}active-order`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) =>{
+            setActiveOrder(res.data)
+        })
+        .catch((err) =>{
+            console.log(err.data)
+        })
+    }
+
     //-- Functions --//
     const removeProduct = (product) => {
         const newCart = states.cart.map((item) => {
@@ -102,11 +113,11 @@ export default function GlobalState(props) {
     }
 
     //-- Constantes para organização --//
-    const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity }
+    const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity, activeOrder}
 
-    const setters = { setProfile, setRestaurantId, setOrders, setHeaderText, setHeaderButton, setUpdate, setCart, setTotalPrice, setProductQuantity }
+    const setters = { setProfile, setRestaurantId, setOrders, setHeaderText, setHeaderButton, setUpdate, setCart, setTotalPrice, setProductQuantity, setActiveOrder }
 
-    const requests = { postPlaceOrder, getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
+    const requests = { postPlaceOrder, getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants, getActiveOrder }
 
     const functions = { removeProduct }
 
