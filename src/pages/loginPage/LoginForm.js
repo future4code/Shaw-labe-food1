@@ -50,6 +50,9 @@ const LoginForm = () => {
                     required
                     type={"email"}
                     placeholder={"email@email.com"}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
                 <TextField
                     name={"password"}
@@ -62,8 +65,13 @@ const LoginForm = () => {
                     required
                     type={"password"}
                     placeholder={"Mínimo 6 caracteres"}
-                    pattern={"^.{6,}"}
-                    title={"A senha deve ter no mínimo 6 caracteres"}
+                    inputProps={{
+                        pattern: "^.{6,}$",
+                        title: "Senha deve possuir no mínimo 6 caracteres"
+                    }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
 
                 <Button
