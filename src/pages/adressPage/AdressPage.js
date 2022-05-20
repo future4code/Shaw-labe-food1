@@ -58,9 +58,9 @@ function AdressPage() {
       neighbourhood: `${states.address?.address.neighbourhood !== undefined ? states.address?.address.neighbourhood : ""}`,
       city: `${states.address?.address.city !== undefined ? states.address?.address.city : ""}`,
       state: `${states.address?.address.state !== undefined ? states.address?.address.state : ""}`,
-      complement: `${states.address?.address.complement !== null && states.address?.address.complement !== undefined ? states.address?.address.complement : ""}`
+      complement: `${states.address?.address.complement === null || states.address?.address.complement === undefined ? "" : states.address?.address.complement}`
     })
-  }, [states.address?.address.street, states.update])
+  }, [states.address?.address.complement, states.update])
 
   return (
     <>
