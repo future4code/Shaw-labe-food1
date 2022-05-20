@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 
 export const ProductOnCartPage = (props) => {
@@ -7,7 +7,7 @@ export const ProductOnCartPage = (props) => {
 
     return(
         <div>
-            <div> <img src={props.item.photoUrl} /> </div>
+            <div> <img src={props.item.photoUrl} alt={"imagem do alimento ou bebida"}/> </div>
 
             <div>
                 {props.item.name}
@@ -24,8 +24,6 @@ export const ProductOnCartPage = (props) => {
                     remover
                 </button>
             </div>
-
-            <p> Frete R${props.shipping.toFixed(2)} </p>
         </div>
     )
 }

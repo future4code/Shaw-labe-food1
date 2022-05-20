@@ -11,7 +11,7 @@ import {
 } from "./styled";
 
 const CardRestaurant = (props) => {
-  
+
   const navigate = useNavigate();
 
   const onClickCard = (id) => {
@@ -33,7 +33,7 @@ const CardRestaurant = (props) => {
           {props.filtered.name}
         </TypographyName>
       </CardActionArea>
-      
+
       <CardActionsInfo>
         <Typography size="small" color="secondary">
           {props.filtered.deliveryTime} min.

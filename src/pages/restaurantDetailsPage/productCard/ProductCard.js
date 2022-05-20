@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 
 export const ProductCard = (props) => {
@@ -51,7 +51,7 @@ export const ProductCard = (props) => {
     return (
         <div>
             <div>
-                <img src={props.product.photoUrl} />
+                <img src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
             </div>
 
             <div>
@@ -75,13 +75,13 @@ export const ProductCard = (props) => {
                 </button>
             </div>
 
-            {productQuantity != 0 ? <div>{productQuantity}</div> : ""}
-            
+            {productQuantity !== 0 ? <div>{productQuantity}</div> : ""}
+
             <div>
                 {productQuantity > 0
                     ?
                     <div>
-                        <select onChange={onChangeQuantity}>
+                        <select onChange={onChangeQuantity} value={productQuantity}>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
