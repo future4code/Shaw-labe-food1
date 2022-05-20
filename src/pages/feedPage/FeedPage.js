@@ -24,23 +24,23 @@ function FeedPage() {
 
   const getFilterName = () => {
     const filteredName = states.restaurants?.restaurants
-      .filter((restaurant) => {
-        return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
-      })
-      .map((filtered) => {
-        return <CardRestaurant filtered={filtered} key={filtered.id} />;
-      });
+    .filter((restaurant) => {
+      return restaurant.name.toLowerCase().includes(form.search.toLowerCase());
+    })
+    .map((filtered) => {
+      return <CardRestaurant filtered={filtered} key={filtered.id} />;
+    });
 
     setFilterRestaurant(filteredName)
   }
 
   const getFilterCategory = (category) => {
     const filteredCategory = states.restaurants?.restaurants
-      .filter((restaurant) => {
-        return restaurant.category === category
-      }).map((filtered) => {
-        return <CardRestaurant filtered={filtered} key={filtered.id} />
-      })
+    .filter((restaurant) => {
+      return restaurant.category === category
+    }).map((filtered) => {
+      return <CardRestaurant filtered={filtered} key={filtered.id} />
+    })
 
     setFilterRestaurant(filteredCategory)
   }
@@ -86,6 +86,7 @@ function FeedPage() {
           name={"search"}
           fullWidth
         />
+        
         <Paper square>
           <FilterName
             value={value}

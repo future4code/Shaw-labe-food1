@@ -25,73 +25,70 @@ export default function GlobalState(props) {
 
     //-- requests --//
     const getFullAddress = () => {
-        axios
-            .get(`${BASE_URL}profile/address`, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                setAddress(res.data)
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        axios.get(`${BASE_URL}profile/address`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            setAddress(res.data)
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
+
     const getProfile = async () => {
-        await axios
-            .get(`${BASE_URL}profile`, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                setProfile(res.data)
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        await axios.get(`${BASE_URL}profile`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            setProfile(res.data)
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
+
     const getRestaurants = () => {
-        axios
-            .get(`${BASE_URL}restaurants`, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                setRestaurants(res.data)
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        axios.get(`${BASE_URL}restaurants`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            setRestaurants(res.data)
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
+
     const getOrdersHistory = () => {
-        axios
-            .get(`${BASE_URL}orders/history`, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                setOrders(res.data)
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        axios.get(`${BASE_URL}orders/history`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            setOrders(res.data)
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
+
     const getRestaurantDetail = async (restaurantId) => {
-        await axios
-            .get(`${BASE_URL}restaurants/${restaurantId}`, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                setRestaurantDetail(res.data)
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        await axios.get(`${BASE_URL}restaurants/${restaurantId}`, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            setRestaurantDetail(res.data)
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
+
     const postPlaceOrder = async (restaurantId, body) => {
-        await axios
-            .get(`${BASE_URL}restaurants/${restaurantId}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
-            .then((res) => {
-                console.log("Seu pedido foi enviado ao restaurante")
-            })
-            .catch((err) => {
-                console.log('Deu ruim: ', err.response.data)
-            })
+        await axios.get(`${BASE_URL}restaurants/${restaurantId}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
+        .then((res) => {
+            console.log("Seu pedido foi enviado ao restaurante")
+        })
+        .catch((err) => {
+            console.log('Deu ruim: ', err.response.data)
+        })
     }
 
     //-- Functions --//
     const removeProduct = (product) => {
         const newCart = states.cart.map((item) => {
             if (item.id === product.id) {
-                return {
-                    ...item, quantity: item.quantity - 1
-                }
+                return {...item, quantity: item.quantity - 1}
             }
             return item
         }).filter((item) => {
@@ -100,13 +97,17 @@ export default function GlobalState(props) {
             }
             return item.quantity > 0
         })
+
         setters.setCart(newCart)
     }
 
     //-- Constantes para organização --//
     const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity }
+
     const setters = { setProfile, setRestaurantId, setOrders, setHeaderText, setHeaderButton, setUpdate, setCart, setTotalPrice, setProductQuantity }
+    
     const requests = { postPlaceOrder, getProfile, getOrdersHistory, getFullAddress, getRestaurantDetail, getRestaurants }
+    
     const functions = { removeProduct }
 
     return (

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 
 export const ProductCard = (props) => {
+
     const { states, setters } = useContext(GlobalContext)
     const [productQuantity, setProductQuantity] = useState(0)
 
@@ -52,6 +53,7 @@ export const ProductCard = (props) => {
             <div>
                 <img src={props.product.photoUrl} />
             </div>
+
             <div>
                 {props.product.name}
                 <br />
@@ -59,6 +61,7 @@ export const ProductCard = (props) => {
                 <br />
                 R${props.product.price.toFixed(2)}
             </div>
+
             <div>
                 <button
                     onClick={
@@ -71,7 +74,9 @@ export const ProductCard = (props) => {
                     {productQuantity === 0 ? "adicionar" : "remover"}
                 </button>
             </div>
+
             {productQuantity != 0 ? <div>{productQuantity}</div> : ""}
+            
             <div>
                 {productQuantity > 0
                     ?

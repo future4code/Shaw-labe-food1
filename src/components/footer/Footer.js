@@ -15,18 +15,14 @@ export const Footer = (props) => {
 
   return (
     <ContainerFooter>
-      <IconButton
-        title={"Página Principal"}
-        onClick={()=>goToFeedPage(navigate)}
-        aria-label='home'
-      >
+      <IconButton title={"Página Principal"} onClick={()=>goToFeedPage(navigate)} aria-label='home'>
         <img src={props.page === 'home' ? homepage : homepageW} />
       </IconButton>
+
       <IconButton title={"Carrinho"} onClick={()=>goToCartPage(navigate)} aria-label="cart">
-        <img
-          src={props.page === 'cart' ? shopping : shoppingW}
-        />
+        <img src={props.page === 'cart' ? shopping : shoppingW} />
       </IconButton>
+      
       <IconButton title={"Perfil"} onClick={()=>goToProfilePage(navigate)} aria-label="profile">
         <img src={props.page === 'profile' ? avatar : avatarW} />
       </IconButton>

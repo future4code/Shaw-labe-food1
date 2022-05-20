@@ -1,4 +1,3 @@
-
 import { Footer } from "../../components/footer/Footer";
 import React, { useContext, useEffect, useState } from "react"
 import Header from "../../components/header/Header";
@@ -8,8 +7,8 @@ import { Button, Checkbox } from "@material-ui/core";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
-
 function CartPage() {
+
   const [paymentMethod, setPaymentMethod] = useState("")
   const { states, requests, setters } = useContext(GlobalContext);
 
@@ -25,15 +24,13 @@ function CartPage() {
   const onClickPlaceOrder = () => {
 
     const body = {...cartBody, paymentMethod}
-    console.log(body);
-    axios
-      .post(`${BASE_URL}restaurants/${states.restaurantDetail?.restaurant.shipping}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
-      .then((res) => {
-        console.log("Seu pedido foi enviado ao restaurante")
-      })
-      .catch((err) => {
-        console.log('Deu ruim: ', err.response.data)
-      })
+    axios.post(`${BASE_URL}restaurants/${states.restaurantDetail?.restaurant.shipping}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
+    .then((res) => {
+      alert("Seu pedido foi enviado ao restaurante")
+    })
+    .catch((err) => {
+      console.log('Deu ruim: ', err.response.data)
+    })
   }
 
 
@@ -65,7 +62,6 @@ function CartPage() {
     setters.setHeaderText("Meu carrinho")
     setters.setHeaderButton("")
   }, [totalPrice]);
-  console.log(paymentMethod);
 
   return (
     <div>
@@ -112,6 +108,7 @@ function CartPage() {
       <div>
         <Button onClick={() => onClickPlaceOrder()} color="primary" fullWidth> Confimar </Button>
       </div>
+      
       <Footer page='cart' />
     </div>
   )

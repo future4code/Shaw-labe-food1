@@ -18,9 +18,12 @@ function SignUpPage() {
   return (
     <div>
       <Header />
+
       <ContainerSingup>
         <img src={logo} />
+
         <Title>Cadastrar</Title>
+        
         <SingUpForm />
       </ContainerSingup>
     </div>

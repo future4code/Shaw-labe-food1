@@ -10,13 +10,15 @@ import axios from "axios"
 import { CircularProgress } from "@material-ui/core";
 
 export const SingUpForm = () => {
+
+  const navigate = useNavigate()
   const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "", password: "" })
   const [passwordConfirm, setPasswordConfirm] = useState("")
-  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
-    event.preventDefault();
+    event.preventDefault()
+
     if (form.password === passwordConfirm) {
       postSingUp(form, clear, navigate)
     } else {
@@ -126,16 +128,16 @@ export const SingUpForm = () => {
             shrink: true,
           }}
         />
+
         <Button type={"submit"}
-          fullWidth
           variant={"contained"}
           color={"primary"}
           margin={"normal"}
+          fullWidth
         >
           {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Cadastrar</>}
         </Button>
       </ContainerForm>
-
     </div>
   );
 };

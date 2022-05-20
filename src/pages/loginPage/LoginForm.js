@@ -10,8 +10,9 @@ import { goToFeedPage } from '../../routes/coordinator'
 import { CircularProgress } from "@material-ui/core";
 
 const LoginForm = () => {
-    const { form, onChange, clear } = useForm({ email: "", password: "" })
+
     const navigate = useNavigate()
+    const { form, onChange, clear } = useForm({ email: "", password: "" })
     const [isLoading, setLoading] = useState(false)
 
     const onSubmitForm = e => {
@@ -23,16 +24,16 @@ const LoginForm = () => {
         setLoading(true)
         const url = `${BASE_URL}login`
         axios.post(url, form)
-            .then((res) => {
-                localStorage.setItem("token", res.data.token)
-                localStorage.setItem("tokenadress", res.data.token)
-                setLoading(false)
-                goToFeedPage(navigate)
-            })
-            .catch((err) => {
-                alert(err.response.data.message)
-                setLoading(false)
-            })
+        .then((res) => {
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("tokenadress", res.data.token)
+            setLoading(false)
+            goToFeedPage(navigate)
+        })
+        .catch((err) => {
+            alert(err.response.data.message)
+            setLoading(false)
+        })
     }
 
     return (
@@ -64,6 +65,7 @@ const LoginForm = () => {
                     pattern={"^.{6,}"}
                     title={"A senha deve ter no mínimo 6 caracteres"}
                 />
+                
                 <Button
                     type={"submit"}
                     fullWidth

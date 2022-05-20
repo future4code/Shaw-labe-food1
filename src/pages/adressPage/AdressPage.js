@@ -11,7 +11,6 @@ import { goToFeedPage, goToProfilePage } from "../../routes/coordinator"
 import { GlobalContext } from "../../global/GlobalContext"
 import Header from "../../components/header/Header"
 import { CircularProgress } from "@material-ui/core"
-import Loading from "../../components/Loading/Loading"
 import { ArrowBackIos } from "@material-ui/icons"
 
 function AdressPage() {
@@ -33,23 +32,21 @@ function AdressPage() {
     event.preventDefault()
     setIsLoading(true)
     axios.put(`${BASE_URL}address`, form, { headers: { auth: localStorage.getItem("token") } })
-      .then((res) => {
-        console.log(res.data)
-        console.log(form)
-        alert("Cadastro de endereço feito com sucesso!")
-        localStorage.setItem("tokenadress", res.data.token)
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        console.log(err.response)
-        console.log(form)
-        alert("Deu ruin Bergue, confere o console ae!!")
-        setIsLoading(false)
-      })
-      {states.profile?.user.hasAddress ? goToProfilePage(navigate) : goToFeedPage(navigate)}
+    .then((res) => {
+      console.log(res.data)
+      console.log(form)
+      alert("Cadastro de endereço feito com sucesso!")
+      localStorage.setItem("tokenadress", res.data.token)
+      setIsLoading(false)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      console.log(form)
+      alert("Deu ruin Bergue, confere o console ae!!")
+      setIsLoading(false)
+    })
+    {states.profile?.user.hasAddress ? goToProfilePage(navigate) : goToFeedPage(navigate)}
   }
-
-  console.log(states.address?.address.city)
 
   useEffect(() => {
     setters.setHeaderButton(<ArrowBackIos/>)
@@ -74,12 +71,10 @@ function AdressPage() {
     states.headerText
   ])
 
-  console.log(states.profile)
-
   return (
     <>
       <Header />
-      {states.address?.address ?  
+      {!states.profile?.user.hasAddress ?  
         <DivAdress>
           {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
 
@@ -162,7 +157,87 @@ function AdressPage() {
           </FormAdress>
         </DivAdress>
         : 
-        <Loading />
+        <DivAdress>
+          {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
+
+          <FormAdress onSubmit={onSubmitAddAdress}>
+            <TextField variant="outlined"
+              label="Logradouro"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Rua / Av."
+              name="street"
+              value={form.street}
+              onChange={onChange}
+              required
+            />
+
+            <TextField variant="outlined"
+              label="Número"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Número"
+              type="number"
+              name="number"
+              value={form.number}
+              onChange={onChange}
+              required
+            />
+
+            <TextField variant="outlined"
+              label="Complemento"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Apto. / Bloco"
+              name="complement"
+              value={form.complement}
+              onChange={onChange}
+            />
+
+            <TextField variant="outlined"
+              label="Bairro"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Bairro"
+              name="neighbourhood"
+              value={form.neighbourhood}
+              onChange={onChange}
+              required
+            />
+
+            <TextField variant="outlined"
+              label="Cidade"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Cidade"
+              name="city"
+              value={form.city}
+              onChange={onChange}
+              required
+            />
+
+            <TextField variant="outlined"
+              label="Estado"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Estado"
+              name="state"
+              value={form.state}
+              onChange={onChange}
+              required
+            />
+
+            <Button type="submit" variant="contained" color="primary">
+              {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+            </Button>
+          </FormAdress>
+        </DivAdress>
       }
     </>
   )

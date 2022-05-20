@@ -16,20 +16,19 @@ import { ArrowBackIos } from "@material-ui/icons";
 export default function UpDateProfile() {
 
     useProtectdPage()
+    const navigate = useNavigate()
     const { form, onChange, clear, setForm } = useForm({ name: "", email: "", cpf: "" })
     const { states, requests, setters } = useContext(GlobalContext)
-    const navigate = useNavigate()
 
     const updateProfile = () => {
-        axios
-            .put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
-            .then((res) => {
-                goToProfilePage(navigate)
-                alert("Perfil atualizado")
-            })
-            .catch((err) => {
-                console.log(err.response);
-            })
+        axios.put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
+        .then((res) => {
+            goToProfilePage(navigate)
+            alert("Perfil atualizado")
+        })
+        .catch((err) => {
+            console.log(err.response);
+        })
     }
 
 
@@ -41,13 +40,22 @@ export default function UpDateProfile() {
     useEffect(() => {
         setters.setHeaderText("Editar")
         setters.setHeaderButton(<ArrowBackIos/>)
-        setForm({name: `${states.profile?.user.name}`, email:`${states.profile?.user.email}`, cpf: `${states.profile?.user.cpf}`})
+        setForm({
+            name: `${states.profile?.user.name}`, 
+            email:`${states.profile?.user.email}`, 
+            cpf: `${states.profile?.user.cpf}`
+        })
         requests.getProfile()
-    }, [states.profile?.user.name, states.profile?.user.email, states.profile?.user.cpf])
+    }, [
+        states.profile?.user.name, 
+        states.profile?.user.email, 
+        states.profile?.user.cpf
+    ])
 
     return (
         <div>
             <Header />
+
             <FormAdress onSubmit={onSubmitForm}>
                 <TextField
                     inputProps={{
@@ -85,7 +93,10 @@ export default function UpDateProfile() {
                     onChange={onChange}
                     required
                 />
-                <Button color="primary" variant="contained" type="submit">Salvar</Button>
+
+                <Button color="primary" variant="contained" type="submit">
+                    Salvar
+                </Button>
             </FormAdress>
         </div>
     )

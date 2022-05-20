@@ -16,8 +16,4 @@ export const FormAdress = styled.form`
     align-items: center;
     gap: 15px;
     margin: 25px;
-
-    input{
-        /* padding: 5px; */
-    }
 `
