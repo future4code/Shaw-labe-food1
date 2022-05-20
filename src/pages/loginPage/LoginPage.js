@@ -1,5 +1,5 @@
 import React from "react"
-import { Screencontainer, LogoImage } from "./styled";
+import { Screencontainer, LogoImage, Subtitle, SingUpButton } from "./styled";
 import logo from "../../assets/logo.png"
 import { Button } from "@material-ui/core";
 import LoginForm from "./LoginForm";
@@ -9,12 +9,12 @@ import { useNavigate } from "react-router";
 const LoginPage = () => {
 
   const navigate = useNavigate()
-  
+
   return (
     <Screencontainer>
-      <LogoImage src={logo} />
+      <LogoImage src={logo} alt={"Imagem logotipo Rappi4"} />
 
-      <p>Entrar</p>
+      <Subtitle>Entrar</Subtitle>
 
       <LoginForm />
 
@@ -26,7 +26,7 @@ const LoginPage = () => {
         margin={"normal"}
         fullWidth
       >
-        Não possui cadastro? Clique aqui.
+        <SingUpButton>  Não possui cadastro? Clique aqui. </SingUpButton>
       </Button>
     </Screencontainer >
   )
