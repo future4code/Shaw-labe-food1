@@ -3,7 +3,7 @@ import useProtectdPage from "../../hooks/useProtectedPage"
 import { useNavigate } from "react-router-dom"
 import useForm from "../../hooks/useForm"
 import axios from "axios"
-import { BASE_URL, headers, tokenadress } from "../../constants/urls"
+import { BASE_URL, token, tokenadress } from "../../constants/urls"
 import { DivAdress, FormAdress } from "./styled"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -32,49 +32,40 @@ function AdressPage() {
     event.preventDefault()
     setIsLoading(true)
     axios.put(`${BASE_URL}address`, form, { headers: { auth: localStorage.getItem("token") } })
-    .then((res) => {
-      console.log(res.data)
-      console.log(form)
-      alert("Cadastro de endereço feito com sucesso!")
-      localStorage.setItem("tokenadress", res.data.token)
-      setIsLoading(false)
-    })
-    .catch((err) => {
-      console.log(err.response)
-      console.log(form)
-      alert("Deu ruin Bergue, confere o console ae!!")
-      setIsLoading(false)
-    })
-    {states.profile?.user.hasAddress ? goToProfilePage(navigate) : goToFeedPage(navigate)}
+      .then((res) => {
+        alert("Cadastro de endereço feito com sucesso!")
+        localStorage.setItem("tokenadress", res.data.token)
+        setters.setUpdate(states.update + 1)
+        setIsLoading(false)
+        !states.profile?.user.hasAddress ? goToFeedPage(navigate) : goToProfilePage(navigate)
+      })
+      .catch((err) => {
+        alert("Deu ruin Bergue, confere o console ae!!")
+        setIsLoading(false)
+        // console.log(form)
+        console.log(err.response)
+      })
   }
 
   useEffect(() => {
-    setters.setHeaderButton(<ArrowBackIos/>)
+    setters.setHeaderButton(<ArrowBackIos />)
     setters.setHeaderText(!tokenadress ? "" : "Endereço")
-    requests.getFullAddress()
+    tokenadress === null ? requests.getFullAddress() : setters.setUpdate(states.update)
+    tokenadress === null ? requests.getProfile() : setters.setUpdate(states.update)
     setForm({
-      street: `${!states.profile?.user.hasAddress ? "" : states.address?.address.street}`, 
-      number:`${!states.profile?.user.hasAddress ? "" : states.address?.address.number}`, 
-      neighbourhood: `${!states.profile?.user.hasAddress ? "" : states.address?.address.neighbourhood}`, 
-      city: `${!states.profile?.user.hasAddress ? "" : states.address?.address.city}`, 
-      state: `${!states.profile?.user.hasAddress ? "" : states.address?.address.state}`, 
-      complement: `${!states.profile?.user.hasAddress ? "" : (states.address?.address.complement !== null ? states.address?.address.complement : "")}`
+      street: `${states.address?.address.street !== undefined ? states.address?.address.street : ""}`,
+      number: `${states.address?.address.number !== undefined ? states.address?.address.number : ""}`,
+      neighbourhood: `${states.address?.address.neighbourhood !== undefined ? states.address?.address.neighbourhood : ""}`,
+      city: `${states.address?.address.city !== undefined ? states.address?.address.city : ""}`,
+      state: `${states.address?.address.state !== undefined ? states.address?.address.state : ""}`,
+      complement: `${states.address?.address.complement !== null && states.address?.address.complement !== undefined ? states.address?.address.complement : ""}`
     })
-    requests.getProfile()
-  }, [
-    states.address?.address.name, 
-    states.address?.address.number, 
-    states.address?.address.neighbourhood, 
-    states.address?.address.city, 
-    states.address?.address.state, 
-    states.address?.address.complement, 
-    states.headerText
-  ])
+  }, [states.address?.address.street, states.update])
 
   return (
     <>
       <Header />
-      {!states.profile?.user.hasAddress ?  
+      {!states.profile?.user.hasAddress ?
         <DivAdress>
           {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
 
@@ -156,7 +147,7 @@ function AdressPage() {
             </Button>
           </FormAdress>
         </DivAdress>
-        : 
+        :
         <DivAdress>
           {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
 

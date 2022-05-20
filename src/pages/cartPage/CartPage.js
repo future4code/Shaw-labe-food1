@@ -6,10 +6,11 @@ import { ProductOnCartPage } from "./productOnCartPage/ProductOnCartPage";
 import { Button, Checkbox } from "@material-ui/core";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
+import Loading from '../../components/Loading/Loading'
 
 function CartPage() {
 
-  const [paymentMethod, setPaymentMethod] = useState("")
+  const [method, setMethod] = useState("")
   const { states, requests, setters } = useContext(GlobalContext);
 
   //-- Montando objeto para o body da requisição --//
@@ -19,33 +20,33 @@ function CartPage() {
       quantity: item.quantity
     }
   })
+  const body = { products: cartBody, paymentMethod: method }
 
   //-- Request place order --//
   const onClickPlaceOrder = () => {
-
-    const body = {...cartBody, paymentMethod}
-    axios.post(`${BASE_URL}restaurants/${states.restaurantDetail?.restaurant.shipping}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
-    .then((res) => {
-      alert("Seu pedido foi enviado ao restaurante")
-    })
-    .catch((err) => {
-      console.log('Deu ruim: ', err.response.data)
-    })
+    axios.post(`${BASE_URL}restaurants/${states.restaurantId}/order`, body, { headers: { auth: localStorage.getItem("tokenadress") } })
+      .then((res) => {
+        alert("Seu pedido foi enviado ao restaurante")
+        setters.setCart([])
+      })
+      .catch((err) => {
+        console.log('Deu ruim: ', err.response.data)
+      })
   }
 
 
   //-- Funções para setar paymentMethod --//
   const onClickCreditCard = () => {
-    setPaymentMethod("creditcard")
+    setMethod("creditcard")
   }
   const onClickMoney = () => {
-    setPaymentMethod("money")
+    setMethod("money")
   }
 
   //-- Calcular subtotal do carrinho --//
   let totalPrice = 0
   const getTotalPrice = states.cart.map((item) => {
-    return totalPrice = totalPrice + (item.price * item.quantity)
+    return totalPrice = totalPrice + (item.price * item.quantity) + states.restaurantDetail.restaurant.shipping
   })
 
   //-- Map para renderizar produtos no carrinho --//
@@ -57,7 +58,11 @@ function CartPage() {
 
   //-- Renderização --//
   useEffect(() => {
-    requests.getRestaurantDetail(states.restaurantId)
+    (states.restaurantId === {}
+      ?
+      requests.getRestaurantDetail(states.restaurantId)
+      :
+      setters.setUpdate())
     requests.getFullAddress()
     setters.setHeaderText("Meu carrinho")
     setters.setHeaderButton("")
@@ -67,48 +72,68 @@ function CartPage() {
     <div>
       <Header />
 
-      {/* Container com endereço de entrega  */}
-      <div>
-        <p>Endereço de entrega</p>
-        <p>{states.address?.address.street}, {states.address?.address.number}</p>
-      </div>
-      <hr />
-      <br />
+      {states.address?.address.street
+        ?
+        <>
+          {/* Container com endereço de entrega  */}
+          <div>
+            <p>Endereço de entrega</p>
+            <p>{states.address?.address.street}, {states.address?.address.number}</p>
+          </div>
+          <hr />
+          <br />
 
-      {/* Nome / Endereço / Tempo de entrega do restaurante / Map dos produtos / Valor do frete */}
-      <div>
-        {states.restaurantDetail?.restaurant.name}
-        <br />
-        {states.restaurantDetail?.restaurant.address}
-        <br />
-        {states.restaurantDetail?.restaurant.shipping} min
-        <hr />
-        <br />
-        {mapItemsOnCart}
-      </div>
+          {/* Nome / Endereço / Tempo de entrega do restaurante / Map dos produtos / Valor do frete */}
+          {states.cart.length
+            ?
+            <div>
+              {states.restaurantDetail?.restaurant.name}
+              <br />
+              {states.restaurantDetail?.restaurant.address}
+              <br />
+              {states.restaurantDetail?.restaurant.shipping} min
+              <hr />
+              <br />
+              {mapItemsOnCart}
+            </div>
+            :
+            "Carrinho vazio"
+          }
 
-      {/* Subtotal */}
-      <div>
-        Subtotal R${totalPrice.toFixed(2)}
-      </div>
-      <br />
-      <hr />
-      <br />
+          {/* Subtotal */}
+          <div>
+            Frete R$
+            {states.cart.length
+              ?
+              states.restaurantDetail?.restaurant.shipping.toFixed(2)
+              :
+              "0,00"
+            }
+            <br />
+            Subtotal R${totalPrice.toFixed(2)}
+          </div>
+          <br />
+          <hr />
+          <br />
 
-      {/* Formas de pagamento  */}
-      <div>
-        <h3>Formas de pagamento</h3>
-        <hr />
-        <Checkbox checked={paymentMethod === "creditcard" ? true : false} onClick={() => onClickCreditCard()} /> Cartão de crédito
-        <br />
-        <Checkbox checked={paymentMethod === "money" ? true : false} onClick={() => onClickMoney()} /> Dinheiro
-      </div>
+          {/* Formas de pagamento  */}
+          <div>
+            <h3>Formas de pagamento</h3>
+            <hr />
+            <Checkbox checked={method === "creditcard" ? true : false} onClick={() => onClickCreditCard()} /> Cartão de crédito
+            <br />
+            <Checkbox checked={method === "money" ? true : false} onClick={() => onClickMoney()} /> Dinheiro
+          </div>
 
-      {/* botão para enviar requisição */}
-      <div>
-        <Button onClick={() => onClickPlaceOrder()} color="primary" fullWidth> Confimar </Button>
-      </div>
-      
+          {/* botão para enviar requisição */}
+          <div>
+            <Button onClick={() => onClickPlaceOrder()} color="primary" fullWidth> Confimar </Button>
+          </div>
+        </>
+        :
+        <Loading />
+      }
+
       <Footer page='cart' />
     </div>
   )
