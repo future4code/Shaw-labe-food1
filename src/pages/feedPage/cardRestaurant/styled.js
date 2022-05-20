@@ -4,12 +4,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { CardActions, Typography } from "@material-ui/core";
 
 export const ContainerCard = styled(Card)`
-    border-radius: 10rem; // o que ele faz?
     border: solid 1px #b8b8b8;
 `
 
 export const CardMediaImg = styled(CardMedia)`
-    border-radius: 0.3rem 0.3rem 0 0; // estava 0.7rem 0.7rem 0 0
+    border-radius: 0.3rem 0.3rem 0 0;
 `
 
 export const TypographyName = styled(Typography)`

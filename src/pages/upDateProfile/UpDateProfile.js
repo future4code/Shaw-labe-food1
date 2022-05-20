@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import useForm from "../../hooks/useForm"
 import axios from "axios";
-import { BASE_URL, headers } from "../../constants/urls"
+import { BASE_URL } from "../../constants/urls"
 import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { FormAdress } from "./styled";
@@ -16,14 +16,14 @@ import { ArrowBackIos } from "@material-ui/icons";
 export default function UpDateProfile() {
 
     useProtectdPage()
-    const { form, onChange, clear, setForm } = useForm({ name: "", email: "", cpf: "" })
-    const { states, requests, setters } = useContext(GlobalContext)
     const navigate = useNavigate()
+    const { form, onChange, setForm } = useForm({ name: "", email: "", cpf: "" })
+    const { states, requests, setters } = useContext(GlobalContext)
 
     const updateProfile = () => {
-        axios
-            .put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
+        axios.put(`${BASE_URL}profile`, form, { headers: { auth: tokenadress } })
             .then((res) => {
+                setters.setUpdate(states.update + 1)
                 goToProfilePage(navigate)
                 alert("Perfil atualizado")
             })
@@ -40,14 +40,19 @@ export default function UpDateProfile() {
 
     useEffect(() => {
         setters.setHeaderText("Editar")
-        setters.setHeaderButton(<ArrowBackIos/>)
-        setForm({name: `${states.profile?.user.name}`, email:`${states.profile?.user.email}`, cpf: `${states.profile?.user.cpf}`})
+        setters.setHeaderButton(<ArrowBackIos />)
+        setForm({
+            name: `${states.profile?.user.name}`,
+            email: `${states.profile?.user.email}`,
+            cpf: `${states.profile?.user.cpf}`
+        })
         requests.getProfile()
-    }, [states.profile?.user.name, states.profile?.user.email, states.profile?.user.cpf])
+    }, [states.profile?.user.name, states.update])
 
     return (
         <div>
             <Header />
+
             <FormAdress onSubmit={onSubmitForm}>
                 <TextField
                     inputProps={{
@@ -85,7 +90,10 @@ export default function UpDateProfile() {
                     onChange={onChange}
                     required
                 />
-                <Button color="primary" variant="contained" type="submit">Salvar</Button>
+
+                <Button color="primary" variant="contained" type="submit">
+                    Salvar
+                </Button>
             </FormAdress>
         </div>
     )

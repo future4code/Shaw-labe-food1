@@ -5,7 +5,7 @@ export const ProfileData = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 7px;
-`;
+`
 
 export const Data = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const Data = styled.div`
     margin: 5px;
     font-weight: normal;
   }
-`;
+`
 
 export const AddressData = styled.div`
   background-color: #eeee;
@@ -33,7 +33,7 @@ export const AddressData = styled.div`
   p {
     font-weight: bold;
   }
-`;
+`
 
 export const OrderHistory = styled.div`
   display: flex;
@@ -56,4 +56,4 @@ export const OrderHistory = styled.div`
       text-align: center;
       font-weight: normal;
   }
-`;
+`

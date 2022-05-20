@@ -11,24 +11,20 @@ import { goToCartPage, goToFeedPage, goToProfilePage } from "../../routes/coordi
 import { ContainerFooter } from "./styled";
 
 export const Footer = (props) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <ContainerFooter>
-      <IconButton
-        title={"Página Principal"}
-        onClick={()=>goToFeedPage(navigate)}
-        aria-label='home'
-      >
-        <img src={props.page === 'home' ? homepage : homepageW} />
+      <IconButton title={"Página Principal"} onClick={() => goToFeedPage(navigate)} aria-label='home'>
+        <img src={props.page === 'home' ? homepage : homepageW} alt={"imagem de casa, representando a página principal"} />
       </IconButton>
-      <IconButton title={"Carrinho"} onClick={()=>goToCartPage(navigate)} aria-label="cart">
-        <img
-          src={props.page === 'cart' ? shopping : shoppingW}
-        />
+
+      <IconButton title={"Carrinho"} onClick={() => goToCartPage(navigate)} aria-label="cart">
+        <img src={props.page === 'cart' ? shopping : shoppingW} alt={"imagem ilustrativa do carrinho de compras"} />
       </IconButton>
-      <IconButton title={"Perfil"} onClick={()=>goToProfilePage(navigate)} aria-label="profile">
-        <img src={props.page === 'profile' ? avatar : avatarW} />
+
+      <IconButton title={"Perfil"} onClick={() => goToProfilePage(navigate)} aria-label="profile">
+        <img src={props.page === 'profile' ? avatar : avatarW} alt={"Imagem ilustrativa representando o perfil"} />
       </IconButton>
     </ContainerFooter>
   );

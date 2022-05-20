@@ -11,14 +11,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 import Loading from '../../components/Loading/Loading'
+import useProtectdPage from "../../hooks/useProtectedPage"
 
 function FeedPage() {
+  useProtectdPage()
   const { states, requests, setters } = useContext(GlobalContext);
-  const { form, onChange } = useForm({ search: "" });
+  const { form, onChange, clear } = useForm({ search: "" });
   const [filterRestaurant, setFilterRestaurant] = useState([]);
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
+    form.search = ""
+    setters.setHeaderText("Rappi4")
     setValue(newValue);
   };
 
@@ -53,17 +57,26 @@ function FeedPage() {
     )
   })
 
+
+  const onClickSearch = () => {
+    setFilterRestaurant(<h4>Busque por nome de restaurante</h4>)
+    setters.setHeaderText("Busca")
+  }
+
   const reset = () => {
     setFilterRestaurant(requests.getRestaurants())
+    clear()
   }
 
   useEffect(() => {
     requests.getRestaurants();
     setters.setHeaderText("Rappi4")
     setters.setHeaderButton("")
+  }, [])
+
+  useEffect(() => {
     getFilterName()
   }, [form, states.restaurants])
-
   return (
     <div>
       <Header />
@@ -78,27 +91,40 @@ function FeedPage() {
               </InputAdornment>
             ),
           }}
+          onClick={onClickSearch}
           onChange={onChange}
           value={form.search}
           name={"search"}
           fullWidth
         />
-        <Paper square>
-          <FilterName
-            value={value}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="disabled tabs example"
-          >
-            <Tab label="Todos" onClick={reset} />
-            {showCategories}
-          </FilterName>
-        </Paper>
 
-        {filterRestaurant ? filterRestaurant : <Loading />}
+        {filterRestaurant
+          ?
+          <>
+            <Paper square>
+              <FilterName
+                value={value}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={handleChange}
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="disabled tabs example"
+              >
+                <Tab label="Todos" onClick={reset} />
+                <div onClick={handleChange}>
+                  {showCategories}
+                </div>
+              </FilterName>
+            </Paper>
+            <>
+              {!filterRestaurant.length && filterRestaurant.key !== null ? <h4>Não encontramos :(</h4> : filterRestaurant}
+            </>
+          </>
+          :
+          <Loading />
+        }
+
       </DivFeed>
 
       <Footer page='home' />

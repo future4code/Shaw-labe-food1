@@ -8,19 +8,23 @@ import { ArrowBackIos } from "@material-ui/icons";
 
 function SignUpPage() {
 
-  const { states, requests, setters } = useContext(GlobalContext)
+  const { states, setters } = useContext(GlobalContext)
 
   useEffect(() => {
     setters.setHeaderText("")
-    setters.setHeaderButton(<ArrowBackIos/>)
+    setters.setHeaderButton(<ArrowBackIos />)
+    setters.setUpdate(states.update + 1)
   }, [])
 
   return (
     <div>
       <Header />
+
       <ContainerSingup>
-        <img src={logo} />
+        <img src={logo} alt={"Imagem logotipo Rappi4"} />
+
         <Title>Cadastrar</Title>
+
         <SingUpForm />
       </ContainerSingup>
     </div>

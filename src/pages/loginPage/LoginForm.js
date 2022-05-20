@@ -10,8 +10,9 @@ import { goToFeedPage } from '../../routes/coordinator'
 import { CircularProgress } from "@material-ui/core";
 
 const LoginForm = () => {
-    const { form, onChange, clear } = useForm({ email: "", password: "" })
+
     const navigate = useNavigate()
+    const { form, onChange } = useForm({ email: "", password: "" })
     const [isLoading, setLoading] = useState(false)
 
     const onSubmitForm = e => {
@@ -64,6 +65,7 @@ const LoginForm = () => {
                     pattern={"^.{6,}"}
                     title={"A senha deve ter no mínimo 6 caracteres"}
                 />
+
                 <Button
                     type={"submit"}
                     fullWidth
@@ -71,7 +73,7 @@ const LoginForm = () => {
                     color={"primary"}
                     margin={"normal"}
                 >
-                   {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <> Entrar </>}
+                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <> Entrar </>}
                 </Button>
             </form>
         </InputsContainer>
