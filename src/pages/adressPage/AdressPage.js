@@ -50,8 +50,8 @@ function AdressPage() {
   useEffect(() => {
     setters.setHeaderButton(<ArrowBackIos />)
     setters.setHeaderText(!tokenadress ? "" : "Endereço")
-    tokenadress === null ? requests.getFullAddress() : setters.setUpdate(states.update)
-    tokenadress === null ? requests.getProfile() : setters.setUpdate(states.update)
+    tokenadress === null || tokenadress !== null ? requests.getProfile() : setters.setUpdate(states.update)
+    tokenadress !== null || tokenadress === null ? requests.getFullAddress() : setters.setUpdate(states.update)
     setForm({
       street: `${states.address?.address.street !== undefined ? states.address?.address.street : ""}`,
       number: `${states.address?.address.number !== undefined ? states.address?.address.number : ""}`,
