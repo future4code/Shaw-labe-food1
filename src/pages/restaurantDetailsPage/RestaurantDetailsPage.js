@@ -37,9 +37,15 @@ function RestaurantDetailsPage() {
   })
 
   const restaurantDrinks = states.restaurantDetail?.restaurant.products
+
+    .map((product) => {
+      if (product.category === "Bebida") {
+        return <ProductCard params={params.restaurantId} key={product.id} product={product} />
+      }
+    })
   .map((product) => {
     if (product.category === "Bebida") {
-      return <ProductCard key={product.id} product={product} quantity={quantity} setOpen={setOpen} />
+      return <ProductCard key={product.id} params={params.restaurantId} product={product} quantity={quantity} setOpen={setOpen} />
     }
   })
 

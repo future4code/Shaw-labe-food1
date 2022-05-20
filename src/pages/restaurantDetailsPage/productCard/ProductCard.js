@@ -39,23 +39,48 @@ export const ProductCard = (props) => {
     setters.setCart(newQuantity)
   }
 
+  //-- Adicionar produto --//
+  const addProduct = (product) => {
+    if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
+      const newCart = [...states.cart, { ...product, quantity: 1 }]
+      setters.setRestaurantId(props.params)
+      setters.setCart(newCart)
+      setters.setUpdate(states.update + 1)
+      setProductQuantity(1)
+    } else {
+      alert("só pode adicionar 1 restaurante no carrinho")
+    }
+  }
+
+  //-- Alterar quantidade dos produtos --//
+  const onChangeQuantity = (e) => {
+    const newQuantity = states.cart.map((item) => {
+      if (item.id === props.product.id) {
+        setters.setUpdate(states.update + 1)
+        setProductQuantity(e.target.value)
+        return { ...item, quantity: Number(e.target.value) }
+      }
+      return item
+    })
+    setters.setCart(newQuantity)
+  }
+
   //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
     const newCart = states.cart.map((item) => {
-        if (item.id === product.id) {
-            setProductQuantity(productQuantity - 1)
-            return {
-              ...item, quantity: item.quantity - 1
-            }
+      if (item.id === product.id) {
+        setProductQuantity(productQuantity - 1)
+        return {
+          ...item, quantity: item.quantity - 1
         }
-        return item
+      }
+      return item
     }).filter((item) => {
-        if (item.quantity === 0) {
-          setProductQuantity(0)
-        }
-        return item.quantity > 0
+      if (item.quantity === 0) {
+        setProductQuantity(0)
+      }
+      return item.quantity > 0
     })
-
     setters.setUpdate(states.update + 1)
     setters.setCart(newCart)
   }
