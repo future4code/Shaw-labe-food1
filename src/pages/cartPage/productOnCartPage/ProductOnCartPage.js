@@ -5,9 +5,9 @@ export const ProductOnCartPage = (props) => {
 
     const { functions } = useContext(GlobalContext);
 
-    return(
+    return (
         <div>
-            <div> <img src={props.item.photoUrl} alt={"imagem do alimento ou bebida"}/> </div>
+            <div> <img src={props.item.photoUrl} alt={"imagem do alimento ou bebida"} /> </div>
 
             <div>
                 {props.item.name}
