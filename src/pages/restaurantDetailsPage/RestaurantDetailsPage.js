@@ -20,6 +20,7 @@ function RestaurantDetailsPage() {
       }
     })
 
+
   const restaurantDrinks = states.restaurantDetail?.restaurant.products
     .map((product) => {
       if (product.category === "Bebida") {

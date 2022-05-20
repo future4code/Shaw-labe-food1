@@ -1,10 +1,19 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
+import {
+  ButtonAdd,
+  CardInfoMeal,
+  CardMediaItemImg,
+  Container,
+  Quantity,
+  Select,
+} from "./styled";
 
 export const ProductCard = (props) => {
 
     const { states, setters } = useContext(GlobalContext)
     const [productQuantity, setProductQuantity] = useState(0)
+
 
     //-- Adicionar produto --//
     const addProduct = (product) => {
@@ -48,56 +57,53 @@ export const ProductCard = (props) => {
         setters.setCart(newCart)
     }
 
-    return (
+      return (
+    <div>
+      <Container>
+        <CardMediaItemImg src={props.product.photoUrl} />
+        <CardInfoMeal>
+          {props.product.name}
+          <br />
+          {props.product.description}
+          <br />
+          R${props.product.price.toFixed(2)}
+        </CardInfoMeal>
+        <ButtonAdd>
+          <button
+            onClick={
+              productQuantity === 0
+                ? () => addProduct(props.product)
+                : () => removeProduct(props.product)
+            }
+          >
+            {productQuantity === 0 ? "adicionar" : "remover"}
+          </button>
+        </ButtonAdd>
+
         <div>
-            <div>
-                <img src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
-            </div>
-
-            <div>
-                {props.product.name}
-                <br />
-                {props.product.description}
-                <br />
-                R${props.product.price.toFixed(2)}
-            </div>
-
-            <div>
-                <button
-                    onClick={
-                        productQuantity === 0
-                            ?
-                            () => addProduct(props.product)
-                            :
-                            () => removeProduct(props.product)
-                    }>
-                    {productQuantity === 0 ? "adicionar" : "remover"}
-                </button>
-            </div>
-
-            {productQuantity !== 0 ? <div>{productQuantity}</div> : ""}
-
-            <div>
-                {productQuantity > 0
-                    ?
-                    <div>
-                        <select onChange={onChangeQuantity} value={productQuantity}>
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                            <option value={9}>9</option>
-                            <option value={10}>10</option>
-                        </select>
-                    </div>
-                    :
-                    ""
-                }
-            </div>
+          {productQuantity > 0 ? (
+            <Select>
+              <select onChange={onChangeQuantity}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
+                <option value={8}>8</option>
+                <option value={9}>9</option>
+                <option value={10}>10</option>
+              </select>
+            </Select>
+          ) : (
+            ""
+          )}
         </div>
-    )
-}
+        <Quantity>
+          {productQuantity !== 0 ? <div>{productQuantity}</div> : ""}
+        </Quantity>
+      </Container>
+    </div>
+  );
+};
