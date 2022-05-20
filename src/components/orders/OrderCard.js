@@ -1,14 +1,20 @@
 import React from "react"
+import {OrderContainer} from "./styled"
 
 function OrderCard(props) {
-    const date = new Date(props.order.createdAt).toLocaleDateString()
 
+    console.log(props.order)
+
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    const newDate = new Date(props?.order.createdAt);
+    let dataFormatada = ((newDate.getDate() + " " + meses[(newDate.getMonth())] + " " + newDate.getFullYear()));
+    
     return (
-        <div>
+        <OrderContainer>
             <h3>{props.order.restaurantName}</h3>
-            {date}
-            <p>Subtotal R${props.order.totalPrice}0</p>
-        </div>
+            <h5>{dataFormatada}</h5>
+            <h4>SUBTOTAL R${props.order.totalPrice}0</h4>
+        </OrderContainer>
     )
 }
 

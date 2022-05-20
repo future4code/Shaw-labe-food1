@@ -6,7 +6,7 @@ import OrderCard from "../../components/orders/OrderCard";
 import { goToUpDateProfile } from "../../routes/coordinator";
 import useProtectdPage from "../../hooks/useProtectedPage";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import { ProfileData, Data, AddressData, OrderHistory } from "./styled";
+import { ProfileData, Data, AddressData, OrderHistory, Orders } from "./styled";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 import Loading from '../../components/Loading/Loading'
@@ -22,7 +22,6 @@ function ProfilePage() {
   });
 
   useEffect(() => {
-    requests.getProfile()
     setters.setUpdate(states.update + 1)
     setters.setHeaderText("Meu perfil")
     setters.setHeaderButton("")
@@ -30,7 +29,10 @@ function ProfilePage() {
 
   useEffect(() => {
     requests.getOrdersHistory()
+    requests.getProfile()
   }, [])
+
+  console.log(states.orders)
 
   return (
     <div>
