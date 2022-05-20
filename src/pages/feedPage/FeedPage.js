@@ -126,7 +126,7 @@ function FeedPage() {
           <Loading />
         }
 
-      {!states.activeOrder? "" : <ActiveOrderCard/>}
+      {states.activeOrder?.order === null ? "" : <ActiveOrderCard/> }
 
       </DivFeed>
 
