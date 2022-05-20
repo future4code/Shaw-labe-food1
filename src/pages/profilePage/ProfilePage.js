@@ -18,16 +18,19 @@ function ProfilePage() {
   const { states, requests, setters } = useContext(GlobalContext);
 
   const mapOrders = states.orders?.orders.map((order) => {
-    return <OrderCard key={order.restaurantName} order={order} />;
+    return <OrderCard key={order.createdAt} order={order} />;
   });
 
   useEffect(() => {
     requests.getProfile()
-    requests.getOrdersHistory()
     setters.setUpdate(states.update + 1)
     setters.setHeaderText("Meu perfil")
     setters.setHeaderButton("")
   }, [states.profile?.user, states.address?.address])
+
+  useEffect(() => {
+    requests.getOrdersHistory()
+  }, [])
 
   return (
     <div>
