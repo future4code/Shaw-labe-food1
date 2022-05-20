@@ -11,6 +11,7 @@ import {
 } from "./styled";
 
 const CardRestaurant = (props) => {
+  
   const navigate = useNavigate();
 
   const onClickCard = (id) => {

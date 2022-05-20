@@ -11,9 +11,10 @@ import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 
 function ProfilePage() {
+  
+  useProtectdPage();
   const navigate = useNavigate();
   const { states, requests, setters } = useContext(GlobalContext);
-  useProtectdPage();
 
   const mapOrders = states.orders?.orders.map((order) => {
     return <OrderCard key={order.restaurantName} order={order} />;
@@ -29,6 +30,7 @@ function ProfilePage() {
   return (
     <div>
       <Header />
+
       <ProfileData>
         <Data>
           <p>{states.profile?.user.name}</p>
@@ -37,6 +39,7 @@ function ProfilePage() {
         </Data>
         <CreateOutlinedIcon onClick={() => goToUpDateProfile(navigate)} />
       </ProfileData>
+      
       <AddressData>
         <Data>
           <h4>Endereço cadastrado</h4>
@@ -44,11 +47,15 @@ function ProfilePage() {
         </Data>
         <CreateOutlinedIcon onClick={() => goToAdressPage(navigate)} />
       </AddressData>
+      
       <OrderHistory>
         <h4>Histórico de pedidos</h4>
         <hr/>
-        <div>{mapOrders?.length !== 0 ? mapOrders :  <p>Você ainda não fez nenhum pedido</p> }</div>
+        <div>
+          {mapOrders?.length !== 0 ? mapOrders :  <p>Você ainda não fez nenhum pedido</p> }
+        </div>
       </OrderHistory>
+
       <Footer page="profile" />
     </div>
   );
