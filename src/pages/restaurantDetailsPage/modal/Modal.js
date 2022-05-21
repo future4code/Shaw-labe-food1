@@ -5,24 +5,18 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import * as S from './styled';
-// import { GlobalContext } from '../../contexts/GlobalContext';
-// import { Toast } from '../../components/Toast'
 
 const ShowModal = ({
     open,
-    // handleOpen,
     handleClose,
-    quantity,
-    setQuantity,
-    // addItemToCart,
-    // product,
-    // restaurantId,
-    // data,
-    }) => {
-
-    const handleChange = (event) => {
-        setQuantity(event.target.value);
-    }
+    product,
+    addProduct,
+    onChangeQuantity,
+    setModalQuantity,
+    productQuantity,
+    initialQuantity,
+    modalQuantity
+}) => {
 
     const body = (
         <S.BodyModal>
@@ -30,19 +24,20 @@ const ShowModal = ({
             <FormControl fullWidth variant='outlined' color={'secondary'}>
                 <InputLabel>Quantidade desejada</InputLabel>
                 <Select
-                    value={quantity}
-                    onChange={handleChange}
+                    value={modalQuantity ? modalQuantity : setModalQuantity(1)}
                     label='Quantidade desejada'
                 >
-                    <MenuItem value='' disabled style={{ display: 'none' }}></MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem onClick={() => setModalQuantity(1)} value={1}>1</MenuItem>
+                    <MenuItem onClick={() => setModalQuantity(2)} value={2}>2</MenuItem>
+                    <MenuItem onClick={() => setModalQuantity(3)} value={3}>3</MenuItem>
+                    <MenuItem onClick={() => setModalQuantity(4)} value={4}>4</MenuItem>
+                    <MenuItem onClick={() => setModalQuantity(5)} value={5}>5</MenuItem>
                 </Select>
             </FormControl>
-            <Button color={'primary'}>
+            <Button
+                onClick={initialQuantity !== productQuantity ? () => onChangeQuantity(product) : () => addProduct(product)}
+                color={'primary'}
+            >
                 Adicionar ao carrinho
             </Button>
         </S.BodyModal>

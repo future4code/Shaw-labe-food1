@@ -36,22 +36,6 @@ function RestaurantDetailsPage() {
     setters.setHeaderButton(<ArrowBackIos />);
   }, []);
 
-
-
-
-
-  const addProduct = (product, params) => {
-    if (states.restaurantId === params || states.restaurantId === undefined || states.cart.length === 0) {
-      const newCart = [...states.cart, { ...product, quantity: 1 }]
-      setters.setRestaurantId(params)
-      setters.setCart(newCart)
-      setters.setUpdate(states.update + 1)
-      // setters.setProductQuantity(props.quantity)
-    } else {
-      alert("só pode adicionar 1 restaurante no carrinho")
-    }
-  }
-
   return (
     <div>
       <Header />

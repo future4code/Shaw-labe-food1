@@ -85,14 +85,14 @@ export default function GlobalState(props) {
             })
     }
 
-    const getActiveOrder = () =>{
+    const getActiveOrder = () => {
         axios.get(`${BASE_URL}active-order`, { headers: { auth: localStorage.getItem("tokenadress") } })
-        .then((res) =>{
-            setActiveOrder(res.data)
-        })
-        .catch((err) =>{
-            console.log(err.data)
-        })
+            .then((res) => {
+                setActiveOrder(res.data)
+            })
+            .catch((err) => {
+                console.log(err.data)
+            })
     }
 
     //-- Functions --//
@@ -113,7 +113,7 @@ export default function GlobalState(props) {
     }
 
     //-- Constantes para organização --//
-    const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity, activeOrder}
+    const states = { profile, restaurantId, orders, address, restaurants, headerText, headerButton, update, restaurantDetail, cart, totalPrice, productQuantity, activeOrder }
 
     const setters = { setProfile, setRestaurantId, setOrders, setHeaderText, setHeaderButton, setUpdate, setCart, setTotalPrice, setProductQuantity, setActiveOrder }
 

@@ -13,22 +13,40 @@ import {
   Price,
   Description
 } from "./styled";
-
 export const ProductCard = (props) => {
-  const { states, setters } = useContext(GlobalContext)
+  const { states, setters, functions } = useContext(GlobalContext)
+  const [initialQuantity, setInitialQuantity] = useState(0)
   const [productQuantity, setProductQuantity] = useState(0)
+  const [modalQuantity, setModalQuantity] = useState(0)
+
   const [open, setOpen] = useState(false)
   const handleClose = () => { setOpen(false) }
 
-  //-- Adicionar produto --//
+  //-- Alterar quantidade dos produtos --//
   const addProduct = (product) => {
-    if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
-      setOpen(true)
-    } else {
-      alert("só pode adicionar 1 restaurante no carrinho");
-    }
-  };
 
+    const newCart = [...states.cart, { ...product, quantity: modalQuantity }]
+
+    setOpen(false)
+    setInitialQuantity(productQuantity - 1)
+    setProductQuantity(modalQuantity)
+    setters.setCart(newCart)
+    setters.setRestaurantId(props.params)
+  }
+
+  const onChangeQuantity = (product) => {
+    const newQuantity = states.cart.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: Number(modalQuantity) }
+      }
+      return item
+    })
+    setInitialQuantity(productQuantity + 1)
+    setOpen(false)
+    setters.setCart(newQuantity)
+  }
+
+  console.log(states.cart)
   //-- Open Modal --//
   const openModal = () => {
     if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
@@ -37,36 +55,22 @@ export const ProductCard = (props) => {
       alert("só pode adicionar 1 restaurante no carrinho");
     }
   };
-  //-- Alterar quantidade dos produtos --//
-  // const onChangeQuantity = (e) => {
-  //   const newQuantity = states.cart.map((item) => {
-  //     if (item.id === props.product.id) {
-  //       setters.setUpdate(states.update + 1)
-  //       setProductQuantity(e.target.value)
-  //       return { ...item, quantity: Number(e.target.value) }
-  //     }
-  //     return item
-  //   })
-  //   setters.setCart(newQuantity)
-  // }
-
 
   //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
-
     const newCart = states.cart.map((item) => {
       if (item.id === product.id) {
-        setters.setProductQuantity(states.productQuantity - 1)
-        return {
-          ...item, quantity: item.quantity - 1
-        }
+        setProductQuantity(productQuantity - 1)
+        return { ...item, quantity: item.quantity - 1 }
       }
       return item
     }).filter((item) => {
       if (item.quantity === 0) {
-        setters.setProductQuantity(0)
-        return item.quantity > 0
+        setModalQuantity(0)
+        setInitialQuantity(0)
+        setProductQuantity(0)
       }
+      return item.quantity > 0
     })
     setters.setUpdate(states.update + 1)
     setters.setCart(newCart)
@@ -84,23 +88,35 @@ export const ProductCard = (props) => {
 
         </CardInfoMeal>
         <div>
-          <ButtonAdd
-            onClick={productQuantity === 0 ? () => openModal() : () => removeProduct(props.product)}
-          >
-            {productQuantity === 0 ? "adicionar" : "remover"}
-          </ButtonAdd>
+          {productQuantity === 0
+            ?
+            <ButtonAdd onClick={() => openModal()}>
+              adicionar
+            </ButtonAdd>
+            :
+            <ButtonRemove onClick={() => removeProduct(props.product)}>
+              remover
+            </ButtonRemove>
+          }
         </div>
         <div>
-          {productQuantity !== 0 ? <Quantity>{productQuantity}</Quantity> : ""}
+          {productQuantity !== 0 ? <Quantity onClick={() => openModal()}>{productQuantity}</Quantity> : ""}
         </div>
-
 
         <ShowModal
           open={open}
           handleClose={handleClose}
+          product={props.product}
+          productQuantity={productQuantity}
+          setProductQuantity={setProductQuantity}
+          addProduct={addProduct}
+          onChangeQuantity={onChangeQuantity}
+          initialQuantity={initialQuantity}
+          setModalQuantity={setModalQuantity}
+          modalQuantity={modalQuantity}
         />
 
       </Container>
-    </div>
+    </div >
   );
 };
