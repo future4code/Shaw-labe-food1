@@ -77,13 +77,12 @@ export const ProductCard = (props) => {
       <Container>
         <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
         <CardInfoMeal>
-          <RestaurantName gutterBottom variant="p" color="primary">{props.product.name}</RestaurantName>
-          <br />
-          <Description>{props.product.description}</Description>
-          <br />
-          <Price> R${props.product.price.toFixed(2)}</Price>
-        </CardInfoMeal>
 
+          <RestaurantName gutterBottom  variant="p" color="primary">{props.product.name}</RestaurantName>
+          <Description>{props.product.description}</Description>
+         <Price> <b>R${props.product.price.toFixed(2)}</b></Price>
+
+        </CardInfoMeal>
         <div>
           <ButtonAdd
             onClick={productQuantity === 0 ? () => openModal() : () => removeProduct(props.product)}

@@ -76,7 +76,6 @@ function RestaurantDetailsPage() {
             <Typography size="small" color="secondary">
               <p>{states.restaurantDetail?.restaurant.category}</p>
               <P>{states.restaurantDetail?.restaurant.deliveryTime} min <p>Frete R${states.restaurantDetail?.restaurant.shipping.toFixed(2)}</p></P>
-              <p></p>
               <p>{states.restaurantDetail?.restaurant.address}</p>
             </Typography>
           </CardActionArea>
