@@ -23,3 +23,8 @@ export const P = styled.p`
         margin-right: 10rem;
     }
 `
+
+export const Title = styled.h3`
+margin-top: 1rem;
+margin-bottom: 0.5rem;
+`
