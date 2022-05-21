@@ -1,6 +1,6 @@
 
 export const goToFeedPage = (navigate) => {
-    navigate("/")
+    navigate("/home")
 }
 
 export const goToLoginPage = (navigate) => {
