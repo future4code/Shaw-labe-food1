@@ -13,22 +13,41 @@ import {
   Price,
   Description
 } from "./styled";
-
 export const ProductCard = (props) => {
   const { states, setters } = useContext(GlobalContext)
+  const [initialQuantity, setInitialQuantity] = useState(0)
   const [productQuantity, setProductQuantity] = useState(0)
+  const [modalQuantity, setModalQuantity] = useState(0)
+
   const [open, setOpen] = useState(false)
   const handleClose = () => { setOpen(false) }
-
-  //-- Adicionar produto --//
+  //-- Alterar quantidade dos produtos --//
+  console.log(productQuantity)
+  console.log(modalQuantity)
+  console.log(initialQuantity)
   const addProduct = (product) => {
-    if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
-      setOpen(true)
-    } else {
-      alert("só pode adicionar 1 restaurante no carrinho");
-    }
-  };
+    const newCart = [...states.cart, { ...product, quantity: modalQuantity }]
 
+    setOpen(false)
+    setInitialQuantity(productQuantity - 1)
+    setProductQuantity(modalQuantity)
+    setters.setCart(newCart)
+    setters.setRestaurantId(props.params)
+  }
+
+  const onChangeQuantity = (product) => {
+    const newQuantity = states.cart.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: Number(modalQuantity) }
+      }
+      return item
+    })
+    setInitialQuantity(productQuantity + 1)
+    setOpen(false)
+    setters.setCart(newQuantity)
+  }
+
+  console.log(states.cart)
   //-- Open Modal --//
   const openModal = () => {
     if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
@@ -37,6 +56,7 @@ export const ProductCard = (props) => {
       alert("só pode adicionar 1 restaurante no carrinho");
     }
   };
+
   //-- Alterar quantidade dos produtos --//
   // const onChangeQuantity = (e) => {
   //   const newQuantity = states.cart.map((item) => {
@@ -53,10 +73,9 @@ export const ProductCard = (props) => {
 
   //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
-
     const newCart = states.cart.map((item) => {
       if (item.id === product.id) {
-        setters.setProductQuantity(states.productQuantity - 1)
+        setModalQuantity(modalQuantity - 1)
         return {
           ...item, quantity: item.quantity - 1
         }
@@ -64,8 +83,10 @@ export const ProductCard = (props) => {
       return item
     }).filter((item) => {
       if (item.quantity === 0) {
-        setters.setProductQuantity(0)
-        return item.quantity > 0
+        setModalQuantity(0)
+        setInitialQuantity(0)
+        setProductQuantity(0)
+        return item.quantity !== 0
       }
     })
     setters.setUpdate(states.update + 1)
@@ -86,22 +107,30 @@ export const ProductCard = (props) => {
 
         <div>
           <ButtonAdd
-            onClick={productQuantity === 0 ? () => openModal() : () => removeProduct(props.product)}
+            onClick={modalQuantity === 0 ? () => openModal() : () => removeProduct(props.product)}
           >
-            {productQuantity === 0 ? "adicionar" : "remover"}
+            {modalQuantity === 0 ? "adicionar" : "remover"}
           </ButtonAdd>
         </div>
         <div>
-          {productQuantity !== 0 ? <Quantity>{productQuantity}</Quantity> : ""}
+          {modalQuantity !== 0 ? <Quantity onClick={() => openModal()}>{modalQuantity}</Quantity> : ""}
         </div>
 
 
         <ShowModal
           open={open}
           handleClose={handleClose}
+          product={props.product}
+          productQuantity={productQuantity}
+          setProductQuantity={setProductQuantity}
+          addProduct={addProduct}
+          onChangeQuantity={onChangeQuantity}
+          initialQuantity={initialQuantity}
+          setModalQuantity={setModalQuantity}
+          modalQuantity={modalQuantity}
         />
 
       </Container>
-    </div>
+    </div >
   );
 };
