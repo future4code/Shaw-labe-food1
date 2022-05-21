@@ -12,13 +12,13 @@ import {
 export const ProductCard = (props) => {
 
   const { states, setters } = useContext(GlobalContext)
-
+  const [quantity, setQuantity] = useState(0)
 
   //-- Adicionar produto --//
   const addProduct = (product) => {
     if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
       props.setOpen(true)
-      props.setProduct(product)
+      props.setProduct(product.quantity)
       setters.setCart([...states.cart, { ...product, quantity: 1 }])
       //   setters.setRestaurantId(props.params)
       //   setters.setCart(newCart)
@@ -28,6 +28,14 @@ export const ProductCard = (props) => {
       alert("só pode adicionar 1 restaurante no carrinho")
     }
   }
+
+  const returnQuantity = (product) => {
+    const newQuantity = states.cart.filter((item) => {
+      if (item.id === product.id) { setQuantity(item.quantity) } else { return false }
+    })
+    return newQuantity
+  }
+
 
   //-- Alterar quantidade dos produtos --//
   // const onChangeQuantity = (e) => {
@@ -43,10 +51,12 @@ export const ProductCard = (props) => {
   // }
   console.log(states.cart)
 
+
   //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
     const newCart = states.cart.map((item) => {
       if (item.id === product.id) {
+        setters.setProductQuantity(states.productQuantity - 1)
         return {
           ...item, quantity: item.quantity - 1
         }
@@ -54,6 +64,7 @@ export const ProductCard = (props) => {
       return item
     }).filter((item) => {
       if (item.quantity === 0) {
+        setters.setProductQuantity(0)
         return item.quantity > 0
       }
     })
