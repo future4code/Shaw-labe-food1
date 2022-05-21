@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export const Container = styled.div`
 width: 100%;
-height: 7rem;
+height: 7.9rem;
 display: flex;
 flex-direction: row;
 border: solid 1px #b8b8b8;
@@ -16,12 +16,12 @@ export const CardInfoMeal = styled.div`
   font-weight: 100;
   color: #b8b8b8;
   margin-left: 8px;
-  margin-top: 3px;
+  margin-top: 10px;
 `
 
 export const CardMediaItemImg = styled.img`
-  width: 7rem;
-  height: 7rem;
+  width: 7.2rem;
+  height: 7.8rem;
   border-radius: 12px 0px 0px 12px;
 `
 
@@ -34,8 +34,8 @@ border: solid 1px black;
 background-color: #fff;
 border-radius: 10px 0px 10px 0px;
 position: relative;
-top: 78px;
-left: 15px;
+top: 92px;
+left: 12px;
 `
 export const ButtonRemove = styled.button`
 width: 22vw;
@@ -69,7 +69,7 @@ font-weight: 400;
 
 export const Price = styled.p`
 color: black;
-font-weight: bold;
+
 `
 
 export const Description = styled.p`
