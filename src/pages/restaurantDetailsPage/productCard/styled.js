@@ -38,7 +38,7 @@ top: 78px;
 left: 15px;
 `
 export const ButtonRemove = styled.button`
-width: 22vw;
+width: 24vw;
 height: 4vh;
 font-size: 12px;
 color: #e02020;
@@ -47,7 +47,8 @@ background-color: #fff;
 border-radius: 10px 0px 10px 0px;
 position: relative;
 top: 78px;
-left: 15px;
+left: 30px;
+/* margin-left: 1px; */
 `
 
 export const Select = styled.button`
