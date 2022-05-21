@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GlobalContext } from "../../global/GlobalContext";
 import { ProductCard } from "./productCard/ProductCard";
-import { P, CardMediaImg, ContainerCardDetail } from "./styled";
+import { P, CardMediaImg, ContainerCardDetail, Title } from "./styled";
 import Loading from '../../components/Loading/Loading'
 import ShowModal from "./modal/Modal";
 import useProtectdPage from "../../hooks/useProtectedPage"
@@ -102,15 +102,16 @@ function RestaurantDetailsPage() {
             </Typography>
           </CardActionArea>
 
+          <Title>Pratos principais</Title>
+
 
           {/* //------------------------------------// */} {/* //------------------------------------// */}
 
 
-          <h3>Pratos principais</h3>
           <hr />
           {restaurantProducts}
 
-          <h3>Bebidas</h3>
+          <Title>Bebidas</Title>
           <hr />
           {restaurantDrinks}
 

@@ -1,16 +1,19 @@
+import { Typography } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 import {
-  ButtonAdd,
+  ButtonRemove,
   CardInfoMeal,
   CardMediaItemImg,
   Container,
   Quantity,
-  Select,
+  ButtonAdd,
+  RestaurantName,
+  Price,
+  Description
 } from "./styled";
 
 export const ProductCard = (props) => {
-
   const { states, setters } = useContext(GlobalContext)
   const [quantity, setQuantity] = useState(0)
 
@@ -25,9 +28,10 @@ export const ProductCard = (props) => {
       //   setters.setUpdate(states.update + 1)
       // setters.setProductQuantity(props.quantity)
     } else {
-      alert("só pode adicionar 1 restaurante no carrinho")
+      alert("só pode adicionar 1 restaurante no carrinho");
     }
-  }
+  };
+
 
   const returnQuantity = (product) => {
     const newQuantity = states.cart.filter((item) => {
@@ -35,6 +39,7 @@ export const ProductCard = (props) => {
     })
     return newQuantity
   }
+
 
 
   //-- Alterar quantidade dos produtos --//
@@ -54,6 +59,7 @@ export const ProductCard = (props) => {
 
   //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
+
     const newCart = states.cart.map((item) => {
       if (item.id === product.id) {
         setters.setProductQuantity(states.productQuantity - 1)
@@ -76,28 +82,54 @@ export const ProductCard = (props) => {
     setters.setProductQuantity(props.quantity)
   }, [])
 
+
   return (
     <div>
       <Container>
         <CardMediaItemImg src={props.product.photoUrl} />
         <CardInfoMeal>
-          {props.product.name}
+          <RestaurantName gutterBottom  variant="p" color="primary">{props.product.name}</RestaurantName>
           <br />
-          {props.product.description}
+          <Description>{props.product.description}</Description>
           <br />
-          R${props.product.price.toFixed(2)}
+         <Price> R${props.product.price.toFixed(2)}</Price>
         </CardInfoMeal>
 
-        <ButtonAdd>
-          <button
-            onClick={states.cart.length === 0 ? () => addProduct(props.product) : () => removeProduct(props.product)}>
-            {states.cart.length === 0 ? "adicionar" : "remover"}
-          </button>
-        </ButtonAdd>
+        <div>
+          {productQuantity === 0 ? (
+            <ButtonAdd
+              onClick={
+                // () => console.log(productQuantity)
+                () => {
+                  productQuantity === 0
+                    ? // ? () => addProduct(props.product)
+                      addProduct()
+                    : removeProduct(props.product);
+                }
+              }
+            >
+              adicionar
+            </ButtonAdd>
+          ) : (
+            <ButtonRemove
+              onClick={
+                // () => console.log(productQuantity)
+                () => {
+                  productQuantity === 0
+                    ? // ? () => addProduct(props.product)
+                      addProduct()
+                    : removeProduct(props.product);
+                }
+              }
+            >
+              remover
+            </ButtonRemove>
+          )}
+        </div>
+        <div>
+          {productQuantity !== 0 ? <Quantity>{productQuantity}</Quantity> : ""}
+        </div>
 
-        <Quantity>
-          {props.productQuantity !== 0 ? <div onClick={() => props.setOpen(true)}>{states.productQuantity}</div> : ""}
-        </Quantity>
       </Container>
     </div>
   );
