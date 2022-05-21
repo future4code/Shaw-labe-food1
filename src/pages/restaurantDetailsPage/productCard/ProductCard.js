@@ -1,6 +1,7 @@
 import { Typography } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
+import ShowModal from "../modal/Modal";
 import {
   ButtonRemove,
   CardInfoMeal,
@@ -15,33 +16,27 @@ import {
 
 export const ProductCard = (props) => {
   const { states, setters } = useContext(GlobalContext)
-  const [quantity, setQuantity] = useState(0)
+  const [productQuantity, setProductQuantity] = useState(0)
+  const [open, setOpen] = useState(false)
+  const handleClose = () => { setOpen(false) }
 
   //-- Adicionar produto --//
   const addProduct = (product) => {
     if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
-      props.setOpen(true)
-      props.setProduct(product.quantity)
-      setters.setCart([...states.cart, { ...product, quantity: 1 }])
-      //   setters.setRestaurantId(props.params)
-      //   setters.setCart(newCart)
-      //   setters.setUpdate(states.update + 1)
-      // setters.setProductQuantity(props.quantity)
+      setOpen(true)
     } else {
       alert("só pode adicionar 1 restaurante no carrinho");
     }
   };
 
-
-  const returnQuantity = (product) => {
-    const newQuantity = states.cart.filter((item) => {
-      if (item.id === product.id) { setQuantity(item.quantity) } else { return false }
-    })
-    return newQuantity
-  }
-
-
-
+  //-- Open Modal --//
+  const openModal = () => {
+    if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
+      setOpen(true)
+    } else {
+      alert("só pode adicionar 1 restaurante no carrinho");
+    }
+  };
   //-- Alterar quantidade dos produtos --//
   // const onChangeQuantity = (e) => {
   //   const newQuantity = states.cart.map((item) => {
@@ -54,7 +49,6 @@ export const ProductCard = (props) => {
   //   })
   //   setters.setCart(newQuantity)
   // }
-  console.log(states.cart)
 
 
   //-- Remover produtos do carrinho --//
@@ -78,57 +72,34 @@ export const ProductCard = (props) => {
     setters.setCart(newCart)
   }
 
-  useEffect(() => {
-    setters.setProductQuantity(props.quantity)
-  }, [])
-
-
   return (
     <div>
       <Container>
-        <CardMediaItemImg src={props.product.photoUrl} />
+        <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
         <CardInfoMeal>
-          <RestaurantName gutterBottom  variant="p" color="primary">{props.product.name}</RestaurantName>
+          <RestaurantName gutterBottom variant="p" color="primary">{props.product.name}</RestaurantName>
           <br />
           <Description>{props.product.description}</Description>
           <br />
-         <Price> R${props.product.price.toFixed(2)}</Price>
+          <Price> R${props.product.price.toFixed(2)}</Price>
         </CardInfoMeal>
 
         <div>
-          {productQuantity === 0 ? (
-            <ButtonAdd
-              onClick={
-                // () => console.log(productQuantity)
-                () => {
-                  productQuantity === 0
-                    ? // ? () => addProduct(props.product)
-                      addProduct()
-                    : removeProduct(props.product);
-                }
-              }
-            >
-              adicionar
-            </ButtonAdd>
-          ) : (
-            <ButtonRemove
-              onClick={
-                // () => console.log(productQuantity)
-                () => {
-                  productQuantity === 0
-                    ? // ? () => addProduct(props.product)
-                      addProduct()
-                    : removeProduct(props.product);
-                }
-              }
-            >
-              remover
-            </ButtonRemove>
-          )}
+          <ButtonAdd
+            onClick={productQuantity === 0 ? () => openModal() : () => removeProduct(props.product)}
+          >
+            {productQuantity === 0 ? "adicionar" : "remover"}
+          </ButtonAdd>
         </div>
         <div>
           {productQuantity !== 0 ? <Quantity>{productQuantity}</Quantity> : ""}
         </div>
+
+
+        <ShowModal
+          open={open}
+          handleClose={handleClose}
+        />
 
       </Container>
     </div>
