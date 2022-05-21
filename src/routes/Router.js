@@ -1,20 +1,22 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdressPage from "../pages/adressPage/AdressPage"
-import CartPage from "../pages/cartPage/CartPage"
+import OpeningPage from "../pages/openingPage/OpeningPage";
 import FeedPage from "../pages/feedPage/FeedPage"
 import LoginPage from "../pages/loginPage/LoginPage"
-import ProfilePage from "../pages/profilePage/ProfilePage"
 import SignUpPage from "../pages/signUpPage/SignUpPage"
-import ErrorPage from "../pages/errorPage/ErrorPage"
-import UpDateProfile from "../pages/upDateProfile/UpDateProfile"
+import AdressPage from "../pages/adressPage/AdressPage"
 import RestaurantDetailsPage from "../pages/restaurantDetailsPage/RestaurantDetailsPage"
+import CartPage from "../pages/cartPage/CartPage"
+import ProfilePage from "../pages/profilePage/ProfilePage"
+import UpDateProfile from "../pages/upDateProfile/UpDateProfile"
+import ErrorPage from "../pages/errorPage/ErrorPage"
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route index element={<FeedPage />} />
+                <Route index element={<OpeningPage />} />
+                <Route path="/home" element={<FeedPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/endereco" element={<AdressPage />} />
