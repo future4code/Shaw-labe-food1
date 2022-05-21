@@ -77,17 +77,11 @@ export const ProductCard = (props) => {
       <Container>
         <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
         <CardInfoMeal>
-<<<<<<< HEAD
+
           <RestaurantName gutterBottom  variant="p" color="primary">{props.product.name}</RestaurantName>
           <Description>{props.product.description}</Description>
          <Price> <b>R${props.product.price.toFixed(2)}</b></Price>
-=======
-          <RestaurantName gutterBottom variant="p" color="primary">{props.product.name}</RestaurantName>
-          <br />
-          <Description>{props.product.description}</Description>
-          <br />
-          <Price> R${props.product.price.toFixed(2)}</Price>
->>>>>>> ef55631dd644d2204d71b4eb3366ffc74a951327
+
         </CardInfoMeal>
         <div>
           <ButtonAdd
