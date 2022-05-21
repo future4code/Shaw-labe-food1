@@ -11,6 +11,4 @@ export const ContainerFooter = styled.div`
     left: 0;
     background-color: #fff;
     border-top: 1px solid #999;
-    /* grid-gap: 1rem;
-    gap: 1rem; */
 `

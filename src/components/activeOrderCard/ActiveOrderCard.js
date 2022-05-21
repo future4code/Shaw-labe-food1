@@ -1,19 +1,25 @@
 import React, {useContext} from "react";
 import { GlobalContext } from "../../global/GlobalContext";
+import { ContainerCard, Informations } from "./style"
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 
 function ActiveOrderCard() {
-    const {states, requests, setters} = useContext(GlobalContext)
-
-    console.log(states.activeOrder)
+    const {states} = useContext(GlobalContext)
 
     return(
 
-        <div>
-            <p>Pedido em andamento</p>
-            <p>{!states.activeOrder ? "" : states.activeOrder?.order.restaurantName }</p>
-            <h3>SUBTOTAL R${!states.activeOrder ? "" : states.activeOrder?.order.totalPrice }</h3>
-        </div>
+        <ContainerCard>
+            <div>
+             <AccessTimeIcon style={{ color: "#ffffff" }} fontSize="large"/>
+            </div>
+            <Informations>
+                <p style={{ color:"#ffffff"}}>Pedido em andamento</p>
+                <p>{!states.activeOrder ? "" : states.activeOrder?.order.restaurantName }</p>
+                <h3>SUBTOTAL R${!states.activeOrder ? "" : states.activeOrder?.order.totalPrice }</h3>
+            </Informations>
+
+        </ContainerCard>
     )
 }
 
