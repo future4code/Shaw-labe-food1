@@ -1,12 +1,12 @@
 import { IconButton } from "@material-ui/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import avatarW from "../../assets/avatar-w.png";
-import avatar from "../../assets/avatar.png";
-import homepageW from "../../assets/homepage-w.png";
-import homepage from "../../assets/homepage.png";
-import shoppingW from "../../assets/shopping-cart-w.png";
-import shopping from "../../assets/shopping-cart.png";
+import avatarW from "../../assets/ImgFooter/avatar-w.png";
+import avatar from "../../assets/ImgFooter/avatar.png";
+import homepageW from "../../assets/ImgFooter/homepage-w.png";
+import homepage from "../../assets/ImgFooter/homepage.png";
+import shoppingW from "../../assets/ImgFooter/shopping-cart-w.png";
+import shopping from "../../assets/ImgFooter/shopping-cart.png";
 import { goToCartPage, goToFeedPage, goToProfilePage } from "../../routes/coordinator";
 import { ContainerFooter } from "./styled";
 
