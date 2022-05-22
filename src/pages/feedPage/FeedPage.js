@@ -132,7 +132,7 @@ function FeedPage() {
         }
       </DivFeed>
       
-      {states.activeOrder?.order === null ? "" : <ActiveOrderCard/> }
+      {states.activeOrder?.order && <ActiveOrderCard/>}
       
       <Footer page='home' />
     </div>

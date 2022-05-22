@@ -12,7 +12,7 @@ export default function GlobalState(props) {
     const [restaurantDetail, setRestaurantDetail] = useState()
     const [restaurants, setRestaurants] = useState()
     const [update, setUpdate] = useState(0)
-    const [activeOrder, setActiveOrder] = useState()
+    const [activeOrder, setActiveOrder] = useState(null)
 
     //-- CARRINHO --//
     const [cart, setCart] = useState([])
