@@ -13,13 +13,15 @@ import useProtectdPage from "../../hooks/useProtectedPage";
 import {
   AddressData,
   ButtonConfirm,
+  ButtonDisabled,
   CardMediaImg,
-  Container,
+  ContainerSummary,
   Data,
   Delivery,
   EmptyCartP,
   PaymentMethods,
-  Subtotal,
+  PurchasesCartDiv,
+  Subtotal
 } from "./styled";
 
 function CartPage() {
@@ -97,10 +99,9 @@ function CartPage() {
 
       {states.address?.address.street ? (
         <>
-          {/* Container com endereço de entrega  */}
           <AddressData>
             <Data>
-              <h4>Endereço entrega</h4>
+              <h4>Endereço de entrega</h4>
               <p>
                 {states.address?.address.street},{" "}
                 {states.address?.address.number}
@@ -108,98 +109,70 @@ function CartPage() {
             </Data>
           </AddressData>
 
-          {/* Nome / Endereço / Tempo de entrega do restaurante / Map dos produtos / Valor do frete */}
           {states.cart.length ? (
-            // <div>
-            //   {states.restaurantDetail?.restaurant.name}
-            //   <br />
-            //   {states.restaurantDetail?.restaurant.address}
-            //   <br />
-            //   {states.restaurantDetail?.restaurant.shipping} min
-            //   <hr />
-            //   <br />
-            //   {mapItemsOnCart}
-            // </div>
-            <div>
-              <Typography gutterBottom variant="h6" color="primary">
+            <PurchasesCartDiv>
+              <Typography variant="h6" color="primary">
                 {states.restaurantDetail?.restaurant.name}
               </Typography>
               <Typography size="small" color="secondary">
                 <p>{states.restaurantDetail?.restaurant.address}</p>
+              </Typography>
+              <Typography size="small" color="secondary">
                 <p>{states.restaurantDetail?.restaurant.deliveryTime} min</p>
               </Typography>
-            </div>
+              {mapItemsOnCart}  
+            </PurchasesCartDiv>
           ) : (
-            <EmptyCartP>Carrinho vazio</EmptyCartP>
+            <EmptyCartP> Carrinho vazio </EmptyCartP>
           )}
-          <Container>
-            {/* Subtotal */}
+
+          <ContainerSummary>
             <Delivery>
               Frete R$
-              {states.cart.length
-                ? states.restaurantDetail?.restaurant.shipping.toFixed(2)
-                : "0,00"}
+              {states.cart.length ? 
+                states.restaurantDetail?.restaurant.shipping.toFixed(2)
+                : 
+                "0,00"
+              }
             </Delivery>
+            
             <Subtotal>
-              <p>SUBTOTAL</p>{" "}
+              <p>SUBTOTAL</p>
               <Typography color="primary">
                 <b>R${totalPrice.toFixed(2)}</b>
               </Typography>
             </Subtotal>
-            {/* Formas de pagamento  */}
+            
             <div>
-              <PaymentMethods>Formas de pagamento</PaymentMethods>
+              <PaymentMethods> Forma de pagamento </PaymentMethods>
               <hr />
+
               <Radio
+                color="black"
                 checked={method === "creditcard" ? true : false}
                 onClick={() => onClickCreditCard()}
-              />{" "}
-              Cartão de crédito
+              /> Cartão de crédito
               <br />
               <Radio
+                color="black"
                 checked={method === "money" ? true : false}
                 onClick={() => onClickMoney()}
-              />{" "}
-              Dinheiro
+              /> Dinheiro
             </div>
-
-            {/* botão para enviar requisição */}
-            {states.cart.length !== 0 ? (
-              <ButtonConfirm
-                onClick={() => onClickPlaceOrder()}
-                type={"submit"}
-                variant={"contained"}
-                color={"primary"}
-                margin={"normal"}
-                fullWidth
-              >
-                Confimar
-              </ButtonConfirm>
-            ) : (
-              <ButtonConfirm
-                onClick={() => onClickPlaceOrder()}
-                type={"submit"}
-                variant={"contained"}
-                color={"primary"}
-                margin={"normal"}
-                fullWidth
-                disabled
-              >
-                Confimar
-              </ButtonConfirm>
-            )}
-            {/* <ButtonConfirm
-                onClick={() => onClickPlaceOrder()}
-                type={"submit"}
-                variant={"contained"}
-                color={"primary"}
-                margin={"normal"}
-                fullWidth
-              >
-                {" "}
-                Confimar{" "}
-              </ButtonConfirm> */}
-          </Container>
+          </ContainerSummary>
+          
+          {states.cart.length !== 0 ? (
+            <ButtonConfirm
+              onClick={() => onClickPlaceOrder()}
+              type={"submit"}
+            >
+              Confimar
+            </ButtonConfirm>
+          ) : (
+            <ButtonDisabled>
+              Confirmar
+            </ButtonDisabled>
+          )}
         </>
       ) : (
         <Loading />
