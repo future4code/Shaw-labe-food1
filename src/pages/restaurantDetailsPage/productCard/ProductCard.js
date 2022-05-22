@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../global/GlobalContext";
 import ShowModal from "../modal/Modal";
@@ -13,20 +12,17 @@ import {
   Price,
   Description
 } from "./styled";
+
 export const ProductCard = (props) => {
   const { states, setters, functions } = useContext(GlobalContext)
   const [initialQuantity, setInitialQuantity] = useState(0)
   const [productQuantity, setProductQuantity] = useState(0)
   const [modalQuantity, setModalQuantity] = useState(0)
-
   const [open, setOpen] = useState(false)
   const handleClose = () => { setOpen(false) }
 
-  //-- Alterar quantidade dos produtos --//
   const addProduct = (product) => {
-
     const newCart = [...states.cart, { ...product, quantity: modalQuantity }]
-
     setOpen(false)
     setInitialQuantity(productQuantity - 1)
     setProductQuantity(modalQuantity)
@@ -46,8 +42,6 @@ export const ProductCard = (props) => {
     setters.setCart(newQuantity)
   }
 
-  console.log(states.cart)
-  //-- Open Modal --//
   const openModal = () => {
     if (states.restaurantId === props.params || states.restaurantId === undefined || states.cart.length === 0) {
       setOpen(true)
@@ -56,7 +50,6 @@ export const ProductCard = (props) => {
     }
   };
 
-  //-- Remover produtos do carrinho --//
   const removeProduct = (product) => {
     const newCart = states.cart.map((item) => {
       if (item.id === product.id) {
@@ -76,15 +69,28 @@ export const ProductCard = (props) => {
     setters.setCart(newCart)
   }
 
+  const showProductCartQuantity = (product) => {
+    const quantityOnCart = states.cart.map((item) => {
+      if (item.id === product.id) {
+        setProductQuantity(item.quantity)
+      }
+    })
+    return quantityOnCart
+  }
+
+  useEffect(() => {
+    showProductCartQuantity(props.product)
+  }, [states.cart])
+
   return (
     <div>
       <Container>
         <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
         <CardInfoMeal>
 
-          <RestaurantName gutterBottom  variant="p" color="primary">{props.product.name}</RestaurantName>
+          <RestaurantName gutterBottom variant="p" color="primary">{props.product.name}</RestaurantName>
           <Description>{props.product.description}</Description>
-         <Price> <b>R${props.product.price.toFixed(2)}</b></Price>
+          <Price> <b>R${props.product.price.toFixed(2)}</b></Price>
 
         </CardInfoMeal>
         <div>
