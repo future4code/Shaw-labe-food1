@@ -42,7 +42,6 @@ function AdressPage() {
       .catch((err) => {
         alert("Deu ruin Bergue, confere o console ae!!")
         setIsLoading(false)
-        // console.log(form)
         console.log(err.response)
       })
   }
@@ -65,6 +64,7 @@ function AdressPage() {
   return (
     <>
       <Header />
+      
       {!states.profile?.user.hasAddress ?
         <DivAdress>
           {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}

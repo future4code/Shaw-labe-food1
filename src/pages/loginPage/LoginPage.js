@@ -1,10 +1,10 @@
 import React from "react"
-import { Screencontainer, LogoImage, Subtitle, SingUpButton } from "./styled";
-import logo from "../../assets/logo.png"
-import { Button } from "@material-ui/core";
-import LoginForm from "./LoginForm";
-import { goTosignUpPage } from "../../routes/coordinator"
 import { useNavigate } from "react-router";
+import { goTosignUpPage } from "../../routes/coordinator"
+import logo from "../../assets/logo.png"
+import LoginForm from "./LoginForm";
+import { Screencontainer, LogoImage, Subtitle, SingUpButton } from "./styled";
+import { Button } from "@material-ui/core";
 
 const LoginPage = () => {
 
@@ -12,9 +12,9 @@ const LoginPage = () => {
 
   return (
     <Screencontainer>
-      <LogoImage src={logo} alt={"Imagem logotipo Rappi4"} />
+      <LogoImage src={logo} alt={"Imagem da logo Rappi4"} />
 
-      <Subtitle>Entrar</Subtitle>
+      <Subtitle> Entrar </Subtitle>
 
       <LoginForm />
 
@@ -23,7 +23,6 @@ const LoginPage = () => {
         type={"submit"}
         variant={"text"}
         color={"inherit"}
-        margin={"normal"}
         fullWidth
       >
         <SingUpButton>  Não possui cadastro? Clique aqui. </SingUpButton>

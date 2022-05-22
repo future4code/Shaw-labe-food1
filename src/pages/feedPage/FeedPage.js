@@ -15,6 +15,7 @@ import useProtectdPage from "../../hooks/useProtectedPage"
 import ActiveOrderCard from "../../components/activeOrderCard/ActiveOrderCard";
 
 function FeedPage() {
+  
   useProtectdPage()
   const { states, requests, setters } = useContext(GlobalContext);
   const { form, onChange, clear } = useForm({ search: "" });

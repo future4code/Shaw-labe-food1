@@ -5,11 +5,12 @@ export const ContainerSingup = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin:1rem;
+    margin-top: 24px;
 `
 
 export const Title = styled.p`
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 28px;
+    margin-bottom: 20px;
 `

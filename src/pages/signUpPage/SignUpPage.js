@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react"
+import { GlobalContext } from "../../global/GlobalContext";
+import { ArrowBackIos } from "@material-ui/icons";
+import Header from "../../components/header/Header"
 import { SingUpForm } from "./singUpForm/SingUpForm";
 import { ContainerSingup, Title } from "./styled";
 import logo from "../../assets/logo.png"
-import Header from "../../components/header/Header"
-import { GlobalContext } from "../../global/GlobalContext";
-import { ArrowBackIos } from "@material-ui/icons";
 
 function SignUpPage() {
 
@@ -23,7 +23,7 @@ function SignUpPage() {
       <ContainerSingup>
         <img src={logo} alt={"Imagem logotipo Rappi4"} />
 
-        <Title>Cadastrar</Title>
+        <Title> Cadastrar </Title>
 
         <SingUpForm />
       </ContainerSingup>
