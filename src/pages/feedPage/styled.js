@@ -5,7 +5,7 @@ export const DivFeed = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 80%;
+    width: 90%;
     margin: 1vh auto 9.5vh auto;
     gap: 10px;
     max-width: 600px;

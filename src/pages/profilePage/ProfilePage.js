@@ -6,7 +6,7 @@ import OrderCard from "../../components/orders/OrderCard";
 import { goToUpDateProfile } from "../../routes/coordinator";
 import useProtectdPage from "../../hooks/useProtectedPage";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import { ProfileData, Data, AddressData, OrderHistory, Orders } from "./styled";
+import { ProfileData, Data, AddressData, OrderHistory, Orders, DivCards } from "./styled";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 import Loading from '../../components/Loading/Loading'
@@ -35,6 +35,7 @@ function ProfilePage() {
   return (
     <div>
       <Header />
+      
       {states.profile?.user.name
         ?
         <>
@@ -58,9 +59,9 @@ function ProfilePage() {
           <OrderHistory>
             <h4>Histórico de pedidos</h4>
             <hr />
-            <div>
+            <DivCards>
               {mapOrders?.length !== 0 ? mapOrders : <p>Você ainda não fez nenhum pedido</p>}
-            </div>
+            </DivCards>
           </OrderHistory>
         </>
         :

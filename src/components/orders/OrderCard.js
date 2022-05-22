@@ -9,9 +9,9 @@ function OrderCard(props) {
     
     return (
         <OrderContainer>
-            <h3>{props.order.restaurantName}</h3>
+            <h4>{props.order.restaurantName}</h4>
             <h5>{dataFormatada}</h5>
-            <h4>SUBTOTAL R${props.order.totalPrice}0</h4>
+            <h3>SUBTOTAL R${props.order.totalPrice}0</h3>
         </OrderContainer>
     )
 }

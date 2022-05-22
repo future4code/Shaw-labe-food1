@@ -20,5 +20,6 @@ export const Informations = styled.div`
 
     p{
         margin-bottom: 10px; 
+        font-weight: lighter;
     }
 `
