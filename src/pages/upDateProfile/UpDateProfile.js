@@ -66,6 +66,7 @@ export default function UpDateProfile() {
                     value={form.name}
                     onChange={onChange}
                     required
+                    fullWidth
                 />
                 <TextField
                     label="E-mail"
@@ -76,6 +77,7 @@ export default function UpDateProfile() {
                     value={form.email}
                     onChange={onChange}
                     required
+                    fullWidth
                 />
                 <TextField
                     label="CPF"
@@ -89,9 +91,10 @@ export default function UpDateProfile() {
                     value={form.cpf}
                     onChange={onChange}
                     required
+                    fullWidth 
                 />
 
-                <Button color="primary" variant="contained" type="submit">
+                <Button color="primary" variant="contained" type="submit" fullWidth>
                     Salvar
                 </Button>
             </FormAdress>

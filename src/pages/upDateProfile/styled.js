@@ -5,6 +5,13 @@ export const FormAdress = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin: 25px;
+    gap: 16px;
+    margin-top: 24px;
+    margin-left: 10vw;
+    width: 80%;
+    max-width: 450px;
+    
+    button{
+        text-transform: capitalize;
+    }
 `

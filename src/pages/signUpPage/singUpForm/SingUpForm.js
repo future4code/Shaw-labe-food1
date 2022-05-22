@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useUnprotectdPage from '../../../hooks/useUnprotectedPage'
 import { useNavigate } from "react-router-dom";
 import { goToAdressPage } from "../../../routes/coordinator"
 import useForm from "../../../hooks/useForm"
@@ -20,7 +19,6 @@ import { CircularProgress } from "@material-ui/core";
 
 export const SingUpForm = () => {
   
-  useUnprotectdPage()
   const navigate = useNavigate()
   const { form, onChange } = useForm({ name: "", email: "", cpf: "", password: "" })
   const [passwordConfirm, setPasswordConfirm] = useState("")

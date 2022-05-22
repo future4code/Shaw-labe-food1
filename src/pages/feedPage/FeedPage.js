@@ -126,9 +126,10 @@ function FeedPage() {
           :
           <Loading />
         }
-
       </DivFeed>
+      
       {states.activeOrder?.order === null ? "" : <ActiveOrderCard/> }
+      
       <Footer page='home' />
     </div>
   );

@@ -42,7 +42,7 @@ function AdressPage() {
       .catch((err) => {
         alert("Deu ruin Bergue, confere o console ae!!")
         setIsLoading(false)
-        console.log(err.response)
+        console.log(err.response.data)
       })
   }
 
@@ -67,7 +67,11 @@ function AdressPage() {
       
       {!states.profile?.user.hasAddress ?
         <DivAdress>
-          {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
+          {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? 
+            "" 
+            : 
+            <p> Meu endereço </p>
+          }
 
           <FormAdress onSubmit={onSubmitAddAdress}>
             <TextField variant="outlined"
@@ -80,6 +84,7 @@ function AdressPage() {
               value={form.street}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -93,6 +98,7 @@ function AdressPage() {
               value={form.number}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -104,6 +110,7 @@ function AdressPage() {
               name="complement"
               value={form.complement}
               onChange={onChange}
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -116,6 +123,7 @@ function AdressPage() {
               value={form.neighbourhood}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -128,6 +136,7 @@ function AdressPage() {
               value={form.city}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -140,16 +149,21 @@ function AdressPage() {
               value={form.state}
               onChange={onChange}
               required
+              fullWidth
             />
 
-            <Button type="submit" variant="contained" color="primary">
-              {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              {isLoading ? <CircularProgress color={"inherit"} size={26} /> : "Salvar"}
             </Button>
           </FormAdress>
         </DivAdress>
         :
         <DivAdress>
-          {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? "" : <p> Meu endereço </p>}
+          {states.profile?.user.hasAddress === true || states.profile?.user.hasAddress === "undefined" ? 
+            "" 
+            : 
+            <p> Meu endereço </p>
+          }
 
           <FormAdress onSubmit={onSubmitAddAdress}>
             <TextField variant="outlined"
@@ -162,6 +176,7 @@ function AdressPage() {
               value={form.street}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -175,6 +190,7 @@ function AdressPage() {
               value={form.number}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -186,6 +202,7 @@ function AdressPage() {
               name="complement"
               value={form.complement}
               onChange={onChange}
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -198,6 +215,7 @@ function AdressPage() {
               value={form.neighbourhood}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -210,6 +228,7 @@ function AdressPage() {
               value={form.city}
               onChange={onChange}
               required
+              fullWidth
             />
 
             <TextField variant="outlined"
@@ -222,10 +241,11 @@ function AdressPage() {
               value={form.state}
               onChange={onChange}
               required
+              fullWidth
             />
 
-            <Button type="submit" variant="contained" color="primary">
-              {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              {isLoading ? <CircularProgress color={"inherit"} size={26} /> : "Salvar"}
             </Button>
           </FormAdress>
         </DivAdress>
