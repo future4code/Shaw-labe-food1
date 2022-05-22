@@ -6,8 +6,7 @@ export const FormAdress = styled.form`
     justify-content: center;
     align-items: center;
     gap: 16px;
-    margin-top: 24px;
-    margin-left: 10vw;
+    margin: 24px auto 0 auto;
     width: 80%;
     max-width: 450px;
     
