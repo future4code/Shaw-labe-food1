@@ -23,7 +23,6 @@ const LoginPage = () => {
         type={"submit"}
         variant={"text"}
         color={"inherit"}
-        fullWidth
       >
         <SingUpButton>  Não possui cadastro? Clique aqui. </SingUpButton>
       </Button>

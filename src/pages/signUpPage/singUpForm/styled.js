@@ -7,4 +7,5 @@ export const ContainerForm = styled.form`
     align-items: center;
     width: 80vw;
     gap: 16px;
+    max-width: 450px;
 `
