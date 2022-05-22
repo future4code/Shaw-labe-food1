@@ -16,7 +16,7 @@ function ActiveOrderCard() {
             <Informations>
                 <p style={{ color:"#ffffff"}}>Pedido em andamento</p>
                 <p>{!states.activeOrder ? "" : states.activeOrder?.order.restaurantName }</p>
-                <h3>SUBTOTAL R${!states.activeOrder ? "" : states.activeOrder?.order.totalPrice }</h3>
+                <h3>SUBTOTAL R${!states.activeOrder ? "" : states.activeOrder?.order.totalPrice.toFixed(2) }</h3>
             </Informations>
 
         </ContainerCard>
