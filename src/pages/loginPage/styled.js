@@ -9,26 +9,35 @@ export const Screencontainer = styled.div`
     margin-top: 12vh;
 `
 
-export const InputsContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    max-width: 450px;
-    align-items: center;
-    margin-bottom: 20px;
-`
-
 export const LogoImage = styled.img`
     width: 104px;
-    height: 58px
+    height: 58px;
 `
+
+export const Subtitle = styled.p`
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+`
+
+export const InputsContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 80vw;
+    max-width: 450px;
+    margin-bottom: 3vh;
+
+    button{
+        text-transform: capitalize;
+        font-size: 16px;
+    }
+`
+
 export const SingUpButton = styled.span`
   text-transform: none;
-  font-weight: lighter;
-  font-size: 2vh;
-`
-export const Subtitle = styled.p`
-font-weight: lighter;
-font-size: 2vh;
-margin-top: 3vh;
+  font-size: 16px;
+  font-weight: bold;
 `

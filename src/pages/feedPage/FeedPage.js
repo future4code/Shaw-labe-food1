@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../global/GlobalContext";
 import CardRestaurant from "./cardRestaurant/CardRestaurant";
 import useForm from "../../hooks/useForm";
-import { DivFeed, FilterName } from "./styled";
+import { DivFeed, FilterName, SearchMessage } from "./styled";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +15,7 @@ import useProtectdPage from "../../hooks/useProtectedPage"
 import ActiveOrderCard from "../../components/activeOrderCard/ActiveOrderCard";
 
 function FeedPage() {
+  
   useProtectdPage()
   const { states, requests, setters } = useContext(GlobalContext);
   const { form, onChange, clear } = useForm({ search: "" });
@@ -60,7 +61,7 @@ function FeedPage() {
 
 
   const onClickSearch = () => {
-    setFilterRestaurant(<h4>Busque por nome de restaurante</h4>)
+    setFilterRestaurant(<SearchMessage>Busque por nome de restaurante</SearchMessage>)
     setters.setHeaderText("Busca")
   }
 
@@ -119,15 +120,20 @@ function FeedPage() {
               </FilterName>
             </Paper>
             <>
-              {!filterRestaurant.length && filterRestaurant.key !== null ? <h4>Não encontramos :(</h4> : filterRestaurant}
+              {!filterRestaurant.length && filterRestaurant.key !== null ? 
+                <SearchMessage>Não encontramos :(</SearchMessage> 
+                : 
+                filterRestaurant
+              }
             </>
           </>
           :
           <Loading />
         }
-
       </DivFeed>
-      {states.activeOrder?.order === null ? "" : <ActiveOrderCard/> }
+      
+      {states.activeOrder?.order && <ActiveOrderCard/>}
+      
       <Footer page='home' />
     </div>
   );

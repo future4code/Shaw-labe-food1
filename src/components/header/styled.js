@@ -26,11 +26,18 @@ export const DivTextButton = styled.div`
 `
 
 export const DivButton = styled.div`
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 20% 80%;
     height: 8vh;
+    align-items: center;
+    justify-items:  center;
 
     hr{
         width: 100vw;
+    }
+
+    button{
+        text-align: center;
+        grid-column: 1/2;
     }
 `

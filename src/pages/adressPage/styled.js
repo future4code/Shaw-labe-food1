@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const DivAdress = styled.div`
-    height: 85vh;
-    margin: 45px 15px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
     p{
-        text-align: center;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-top: 28px;
     }
 `
 
@@ -14,6 +18,12 @@ export const FormAdress = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin: 25px;
+    width: 80vw;
+    gap: 16px;
+    max-width: 450px;
+    margin-top: 24px;
+
+    button{
+        text-transform: capitalize;
+    }
 `
