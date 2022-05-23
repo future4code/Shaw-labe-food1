@@ -32,7 +32,7 @@
   - [styled-components](https://styled-components.com/)
   
 ## 🔗 Link Surge: 
-  - Acesse Rappi4 [clicando aqui.](https://light-front.surge.sh/)
+  - Acesse Rappi4 [clicando aqui.](https://ragged-yard.surge.sh/)
 
 <br>  
   
