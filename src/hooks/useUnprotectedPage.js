@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import { goToFeedPage } from "../routes/coordinator"
 
 const useUnprotectdPage = () => {
 
@@ -9,9 +10,9 @@ const useUnprotectdPage = () => {
         const token = localStorage.getItem('token')
 
         if(token){
-            navigate('/feed', {replace:true})
+            goToFeedPage(navigate)
         }
-    }, [])
+    }, [navigate])
 } 
 
 export default useUnprotectdPage
