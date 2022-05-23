@@ -14,14 +14,14 @@ import {
   AddressData,
   ButtonConfirm,
   ButtonDisabled,
-  CardMediaImg,
   ContainerSummary,
   Data,
   Delivery,
   EmptyCartP,
   PaymentMethods,
   PurchasesCartDiv,
-  Subtotal
+  Subtotal,
+  DivCart
 } from "./styled";
 
 function CartPage() {
@@ -98,7 +98,7 @@ function CartPage() {
       <Header />
 
       {states.address?.address.street ? (
-        <>
+        <DivCart>
           <AddressData>
             <Data>
               <h4>Endereço de entrega</h4>
@@ -128,16 +128,18 @@ function CartPage() {
 
           <ContainerSummary>
             <Delivery>
-              Frete R$
-              {states.cart.length ? 
-                states.restaurantDetail?.restaurant.shipping.toFixed(2)
-                : 
-                "0,00"
-              }
+              <b>
+                Frete R$
+                {states.cart.length ? 
+                  states.restaurantDetail?.restaurant.shipping.toFixed(2)
+                  : 
+                  "0,00"
+                }
+              </b>
             </Delivery>
             
             <Subtotal>
-              <p>SUBTOTAL</p>
+              <b>SUBTOTAL</b>
               <Typography color="primary">
                 <b>R${totalPrice.toFixed(2)}</b>
               </Typography>
@@ -166,14 +168,14 @@ function CartPage() {
               onClick={() => onClickPlaceOrder()}
               type={"submit"}
             >
-              Confimar
+              Confirmar
             </ButtonConfirm>
           ) : (
             <ButtonDisabled>
               Confirmar
             </ButtonDisabled>
           )}
-        </>
+        </DivCart>
       ) : (
         <Loading />
       )}

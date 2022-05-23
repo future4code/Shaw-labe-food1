@@ -37,19 +37,22 @@ export const Description = styled.p`
 
 export const Price = styled.p`
   font-size: 16px;
+  font-weight: bold;
 `
 
 export const ButtonAdd = styled.button`
   width: 90px;
   height: 31px;
-  font-size: 12px;
+  font-size: 14px;
   color: black;
   border: solid 1px black;
   background-color: #fff;
   border-radius: 8px 0px;
   position: relative;
-  top: 92px;
+  top: 97px;
+  font-weight: bold;
 `
+
 export const ButtonRemove = styled.button`
   width: 90px;
   height: 31px;
@@ -59,16 +62,14 @@ export const ButtonRemove = styled.button`
   background-color: #fff;
   border-radius: 8px 0px;
   position: relative;
-  top: 90px;
+  top: 97px;
   left: 30px;
-`
-
-export const Select = styled.button`
-  position: relative;
-  top: 3rem
+  font-weight: bold;
 `
 
 export const Quantity = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
   width: 30px;
   height: 30px;
@@ -76,4 +77,10 @@ export const Quantity = styled.div`
   bottom: 1px;
   border: solid 1px #e02020;
   border-radius: 0px 8px;
+  color: #e02020;
+`
+
+export const Select = styled.button`
+  position: relative;
+  top: 3rem
 `

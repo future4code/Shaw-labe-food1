@@ -13,6 +13,7 @@ export const BodyModal = styled.div`
   padding: 2rem 1rem;
   background-color: #fff;
   border-radius: 10px;
+  gap: 20px;
 `
 
 export const DivModal = styled(Modal)`

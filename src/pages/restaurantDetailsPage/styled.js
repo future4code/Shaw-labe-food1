@@ -3,6 +3,23 @@ import { CardMedia } from "@material-ui/core";
 
 export const ContainerCardDetail = styled.div`
     margin: 1rem;
+
+    @media (min-width: 500px) {
+        margin-left: 15vw;
+        margin-right: 15vw;
+    }
+    @media (min-width: 600px) {
+        margin-left: 20vw;
+        margin-right: 20vw;
+    }
+    @media (min-width: 700px) {
+        margin-left: 25vw;
+        margin-right: 25vw;
+    }
+    @media (min-width: 1000px) {
+        margin-left: 30vw;
+        margin-right: 30vw;
+    }
 `
 
 export const CardMediaImg = styled(CardMedia)`

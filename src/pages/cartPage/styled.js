@@ -1,7 +1,23 @@
-import { Button } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import { CardMedia } from "@material-ui/core";
 import styled from "styled-components";
+
+export const DivCart = styled.div`
+  @media (min-width: 500px) {
+    margin-left: 8vw;
+    margin-right: 8vw;
+  }
+  @media (min-width: 600px) {
+    margin-left: 15vw;
+    margin-right: 15vw;
+  }
+  @media (min-width: 700px) {
+    margin-left: 18vw;
+    margin-right: 18vw;
+  }
+  @media (min-width: 1000px) {
+    margin-left: 30vw;
+    margin-right: 30vw;
+  }
+`
 
 export const AddressData = styled.div`
   background-color: #eeee;
@@ -81,6 +97,28 @@ export const ButtonConfirm = styled.button`
   position: fixed;
   bottom: 10vh;
   left: 5%;
+  font-weight: bold;
+  font-size: 16px;
+  @media (min-width: 500px) {
+    width: 75%;
+    left: 12.5%;
+  }
+  @media (min-width: 600px) {
+    width: 62%;
+    left: 19%;
+  }
+  @media (min-width: 700px) {
+    width: 58%;
+    left: 21%;
+  }
+  @media (min-width: 850px) {
+    width: 55%;
+    left: 22.5%;
+  }
+  @media (min-width: 1000px) {
+    width: 40%;
+    left: 30%;
+  }
 `
 
 export const ButtonDisabled = styled.button`
@@ -95,33 +133,26 @@ export const ButtonDisabled = styled.button`
   position: fixed;
   bottom: 10vh;
   left: 5%;
-`
-
-
-// verificar as estilizações de baixo
-export const ContainerCardDetail = styled(Card)`
-    margin: 1rem;
-    p{
-        font-weight:200;
-        
-    }
-`
-
-export const CardMediaImg = styled(CardMedia)`
-    border-radius: 0.7rem 0.7rem 0 0;
-`
-
-export const P = styled.p`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-    p{
-        margin-right: 10rem;
-    }
-`
-
-export const Title = styled.h3`
-margin-top: 1rem;
-margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 16px;
+  @media (min-width: 500px) {
+    width: 75%;
+    left: 12.5%;
+  }
+  @media (min-width: 600px) {
+    width: 62%;
+    left: 19%;
+  }
+  @media (min-width: 700px) {
+    width: 58%;
+    left: 21%;
+  }
+  @media (min-width: 850px) {
+    width: 55%;
+    left: 22.5%;
+  }
+  @media (min-width: 1000px) {
+    width: 40%;
+    left: 30%;
+  }
 `

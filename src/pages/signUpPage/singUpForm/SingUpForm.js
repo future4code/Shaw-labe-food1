@@ -215,7 +215,7 @@ export const SingUpForm = () => {
           color={"primary"}
           fullWidth
         >
-          {isLoading ? <CircularProgress color={"inherit"} size={26} /> : "Cadastrar"}
+          {isLoading ? <CircularProgress color={"inherit"} size={26} /> : "Criar"}
         </Button>
       </ContainerForm>
     </div>

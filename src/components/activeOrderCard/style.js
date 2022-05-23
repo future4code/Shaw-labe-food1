@@ -5,7 +5,7 @@ export const ContainerCard = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #E86E5A;
-    height: 15vh;
+    height: 18vh;
     width: 100vw;
     position: fixed;
     bottom: 8vh;
@@ -19,7 +19,10 @@ export const Informations = styled.div`
     margin-left: 30px;
 
     p{
-        margin-bottom: 10px; 
-        font-weight: lighter;
+        margin-bottom: 10px;
     }
+`
+
+export const P = styled.p`
+    color: white;
 `
