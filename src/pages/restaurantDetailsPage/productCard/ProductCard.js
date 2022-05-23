@@ -10,7 +10,8 @@ import {
   ButtonAdd,
   RestaurantName,
   Price,
-  Description
+  Description,
+  DivButton
 } from "./styled";
 
 export const ProductCard = (props) => {
@@ -85,15 +86,15 @@ export const ProductCard = (props) => {
   return (
     <div>
       <Container>
-        <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do alimento ou bebida"} />
+        <CardMediaItemImg src={props.product.photoUrl} alt={"imagem do produto"} />
+        
         <CardInfoMeal>
-
-          <RestaurantName gutterBottom variant="p" color="primary">{props.product.name}</RestaurantName>
+          <RestaurantName>{props.product.name}</RestaurantName>
           <Description>{props.product.description}</Description>
-          <Price> <b>R${props.product.price.toFixed(2)}</b></Price>
-
+          <Price>R${props.product.price.toFixed(2)}</Price>
         </CardInfoMeal>
-        <div>
+
+        <>
           {productQuantity === 0
             ?
             <ButtonAdd onClick={() => openModal()}>
@@ -104,9 +105,17 @@ export const ProductCard = (props) => {
               remover
             </ButtonRemove>
           }
-        </div>
+        </>
+
         <div>
-          {productQuantity !== 0 ? <Quantity onClick={() => openModal()}>{productQuantity}</Quantity> : ""}
+          {
+            productQuantity !== 0 ? 
+              <Quantity onClick={() => openModal()}>
+                {productQuantity}
+              </Quantity> 
+            : 
+              ""
+          }
         </div>
 
         <ShowModal
@@ -121,7 +130,6 @@ export const ProductCard = (props) => {
           setModalQuantity={setModalQuantity}
           modalQuantity={modalQuantity}
         />
-
       </Container>
     </div >
   );
