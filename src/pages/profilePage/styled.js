@@ -30,7 +30,7 @@ export const Data = styled.div`
   gap: 8px;
 
   p {
-    font-weight: normal;
+    font-weight: bold;
   }
 `
 
@@ -61,6 +61,7 @@ export const AddressData = styled.div`
 
   h4 {
     color: #b8b8b8;
+    font-weight: normal;
   }
 
   p {
@@ -71,7 +72,7 @@ export const AddressData = styled.div`
 export const OrderHistory = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 20px 16px 10px 16px;
 
   @media (min-width: 500px) {
     margin-left: 15vw;

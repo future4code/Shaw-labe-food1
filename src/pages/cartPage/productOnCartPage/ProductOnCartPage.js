@@ -7,8 +7,8 @@ import {
   Container,
   Description,
   Price,
-  ProductName,
   Quantity,
+  RestaurantName,
 } from "./styled";
 
 export const ProductOnCartPage = (props) => {
@@ -16,51 +16,25 @@ export const ProductOnCartPage = (props) => {
 
   return (
     <div>
-      {/* <div>
-        {" "}
-        <img
-          src={props.item.photoUrl}
-          alt={"imagem do alimento ou bebida"}
-        />{" "}
-      </div>
+      <Container>
+        <CardMediaItemImg  src={props.item.photoUrl} alt={"imagem do alimento ou bebida"} />
 
-      <div>
-        {props.item.name}
-        <br />
-        {props.item.description}
-        <br />
-        R${props.item.price.toFixed(2)}
-      </div>
+        <CardInfoMeal>
+          <RestaurantName> {props.item.name} </RestaurantName>
+          <Description> {props.item.description} </Description>
+          <Price> R${props.item.price.toFixed(2)} </Price>
+        </CardInfoMeal>
 
-      <div> {props.item.quantity} </div>
-
-      <div>
-        <button onClick={() => functions.removeProduct(props.item)}>
-          remover
-        </button>
-      </div> */}
-      <div>
-        <Container>
-          <CardMediaItemImg  src={props.item.photoUrl}
-          alt={"imagem do alimento ou bebida"} />
-          <CardInfoMeal>
-            <ProductName gutterBottom variant="p" color="primary">
-            {props.item.name}
-            </ProductName>
-            <Description>{props.item.description}</Description>
-            <Price>
-              {" "}
-              <b>R${props.item.price.toFixed(2)}</b>
-            </Price>
-          </CardInfoMeal>
-          <div>
-            <ButtonRemove onClick={() => functions.removeProduct(props.item)}>
-              remover
-            </ButtonRemove>
-          </div>
+        <div>
+          <ButtonRemove onClick={() => functions.removeProduct(props.item)}>
+            remover
+          </ButtonRemove>
+        </div>
+        
+        <div>
           <Quantity> {props.item.quantity} </Quantity>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </div>
   );
 };

@@ -25,5 +25,6 @@ export const FormAdress = styled.form`
 
     button{
         text-transform: capitalize;
+        font-weight: bold;
     }
 `

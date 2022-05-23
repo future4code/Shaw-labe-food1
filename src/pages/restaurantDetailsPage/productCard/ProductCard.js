@@ -94,7 +94,7 @@ export const ProductCard = (props) => {
           <Price>R${props.product.price.toFixed(2)}</Price>
         </CardInfoMeal>
 
-        <>
+        <div>
           {productQuantity === 0
             ?
             <ButtonAdd onClick={() => openModal()}>
@@ -105,7 +105,7 @@ export const ProductCard = (props) => {
               remover
             </ButtonRemove>
           }
-        </>
+        </div>
 
         <div>
           {

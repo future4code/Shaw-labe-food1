@@ -8,4 +8,9 @@ export const ContainerForm = styled.form`
     width: 80vw;
     gap: 16px;
     max-width: 450px;
+
+    button{
+        font-weight: bold;
+        text-transform: capitalize;
+    }
 `

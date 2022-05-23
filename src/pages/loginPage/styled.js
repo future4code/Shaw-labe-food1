@@ -33,6 +33,7 @@ export const InputsContainer = styled.form`
     button{
         text-transform: capitalize;
         font-size: 16px;
+        font-weight: bold;
     }
 `
 
